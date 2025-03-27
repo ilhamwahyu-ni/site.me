@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Arahan GitHub</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            line-height: 1.7;
+        }
+        .search-results-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 3rem;
+            padding-left: 10%;
+        }
+        .search-result {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 1rem;
+            padding: 0;
+            background-color: transparent;
+            border-radius: 0;
+            box-shadow: none;
+            transition: none;
+            text-align: left;
+        }
+        .search-result:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        .title-link {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #1a0dab;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .title-link:visited {
+            color: #681da8;
+        }
+        .title-link:hover {
+            text-decoration: underline;
+            color: #1a0dab;
+        }
+        .snippet {
+            font-size: 0.875rem;
+            color: #4d5156;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+        }
+        .url {
+            font-size: 0.75rem;
+            color: #202124;
+            margin-bottom: 1rem;
+        }
+        .social-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-left: 0;
+        }
+        .social-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+            width: auto;
+            margin-bottom: 0;
+            max-width: none;
+        }
+        .social-button:hover {
+            transform: translateY(-0.25rem) scale(1.05);
+            box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.15);
+        }
+        .linkedin {
+            background-color: #0077b5;
+            color: white;
+        }
+        .linkedin:hover {
+            background-color: #005f99;
+        }
+        .instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e5664d 25%, #d62e56 50%, #c21e56 75%, #b10d45 100%);
+            color: white;
+        }
+        .instagram:hover {
+            background: linear-gradient(45deg, #d87d1e 0%, #c15338 25%, #b41941 50%, #a00a41 75%, #910535 100%);
+        }
+        .telegram {
+            background-color: #229ED9;
+            color: white;
+        }
+        .telegram:hover {
+            background-color: #1976d2;
+        }
+        .gmail {
+            background-color: #D44638;
+            color: white;
+        }
+        .gmail:hover {
+            background-color: #c83223;
+        }
+        /* Gaya untuk animasi mengetik */
+        .typing-animation {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .05em;
+            animation: typing 2.5s steps(13, end) infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        /* Gaya untuk bagian proyek */
+        .projects-section {
+            margin-top: 2rem;
+            padding-left: 0;
+        }
+        .project-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a0dab;
+            margin-bottom: 0.25rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .project-title:hover {
+            color: #1a0da1;
+        }
+        .project-description {
+            font-size: 0.875rem;
+            color: #4d5156;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+        .project-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .project-item {
+            margin-bottom: 1.5rem;
+        }
+        /* Gaya tambahan untuk tata letak yang lebih baik */
+        .search-results-container {
+            max-width: 800px; /* Meningkatkan lebar maksimum container */
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 0; /* Menghapus padding kiri yang tidak perlu */
+        }
+        .search-result {
+            padding: 1.5rem; /* Mengembalikan padding untuk search result */
+            background-color: #fff; /* Mengembalikan background color untuk search result */
+            border-radius: 0.5rem; /* Mengembalikan border radius untuk search result */
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* Mengembalikan box shadow untuk search result */
+        }
+        .projects-section {
+            padding-left: 1.5rem; /* Menambahkan padding kiri untuk bagian proyek agar sejajar dengan konten lainnya */
+        }
+        .social-buttons {
+            justify-content: center; /* Memusatkan tombol media sosial */
+            padding-left: 0;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-blue-100 to-purple-100 flex flex-col items-start justify-content-start min-h-screen py-10">
+    <div class="search-results-container">
+        <div class="search-result">
+            <a href="#" class="title-link">
+                <span class="typing-animation">Ilham Wahyuni</span>
+            </a>
+            <div class="url">https://github.com/ilhamwahyu-ni</div>
+            <div class="snippet">
+                Guru TIK | Pengembang Web | Kontributor Open Source. Menginspirasi dan mendidik generasi muda di bidang teknologi.
+            </div>
+            <div class="projects-section">
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Proyek</h2>
+                <ul class="project-list">
+                    <li class="project-item">
+                        <a href="https://example.com/proyek1" target="_blank" rel="noopener noreferrer" class="project-title">
+                            Proyek 1: Website E-commerce
+                        </a>
+                        <p class="project-description">
+                            Deskripsi singkat tentang proyek website e-commerce yang pernah dibuat.
+                        </p>
+                    </li>
+                    <li class="project-item">
+                        <a href="https://example.com/proyek2" target="_blank" rel="noopener noreferrer" class="project-title">
+                            Proyek 2: Aplikasi Manajemen Tugas
+                        </a>
+                        <p class="project-description">
+                            Deskripsi singkat tentang aplikasi manajemen tugas yang pernah dibuat.
+                        </p>
+                    </li>
+                    <li class="project-item">
+                        <a href="https://example.com/proyek3" target="_blank" rel="noopener noreferrer" class="project-title">
+                            Proyek 3: Kontribusi Open Source
+                        </a>
+                        <p class="project-description">
+                            Deskripsi singkat tentang kontribusi proyek open source.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="social-buttons">
+            <a href="https://www.linkedin.com/in/ilhamwahyu-ni" target="_blank" rel="noopener noreferrer" class="social-button linkedin">
+                <i class="fab fa-linkedin-in mr-2"></i> LinkedIn
+            </a>
+            <a href="https://www.instagram.com/ilhamwahyu_ni/" target="_blank" rel="noopener noreferrer" class="social-button instagram">
+                <i class="fab fa-instagram mr-2"></i> Instagram
+            </a>
+            <a href="https://t.me/ilhamwahyu_ni" target="_blank" rel="noopener noreferrer" class="social-button telegram">
+                <i class="fab fa-telegram mr-2"></i> Telegram
+            </a>
+            <a href="mailto:ilhamwahyu.n@example.com" class="social-button gmail">
+                <i class="far fa-envelope mr-2"></i> Gmail
+            </a>
+        </div>
+    </div>
+</body>
+</html>
