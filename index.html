@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ILham Wahyuni</title>
+    <title>Ilham Wahyuni - Portfolio</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,6 +71,12 @@
 
         .theme-toggle:hover {
             transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .theme-toggle {
+                padding: 0.5rem;
+            }
         }
 
         .title-link {
@@ -203,6 +209,24 @@
             margin-bottom: 1.5rem;
         }
 
+        .skills-section {
+            margin-top: 2rem;
+            padding-left: 0;
+        }
+
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .skill-item {
+            font-size: 0.875rem;
+            color: #4d5156;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+        }
+
         @media (max-width: 768px) {
             .search-results-container {
                 padding: 0 1rem;
@@ -255,32 +279,34 @@
                 Guru TIK | Pengembang Web | Kontributor Open Source
             </div>
             <div class="projects-section">
-                <h2 class="text-lg font-semibold text-gray-700 mb-4">Proyek</h2>
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Projects</h2>
                 <ul class="project-list">
                     <li class="project-item">
-                        <a href="https://example.com/proyek1" target="_blank" rel="noopener noreferrer" class="project-title">
-                            Proyek 1: Website E-commerce
+                        <a href="https://etavis.ilhamwahyuni.my.id" target="_blank" rel="noopener noreferrer" class="project-title">
+                            Etavis: Quran Memorization Report
                         </a>
                         <p class="project-description">
-                            Deskripsi singkat tentang proyek website e-commerce yang pernah dibuat.
+                            Web application for recording report values in Quran memorization.
                         </p>
                     </li>
                     <li class="project-item">
-                        <a href="https://example.com/proyek2" target="_blank" rel="noopener noreferrer" class="project-title">
-                            Proyek 2: Aplikasi Manajemen Tugas
+                        <a href="https://github.com/ilhamwahyu-ni/product-qr-code" target="_blank" rel="noopener noreferrer" class="project-title">
+                            Product QR Code Scanner
                         </a>
                         <p class="project-description">
-                            Deskripsi singkat tentang aplikasi manajemen tugas yang pernah dibuat.
+                            A simple QR code scanner for product information using JavaScript.
                         </p>
                     </li>
-                    <li class="project-item">
-                        <a href="https://example.com/proyek3" target="_blank" rel="noopener noreferrer" class="project-title">
-                            Proyek 3: Kontribusi Open Source
-                        </a>
-                        <p class="project-description">
-                            Deskripsi singkat tentang kontribusi proyek open source.
-                        </p>
-                    </li>
+                </ul>
+            </div>
+            <div class="skills-section">
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Skills</h2>
+                <ul class="skills-list">
+                    <li class="skill-item">Web Development (HTML, CSS, JavaScript)</li>
+                    <li class="skill-item">Frameworks (React, Tailwind CSS)</li>
+                    <li class="skill-item">Backend Development (Node.js, Express)</li>
+                    <li class="skill-item">Database Management (MySQL, MongoDB)</li>
+                    <li class="skill-item">Version Control (Git, GitHub)</li>
                 </ul>
             </div>
         </div>
