@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,27 +10,69 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        :root {
+            --bg-primary: #ffffff;
+            --text-primary: #333333;
+            --card-bg: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        html.dark {
+            --bg-primary: #1a1a1a;
+            --text-primary: #e5e5e5;
+            --card-bg: #2d2d2d;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #ffffff;
-            color: #333;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
+            transition: background-color 0.3s ease;
         }
+
         .search-results-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-width: 700px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+            position: relative;
         }
+
         .search-result {
             width: 100%;
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            transition: all 0.3s ease;
+            transform: translateY(0);
         }
+
+        .search-result:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--shadow-color);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
         .title-link {
             font-size: 1.2rem;
             font-weight: 500;
@@ -38,61 +80,79 @@
             text-decoration: none;
             transition: color 0.3s ease;
         }
+
         .title-link:visited {
             color: #681da8;
         }
+
         .title-link:hover {
             text-decoration: underline;
             color: #1a0dab;
         }
+
         .snippet {
             font-size: 0.875rem;
             color: #4d5156;
             line-height: 1.4;
             margin-bottom: 0.5rem;
         }
+
         .url {
             font-size: 0.75rem;
             color: #202124;
             margin-bottom: 1rem;
         }
+
         .social-buttons {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             gap: 1rem;
             margin-top: 2rem;
         }
+
         .social-button {
             display: inline-flex;
             align-items: center;
             padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
+            border-radius: 0.75rem;
             font-size: 0.9rem;
             font-weight: 500;
             transition: all 0.3s ease;
+            transform: translateY(0);
         }
+
+        .social-button:hover {
+            transform: translateY(-3px);
+        }
+
         .linkedin {
             background-color: #0077b5;
             color: white;
         }
+
         .linkedin:hover {
             background-color: #005f99;
         }
+
         .github {
             background-color: #24292e;
             color: white;
         }
+
         .github:hover {
             background-color: #1b1f23;
         }
+
         .gmail {
             background-color: #D44638;
             color: white;
         }
+
         .gmail:hover {
             background-color: #c83223;
         }
-        /* Gaya untuk animasi mengetik */
+
         .typing-animation {
             position: relative;
             display: inline-block;
@@ -102,15 +162,17 @@
             letter-spacing: .05em;
             animation: typing 2.5s steps(13, end) infinite;
         }
+
         @keyframes typing {
             from { width: 0; }
             to { width: 100%; }
         }
-        /* Gaya untuk bagian proyek */
+
         .projects-section {
             margin-top: 2rem;
             padding-left: 0;
         }
+
         .project-title {
             font-size: 1.1rem;
             font-weight: 600;
@@ -119,26 +181,33 @@
             text-decoration: none;
             transition: color 0.3s ease;
         }
+
         .project-title:hover {
             color: #1a0da1;
         }
+
         .project-description {
             font-size: 0.875rem;
             color: #4d5156;
             line-height: 1.4;
             margin-bottom: 1rem;
         }
+
         .project-list {
             list-style: none;
             padding: 0;
             margin: 0;
         }
+
         .project-item {
             margin-bottom: 1.5rem;
         }
     </style>
 </head>
 <body class="bg-gray-50">
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon"></i>
+    </button>
     <div class="search-results-container">
         <div class="search-result">
             <a href="#" class="title-link">
@@ -190,5 +259,21 @@
             </a>
         </div>
     </div>
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.querySelector('.theme-toggle i');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                html.classList.add('dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
+    </script>
 </body>
 </html>
