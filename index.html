@@ -12,31 +12,24 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f0f0;
+            background-color: #ffffff;
             color: #333;
-            line-height: 1.7;
+            line-height: 1.6;
         }
         .search-results-container {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            margin-top: 3rem;
-            padding-left: 10%;
+            align-items: center;
+            max-width: 700px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
         .search-result {
             width: 100%;
-            max-width: 600px;
-            margin-bottom: 1rem;
-            padding: 0;
-            background-color: transparent;
-            border-radius: 0;
-            box-shadow: none;
-            transition: none;
-            text-align: left;
-        }
-        .search-result:hover {
-            transform: none;
-            box-shadow: none;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .title-link {
             font-size: 1.2rem;
@@ -65,29 +58,18 @@
         }
         .social-buttons {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
+            justify-content: center;
             gap: 1rem;
-            margin-top: 1rem;
-            padding-left: 0;
+            margin-top: 2rem;
         }
         .social-button {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 500;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-            width: auto;
-            margin-bottom: 0;
-            max-width: none;
-        }
-        .social-button:hover {
-            transform: translateY(-0.25rem) scale(1.05);
-            box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
         }
         .linkedin {
             background-color: #0077b5;
@@ -96,19 +78,12 @@
         .linkedin:hover {
             background-color: #005f99;
         }
-        .instagram {
-            background: linear-gradient(45deg, #f09433 0%, #e5664d 25%, #d62e56 50%, #c21e56 75%, #b10d45 100%);
+        .github {
+            background-color: #24292e;
             color: white;
         }
-        .instagram:hover {
-            background: linear-gradient(45deg, #d87d1e 0%, #c15338 25%, #b41941 50%, #a00a41 75%, #910535 100%);
-        }
-        .telegram {
-            background-color: #229ED9;
-            color: white;
-        }
-        .telegram:hover {
-            background-color: #1976d2;
+        .github:hover {
+            background-color: #1b1f23;
         }
         .gmail {
             background-color: #D44638;
@@ -116,20 +91,6 @@
         }
         .gmail:hover {
             background-color: #c83223;
-        }
-        .twitter {
-            background-color: #1DA1F2;
-            color: white;
-        }
-        .twitter:hover {
-            background-color: #0d8ae8;
-        }
-        .facebook {
-            background-color: #1877F2;
-            color: white;
-        }
-        .facebook:hover {
-            background-color: #145dbf;
         }
         /* Gaya untuk animasi mengetik */
         .typing-animation {
@@ -175,29 +136,9 @@
         .project-item {
             margin-bottom: 1.5rem;
         }
-        /* Gaya tambahan untuk tata letak yang lebih baik */
-        .search-results-container {
-            max-width: 800px; /* Meningkatkan lebar maksimum container */
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 0; /* Menghapus padding kiri yang tidak perlu */
-        }
-        .search-result {
-            padding: 1.5rem; /* Mengembalikan padding untuk search result */
-            background-color: #fff; /* Mengembalikan background color untuk search result */
-            border-radius: 0.5rem; /* Mengembalikan border radius untuk search result */
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* Mengembalikan box shadow untuk search result */
-        }
-        .projects-section {
-            padding-left: 1.5rem; /* Menambahkan padding kiri untuk bagian proyek agar sejajar dengan konten lainnya */
-        }
-        .social-buttons {
-            justify-content: center; /* Memusatkan tombol media sosial */
-            padding-left: 0;
-        }
     </style>
 </head>
-<body class="bg-gradient-to-r from-blue-100 to-purple-100 flex flex-col items-start justify-content-start min-h-screen py-10">
+<body class="bg-gray-50">
     <div class="search-results-container">
         <div class="search-result">
             <a href="#" class="title-link">
@@ -205,7 +146,7 @@
             </a>
             <div class="url">https://github.com/ilhamwahyu-ni</div>
             <div class="snippet">
-                Guru TIK | Pengembang Web | Kontributor Open Source. Menginspirasi dan mendidik generasi muda di bidang teknologi.
+                Guru TIK | Pengembang Web | Kontributor Open Source
             </div>
             <div class="projects-section">
                 <h2 class="text-lg font-semibold text-gray-700 mb-4">Proyek</h2>
@@ -241,20 +182,11 @@
             <a href="https://www.linkedin.com/in/ilhamwahyu-ni" target="_blank" rel="noopener noreferrer" class="social-button linkedin">
                 <i class="fab fa-linkedin-in mr-2"></i> LinkedIn
             </a>
-            <a href="https://www.instagram.com/ilhamwahyu_ni/" target="_blank" rel="noopener noreferrer" class="social-button instagram">
-                <i class="fab fa-instagram mr-2"></i> Instagram
-            </a>
-            <a href="https://t.me/ilhamwahyu_ni" target="_blank" rel="noopener noreferrer" class="social-button telegram">
-                <i class="fab fa-telegram mr-2"></i> Telegram
+            <a href="https://github.com/ilhamwahyu-ni" target="_blank" rel="noopener noreferrer" class="social-button github">
+                <i class="fab fa-github mr-2"></i> GitHub
             </a>
             <a href="mailto:ilhamwahyu.n@example.com" class="social-button gmail">
                 <i class="far fa-envelope mr-2"></i> Gmail
-            </a>
-            <a href="https://twitter.com/ilhamwahyu_ni" target="_blank" rel="noopener noreferrer" class="social-button twitter">
-                <i class="fab fa-twitter mr-2"></i> Twitter
-            </a>
-            <a href="https://facebook.com/ilhamwahyu_ni" target="_blank" rel="noopener noreferrer" class="social-button facebook">
-                <i class="fab fa-facebook-f mr-2"></i> Facebook
             </a>
         </div>
     </div>
