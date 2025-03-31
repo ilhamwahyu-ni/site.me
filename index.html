@@ -246,6 +246,30 @@
                 font-size: 0.9rem; /* Adjust the font size for smaller screens */
             }
         }
+
+        .tab-button {
+            padding: 0.5rem 1rem;
+            margin-right: 0.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .tab-button.active {
+            background-color: #0077b5;
+            color: white;
+        }
+
+        .tab-content {
+            margin-top: 1rem;
+        }
+
+        .tab-content.hidden {
+            display: none;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -264,25 +288,51 @@
                 IT Teacher | Web Developer | Open Source Contributor
             </div>
             <div class="projects-section">
-                <h2 class="text-lg font-semibold text-gray-700 mb-4">Projects</h2>
-                <ul class="project-list">
-                    <li class="project-item">
-                        <a href="https://etavis.ilhamwahyuni.my.id" target="_blank" rel="noopener noreferrer" class="project-title">
-                            Etavis: Quran Memorization Report
-                        </a>
-                        <p class="project-description">
-                            Web application for recording report values in Quran memorization.
-                        </p>
-                    </li>
-                    <li class="project-item">
-                        <a href="https://github.com/ilhamwahyu-ni/product-qr-code" target="_blank" rel="noopener noreferrer" class="project-title">
-                            Product QR Code Scanner
-                        </a>
-                        <p class="project-description">
-                            A simple QR code scanner for product information using JavaScript.
-                        </p>
-                    </li>
-                </ul>
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Projects & Services</h2>
+                <div>
+                    <button onclick="showTab('projects')" id="projects-tab" class="tab-button active">Projects</button>
+                    <button onclick="showTab('services')" id="services-tab" class="tab-button">Services</button>
+                </div>
+                <div id="projects" class="tab-content">
+                    <ul class="project-list">
+                        <li class="project-item">
+                            <a href="https://etavis.ilhamwahyuni.my.id" target="_blank" rel="noopener noreferrer" class="project-title">
+                                Etavis: Quran Memorization Report
+                            </a>
+                            <p class="project-description">
+                                Web application for recording report values in Quran memorization.
+                            </p>
+                        </li>
+                        <li class="project-item">
+                            <a href="https://github.com/ilhamwahyu-ni/product-qr-code" target="_blank" rel="noopener noreferrer" class="project-title">
+                                Product QR Code Scanner
+                            </a>
+                            <p class="project-description">
+                                A simple QR code scanner for product information using JavaScript.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div id="services" class="tab-content hidden">
+                    <ul class="project-list">
+                        <li class="project-item">
+                            <a href="#" class="project-title">
+                                Village Information System Installation
+                            </a>
+                            <p class="project-description">
+                                Service for setting up and configuring a village information system.
+                            </p>
+                        </li>
+                        <li class="project-item">
+                            <a href="#" class="project-title">
+                                Moodle Application Installation
+                            </a>
+                            <p class="project-description">
+                                Service for installing and configuring Moodle for educational purposes.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="social-buttons">
@@ -330,6 +380,22 @@
                 themeIcon.classList.remove('fa-sun');
                 themeIcon.classList.add('fa-moon');
             }
+        }
+
+        function showTab(tabId) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-button');
+
+            tabs.forEach(tab => {
+                tab.classList.add('hidden');
+            });
+
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById(`${tabId}-tab`).classList.add('active');
         }
     </script>
 </body>
