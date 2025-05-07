@@ -21,8 +21,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /www/wwwroot/ilwa.my.id
-            git pull origin main
-            echo "Connection successful!"
-            whoami
-            pwd
-            ls -la ~/.ssh/
+            sudo -u www git pull origin main
+      
+         
