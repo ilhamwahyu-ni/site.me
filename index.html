@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio Interaktif - Ilham Wahyuni</title>
+    <title>Portofolio - Ilham Wahyuni</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.js"></script>
     <script
@@ -396,40 +396,51 @@
 
 <body class="antialiased">
 
-    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+    <header id="header" class="bg-white sticky top-0 z-50 shadow-sm">
         <div class="container mx-auto px-6 py-4">
             <nav class="flex items-center justify-between">
-                <a href="#hero" class="text-xl font-bold text-[#3d405b]">Ilham Wahyuni</a>
-                
-                <!-- Tombol menu mobile -->
+                <a href="#hero" class="text-lg md:text-xl font-bold text-[#3d405b]">Ilham Wahyuni</a>
+
+                <div class="hidden md:flex items-center space-x-4 lg:space-x-8">
+                    <a href="#skills"
+                        class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Keahlian</a>
+                    <a href="#projects-services"
+                        class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Projek</a>
+                    <a href="#experience"
+                        class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Pengalaman</a>
+                    <a href="#education"
+                        class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Pendidikan</a>
+                </div>
+
+                <button onclick="generateCV()"
+                    class="hidden md:inline-flex items-center bg-[#e07a5f] text-white px-3 py-2 md:px-4 md:py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm md:text-base">
+                    <i class="fas fa-file-pdf mr-2"></i> <span class="hidden sm:inline">Generate CV</span>
+                </button>
+
                 <button id="menuBtn" class="md:hidden text-[#3d405b] focus:outline-none">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
-
-                <!-- Menu desktop -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#skills" class="text-gray-600 hover:text-[#e07a5f] transition-colors">Keahlian</a>
-                    <a href="#projects-services" class="text-gray-600 hover:text-[#e07a5f] transition-colors">Projek</a>
-                    <a href="#experience" class="text-gray-600 hover:text-[#e07a5f] transition-colors">Pengalaman</a>
-                    <a href="#education" class="text-gray-600 hover:text-[#e07a5f] transition-colors">Pendidikan</a>
-                </div>
-
-                <!-- Tombol Generate CV -->
-                <button onclick="generateCV()" class="hidden md:inline-flex items-center bg-[#e07a5f] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all">
-                    <i class="fas fa-file-pdf mr-2"></i> Generate CV
-                </button>
             </nav>
+        </div>
 
-            <!-- Menu mobile -->
-            <div id="mobileMenu" class="hidden md:hidden bg-white fixed inset-0 z-50 flex flex-col items-center justify-center space-y-8">
-                <button id="closeMenuBtn" class="absolute top-6 right-6 text-[#3d405b]">
-                    <i class="fas fa-times text-2xl"></i>
-                </button>
-                <a href="#skills" class="text-xl text-gray-600 hover:text-[#e07a5f] transition-colors">Keahlian</a>
-                <a href="#projects-services" class="text-xl text-gray-600 hover:text-[#e07a5f] transition-colors">Projek</a>
-                <a href="#experience" class="text-xl text-gray-600 hover:text-[#e07a5f] transition-colors">Pengalaman</a>
-                <a href="#education" class="text-xl text-gray-600 hover:text-[#e07a5f] transition-colors">Pendidikan</a>
-                <button onclick="generateCV()" class="mt-4 inline-flex items-center bg-[#e07a5f] text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-all">
+        <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-black bg-opacity-50 z-40" aria-hidden="true">
+        </div>
+        <div id="mobileMenuContent"
+            class="hidden md:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 p-6 transform translate-x-full transition-transform duration-300 ease-in-out">
+            <button id="closeMenuBtn" class="absolute top-6 right-6 text-[#3d405b]">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <div class="flex flex-col space-y-6 mt-12">
+                <a href="#skills"
+                    class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Keahlian</a>
+                <a href="#projects-services"
+                    class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Projek</a>
+                <a href="#experience"
+                    class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Pengalaman</a>
+                <a href="#education"
+                    class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Pendidikan</a>
+                <button onclick="generateCV()"
+                    class="mt-4 inline-flex items-center justify-center bg-[#e07a5f] text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-all">
                     <i class="fas fa-file-pdf mr-2"></i> Generate CV
                 </button>
             </div>
@@ -440,27 +451,36 @@
             const menuBtn = document.getElementById('menuBtn');
             const closeMenuBtn = document.getElementById('closeMenuBtn');
             const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuContent = document.getElementById('mobileMenuContent');
 
-            menuBtn.addEventListener('click', () => {
+            const openMenu = () => {
                 mobileMenu.classList.remove('hidden');
+                mobileMenuContent.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
-            });
+                // Trigger reflow untuk transisi
+                mobileMenuContent.offsetWidth;
+                mobileMenuContent.classList.remove('translate-x-full');
+            };
 
-            closeMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            });
+            const closeMenu = () => {
+                mobileMenuContent.classList.add('translate-x-full');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuContent.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }, 300); // Sesuaikan dengan durasi transisi
+            };
+
+            menuBtn.addEventListener('click', openMenu);
+            closeMenuBtn.addEventListener('click', closeMenu);
+            mobileMenu.addEventListener('click', closeMenu); // Menutup jika klik di luar area menu
 
             // Menutup menu saat link diklik
-            const mobileLinks = mobileMenu.getElementsByTagName('a');
-            Array.from(mobileLinks).forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    document.body.style.overflow = 'auto';
-                });
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', closeMenu);
             });
         </script>
-        </div>
     </header>
 
     <main id="main-content">
