@@ -21,7 +21,7 @@
         - Proyek & Layanan: Menggunakan sistem tab interaktif. Goal: Organize/Explore. Method: HTML/JS/CSS. Interaction: Klik untuk beralih konten. Justification: Memisahkan proyek pribadi dari layanan yang ditawarkan secara jelas.
         - Linimasa Karier: Menggunakan diagram alur vertikal alternating (kiri-kanan). Goal: Change/Explore. Method: HTML/Tailwind/JS. Interaction: Klik untuk menampilkan/menyembunyikan detail pekerjaan. Justification: Tata letak lebih dinamis dan menarik secara visual.
         - Durasi Pengalaman: Menggunakan bagan balok horizontal (Gantt chart). Goal: Compare/Analyze. Method: Chart.js Canvas. Interaction: Tooltip saat hover. Justification: Memberikan gambaran visual yang kuat tentang durasi dan tumpang tindih setiap peran.
-        - PDF Generation: Menggunakan template CV profesional tersembunyi yang diisi secara dinamis. Metode diubah kembali ke html2canvas + jsPDF.addImage() dengan loop manual untuk memastikan rendering yang andal dan mencegah halaman kosong. Goal: Export. Method: html2canvas, jsPDF, Hidden HTML template. Interaction: Klik tombol. Justification: Menjamin pembuatan PDF yang berhasil dan konsisten.
+        - PDF Generation: Menggunakan template CV profesional tersembunyi (terinspirasi dari PDF user) yang diisi secara dinamis menggunakan SUMBER DATA YANG SAMA dengan konten web. Goal: Export. Method: jsPDF, html2canvas, Hidden HTML template. Interaction: Klik tombol. Justification: Menghasilkan PDF profesional, bukan sekadar screenshot, dan menjamin konsistensi data.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
@@ -536,20 +536,40 @@
             buildProfessionalPdfHtml();
             const content = document.getElementById('pdf-professional-container');
             
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF('p', 'mm', 'a4');
+            html2canvas(content, {
+                scale: 2,
+                useCORS: true,
+                logging: false 
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF({
+                    orientation: 'p',
+                    unit: 'mm',
+                    format: 'a4'
+                });
 
-            pdf.html(content, {
-                callback: function(doc) {
-                    doc.save('CV-Profesional-Ilham-Wahyuni.pdf');
-                },
-                margin: 10, // Symmetrical margin of 10mm on all sides
-                autoPaging: 'slice', 
-                html2canvas: {
-                    scale: 0.23, // Adjusted scale for better rendering
-                    useCORS: true,
-                    logging: false
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const canvasHeight = canvas.height;
+                const canvasWidth = canvas.width;
+                const ratio = canvasWidth / canvasHeight;
+
+                const imgHeight = pdfWidth / ratio;
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
+                heightLeft -= pdf.internal.pageSize.getHeight();
+
+                while (heightLeft > 0) {
+                    position = position - pdf.internal.pageSize.getHeight();
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
+                    heightLeft -= pdf.internal.pageSize.getHeight();
                 }
+                
+                pdf.save('CV-Profesional-Ilham-Wahyuni.pdf');
+            }).catch(err => {
+                console.error("Error generating PDF:", err);
             });
         }
 
