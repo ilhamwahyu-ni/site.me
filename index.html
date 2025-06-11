@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portofolio Interaktif - Ilham Wahyuni</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
@@ -30,6 +32,7 @@
             background-color: #F8F7F4;
             color: #3d405b;
         }
+
         .social-button {
             display: inline-flex;
             align-items: center;
@@ -40,14 +43,30 @@
             transition: transform 0.2s;
             font-size: 0.875rem;
         }
+
         .social-button:hover {
             transform: translateY(-2px);
         }
-        .linkedin { background-color: #0077b5; }
-        .github { background-color: #333; }
-        .gmail { background-color: #d44638; }
-        .instagram { background-color: #E1306C; }
-        .youtube { background-color: #ff0000; }
+
+        .linkedin {
+            background-color: #0077b5;
+        }
+
+        .github {
+            background-color: #333;
+        }
+
+        .gmail {
+            background-color: #d44638;
+        }
+
+        .instagram {
+            background-color: #E1306C;
+        }
+
+        .youtube {
+            background-color: #ff0000;
+        }
 
         .tab-button {
             padding: 0.5rem 1rem;
@@ -56,14 +75,31 @@
             font-weight: 500;
             transition: all 0.3s;
         }
+
         .tab-button.active {
             border-color: #81b29a;
             color: #81b29a;
             background-color: #eaf6f0;
         }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
 
         .project-item {
             background-color: #fff;
@@ -72,13 +108,21 @@
             margin-bottom: 1rem;
             border: 1px solid #e5e7eb;
         }
-        .project-title { font-weight: 700; color: #3d405b; }
-        .project-description { color: #6b7280; }
+
+        .project-title {
+            font-weight: 700;
+            color: #3d405b;
+        }
+
+        .project-description {
+            color: #6b7280;
+        }
 
         .timeline-container {
             width: 100%;
             position: relative;
         }
+
         .timeline-container::after {
             content: '';
             position: absolute;
@@ -89,14 +133,21 @@
             left: 50%;
             margin-left: -2px;
         }
+
         .timeline-item-container {
             padding: 10px 40px;
             position: relative;
             background-color: inherit;
             width: 50%;
         }
-        .timeline-item-container.left { left: 0; }
-        .timeline-item-container.right { left: 50%; }
+
+        .timeline-item-container.left {
+            left: 0;
+        }
+
+        .timeline-item-container.right {
+            left: 50%;
+        }
 
         .timeline-item-container::after {
             content: '';
@@ -110,7 +161,10 @@
             border-radius: 50%;
             z-index: 1;
         }
-        .timeline-item-container.right::after { left: -8px; }
+
+        .timeline-item-container.right::after {
+            left: -8px;
+        }
 
         .timeline-content {
             padding: 20px;
@@ -120,28 +174,40 @@
             border: 1px solid #e5e7eb;
             cursor: pointer;
         }
+
         .timeline-details {
             max-height: 0;
             opacity: 0;
             overflow: hidden;
             transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
         }
+
         .timeline-content.active .timeline-details {
             max-height: 500px;
             opacity: 1;
         }
+
         @media screen and (max-width: 768px) {
-            .timeline-container::after { left: 15px; }
+            .timeline-container::after {
+                left: 15px;
+            }
+
             .timeline-item-container {
                 width: 100%;
                 padding-left: 50px;
                 padding-right: 15px;
             }
-            .timeline-item-container.right { left: 0%; }
-            .timeline-item-container.left::after, .timeline-item-container.right::after {
+
+            .timeline-item-container.right {
+                left: 0%;
+            }
+
+            .timeline-item-container.left::after,
+            .timeline-item-container.right::after {
                 left: -8px;
             }
         }
+
         .chart-container {
             position: relative;
             width: 100%;
@@ -151,72 +217,249 @@
             height: 400px;
             max-height: 50vh;
         }
+
         @media (max-width: 768px) {
             .chart-container {
                 height: 500px;
                 max-height: 70vh;
             }
         }
-        
+
         /* Professional PDF Template Styles */
         .pdf-pro-container {
             position: absolute;
             left: -9999px;
-            top: auto;
+            /* top: 10mm; */
             width: 210mm;
             background-color: white;
             font-family: 'Roboto', sans-serif;
         }
+
         .pdf-pro-page {
-            padding: 10mm; /* Equal margin: 10mm on all sides */
-            width: 210mm;
-            min-height: 297mm;
+            padding: 10mm;
+            /* Equal margin: 10mm on all sides */
+            width: 100%;
+            min-height: calc(297mm - 20mm);
             box-sizing: border-box;
             color: #333;
         }
-        .pdf-pro-header { text-align: center; margin-bottom: 7mm;}
-        .pdf-pro-header h1 { font-size: 26pt; font-weight: 700; color: #2c3e50; margin: 0; }
-        .pdf-pro-header h2 { font-size: 11pt; font-weight: 500; color: #34495e; margin: 1mm 0; letter-spacing: 1px; }
-        .pdf-pro-contact { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 4mm; font-size: 9pt; color: #555;}
-        .pdf-pro-contact span { display: flex; align-items: center; gap: 5px; }
-        .pdf-pro-section-title { font-size: 13pt; font-weight: 700; color: #2c3e50; margin-top: 5mm; margin-bottom: 3mm; border-bottom: 1.5px solid #bdc3c7; padding-bottom: 1.5mm;}
-        .pdf-pro-profile-text { font-size: 10pt; line-height: 1.5; text-align: justify;}
-        .pdf-pro-grid { display: grid; grid-template-columns: 1fr 2.5fr; gap: 8mm; align-items: start; }
-        .pdf-pro-grid-title { font-weight: 700; font-size: 10pt; color: #34495e;}
-        .pdf-pro-grid-content { font-size: 10pt;}
-        .pdf-pro-work-item { margin-bottom: 5mm; page-break-inside: avoid; } /* Avoid page break */
-        .pdf-pro-work-item:last-child { margin-bottom: 0; }
-        .pdf-pro-work-header { display: flex; justify-content: space-between; align-items: flex-start; }
-        .pdf-pro-work-role { font-size: 11pt; font-weight: 700; }
-        .pdf-pro-work-date { font-size: 9pt; color: #777; font-weight: 500; }
-        .pdf-pro-work-company { font-size: 10pt; font-weight: 500; color: #555; margin-bottom: 2mm; }
-        .pdf-pro-work-details { font-size: 9.5pt; padding-left: 15px; margin: 0; list-style-type: disc; } /* Added list-style-type */
-        .pdf-pro-work-details li { margin-bottom: 1.2mm; }
-        .pdf-pro-sub-skill { font-size: 9.5pt; margin-top: 2mm; }
-        .pdf-pro-sub-skill strong { font-weight: 700; }
-        .pdf-pro-project-item { margin-bottom: 4mm; page-break-inside: avoid; } /* Avoid page break */
-        .pdf-pro-project-title { font-size: 10pt; font-weight: 700; }
-        .pdf-pro-project-context { font-size: 9pt; color: #555; font-style: italic; margin-bottom: 2mm; }
-        .pdf-pro-project-details { font-size: 9.5pt; padding-left: 15px; margin: 0; }
 
+        .pdf-pro-header {
+            text-align: center;
+            margin-bottom: 7mm;
+        }
+
+        .pdf-pro-header h1 {
+            font-size: 26pt;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .pdf-pro-header h2 {
+            font-size: 11pt;
+            font-weight: 500;
+            color: #34495e;
+            margin: 1mm 0;
+            letter-spacing: 1px;
+        }
+
+        .pdf-pro-contact {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 4mm;
+            font-size: 9pt;
+            color: #555;
+        }
+
+        .pdf-pro-contact span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .pdf-pro-section-title {
+            font-size: 13pt;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-top: 5mm;
+            margin-bottom: 3mm;
+            border-bottom: 1.5px solid #bdc3c7;
+            padding-bottom: 1.5mm;
+        }
+
+        .pdf-pro-profile-text {
+            font-size: 10pt;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        .pdf-pro-grid {
+            display: grid;
+            grid-template-columns: 1fr 2.5fr;
+            gap: 8mm;
+            align-items: start;
+        }
+
+        .pdf-pro-grid-title {
+            font-weight: 700;
+            font-size: 10pt;
+            color: #34495e;
+        }
+
+        .pdf-pro-grid-content {
+            font-size: 10pt;
+        }
+
+        .pdf-pro-work-item {
+            margin-bottom: 5mm;
+            page-break-inside: avoid;
+        }
+
+        /* Avoid page break */
+        .pdf-pro-work-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .pdf-pro-work-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .pdf-pro-work-role {
+            font-size: 11pt;
+            font-weight: 700;
+        }
+
+        .pdf-pro-work-date {
+            font-size: 9pt;
+            color: #777;
+            font-weight: 500;
+        }
+
+        .pdf-pro-work-company {
+            font-size: 10pt;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 2mm;
+        }
+
+        .pdf-pro-work-details {
+            font-size: 9.5pt;
+            padding-left: 15px;
+            margin: 0;
+            list-style-type: disc;
+        }
+
+        /* Added list-style-type */
+        .pdf-pro-work-details li {
+            margin-bottom: 1.2mm;
+        }
+
+        .pdf-pro-sub-skill {
+            font-size: 9.5pt;
+            margin-top: 2mm;
+        }
+
+        .pdf-pro-sub-skill strong {
+            font-weight: 700;
+        }
+
+        .pdf-pro-project-item {
+            margin-bottom: 4mm;
+            page-break-inside: avoid;
+        }
+
+        /* Avoid page break */
+        .pdf-pro-project-title {
+            font-size: 10pt;
+            font-weight: 700;
+        }
+
+        .pdf-pro-project-context {
+            font-size: 9pt;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 2mm;
+        }
+
+        .pdf-pro-project-details {
+            font-size: 9.5pt;
+            padding-left: 15px;
+            margin: 5;
+        }
     </style>
 </head>
+
 <body class="antialiased">
 
     <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
         <div class="container mx-auto px-6 py-4">
             <nav class="flex items-center justify-between">
                 <a href="#hero" class="text-xl font-bold text-[#3d405b]">Ilham Wahyuni</a>
+                
+                <!-- Tombol menu mobile -->
+                <button id="menuBtn" class="md:hidden text-[#3d405b] focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+
+                <!-- Menu desktop -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#skills" class="text-gray-600 hover:text-[#e07a5f] transition-colors">Keahlian</a>
                     <a href="#projects-services" class="text-gray-600 hover:text-[#e07a5f] transition-colors">Projek</a>
                     <a href="#experience" class="text-gray-600 hover:text-[#e07a5f] transition-colors">Pengalaman</a>
                     <a href="#education" class="text-gray-600 hover:text-[#e07a5f] transition-colors">Pendidikan</a>
                 </div>
+
+                <!-- Tombol Generate CV -->
                 <button onclick="generateCV()" class="hidden md:inline-flex items-center bg-[#e07a5f] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all">
                     <i class="fas fa-file-pdf mr-2"></i> Generate CV
                 </button>
             </nav>
+
+            <!-- Menu mobile -->
+            <div id="mobileMenu" class="hidden md:hidden bg-white fixed inset-0 z-50 flex flex-col items-center justify-center space-y-8">
+                <button id="closeMenuBtn" class="absolute top-6 right-6 text-[#3d405b]">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <a href="#skills" class="text-xl text-gray-600 hover:text-[#e07a5f] transition-colors">Keahlian</a>
+                <a href="#projects-services" class="text-xl text-gray-600 hover:text-[#e07a5f] transition-colors">Projek</a>
+                <a href="#experience" class="text-xl text-gray-600 hover:text-[#e07a5f] transition-colors">Pengalaman</a>
+                <a href="#education" class="text-xl text-gray-600 hover:text-[#e07a5f] transition-colors">Pendidikan</a>
+                <button onclick="generateCV()" class="mt-4 inline-flex items-center bg-[#e07a5f] text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-all">
+                    <i class="fas fa-file-pdf mr-2"></i> Generate CV
+                </button>
+            </div>
+        </div>
+
+        <script>
+            // Fungsi untuk menu mobile
+            const menuBtn = document.getElementById('menuBtn');
+            const closeMenuBtn = document.getElementById('closeMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+
+            // Menutup menu saat link diklik
+            const mobileLinks = mobileMenu.getElementsByTagName('a');
+            Array.from(mobileLinks).forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+        </script>
         </div>
     </header>
 
@@ -226,11 +469,16 @@
                 <h1 class="text-4xl md:text-6xl font-bold text-[#3d405b] leading-tight">Ilham Wahyuni</h1>
                 <p class="mt-4 text-lg md:text-xl text-gray-700">Pendidik & Pengembang Web | Laravel | TIK</p>
                 <div class="mt-8 flex justify-center flex-wrap gap-3">
-                    <a href="https://www.linkedin.com/in/ilham-wahyuni" target="_blank" rel="noopener noreferrer" class="social-button linkedin"><i class="fab fa-linkedin-in mr-2"></i> LinkedIn</a>
-                    <a href="https://github.com/ilhamw-code" target="_blank" rel="noopener noreferrer" class="social-button github"><i class="fab fa-github mr-2"></i> GitHub</a>
-                    <a href="mailto:wahyuilham20@gmail.com" class="social-button gmail"><i class="far fa-envelope mr-2"></i> Gmail</a>
-                    <a href="https://www.instagram.com/ilhamwahyu_ni/" target="_blank" rel="noopener noreferrer" class="social-button instagram"><i class="fab fa-instagram mr-2"></i> Instagram</a>
-                    <a href="https://www.youtube.com/@ilhamwahyu_ni" target="_blank" rel="noopener noreferrer" class="social-button youtube"><i class="fab fa-youtube mr-2"></i> YouTube</a>
+                    <a href="https://www.linkedin.com/in/ilham-wahyuni" target="_blank" rel="noopener noreferrer"
+                        class="social-button linkedin"><i class="fab fa-linkedin-in mr-2"></i> LinkedIn</a>
+                    <a href="https://github.com/ilhamw-code" target="_blank" rel="noopener noreferrer"
+                        class="social-button github"><i class="fab fa-github mr-2"></i> GitHub</a>
+                    <a href="mailto:wahyuilham20@gmail.com" class="social-button gmail"><i
+                            class="far fa-envelope mr-2"></i> Gmail</a>
+                    <a href="https://www.instagram.com/ilhamwahyu_ni/" target="_blank" rel="noopener noreferrer"
+                        class="social-button instagram"><i class="fab fa-instagram mr-2"></i> Instagram</a>
+                    <a href="https://www.youtube.com/@ilhamwahyu_ni" target="_blank" rel="noopener noreferrer"
+                        class="social-button youtube"><i class="fab fa-youtube mr-2"></i> YouTube</a>
                 </div>
             </div>
         </section>
@@ -266,7 +514,7 @@
                             <li>Video Streaming Edukatif</li>
                         </ul>
                     </div>
-                     <div id="soft-skills" class="bg-gray-50 p-6 rounded-lg">
+                    <div id="soft-skills" class="bg-gray-50 p-6 rounded-lg">
                         <h3 class="font-bold text-xl mb-3">🤝 Profesional</h3>
                         <ul class="space-y-2 text-gray-700">
                             <li>Pemecahan Masalah</li>
@@ -282,43 +530,46 @@
         <section id="projects-services" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-6 max-w-4xl">
                 <div class="text-center mb-12">
-                     <h2 class="text-3xl font-bold">Projek & Layanan</h2>
+                    <h2 class="text-3xl font-bold">Projek & Layanan</h2>
                 </div>
                 <div class="flex justify-center mb-6">
                     <button onclick="showTab('projects')" id="projects-tab" class="tab-button active">Projek</button>
                     <button onclick="showTab('services')" id="services-tab" class="tab-button">Layanan</button>
                 </div>
                 <div id="projects" class="tab-content active">
-                     <ul class="project-list">
-                         <li class="project-item">
-                             <a href="https://etahfiz.ilwa.my.id" target="_blank" rel="noopener noreferrer" class="project-title">
-                                 Etahfiz: Laporan Hafalan Al-Quran
-                             </a>
-                             <p class="project-description">
-                                 Aplikasi web untuk mencatat nilai laporan dalam hafalan Al-Quran.
-                             </p>
-                         </li>
-                     </ul>
+                    <ul class="project-list">
+                        <li class="project-item">
+                            <a href="https://etahfiz.ilwa.my.id" target="_blank" rel="noopener noreferrer"
+                                class="project-title">
+                                Etahfiz: Laporan Hafalan Al-Quran
+                            </a>
+                            <p class="project-description">
+                                Aplikasi web untuk mencatat nilai laporan dalam hafalan Al-Quran.
+                            </p>
+                        </li>
+                    </ul>
                 </div>
                 <div id="services" class="tab-content">
-                     <ul class="project-list">
-                         <li class="project-item">
-                             <a href="https://batipuahateh.desa.id/" target="_blank" rel="noopener noreferrer" class="project-title">
-                                 Pengembangan & Implementasi Sistem Informasi Desa
-                             </a>
-                             <p class="project-description">
-                                 Jasa untuk menyiapkan dan mengkonfigurasi sistem informasi desa.
-                             </p>
-                         </li>
-                         <li class="project-item">
-                             <a href="https://studywith.ilwa.my.id/" target="_blank" rel="noopener noreferrer" class="project-title">
-                                 Instalasi Aplikasi Moodle
-                             </a>
-                             <p class="project-description">
-                                 Jasa untuk menginstal dan mengkonfigurasi Moodle untuk keperluan pendidikan.
-                             </p>
-                         </li>
-                     </ul>
+                    <ul class="project-list">
+                        <li class="project-item">
+                            <a href="https://batipuahateh.desa.id/" target="_blank" rel="noopener noreferrer"
+                                class="project-title">
+                                Pengembangan & Implementasi Sistem Informasi Desa
+                            </a>
+                            <p class="project-description">
+                                Jasa untuk menyiapkan dan mengkonfigurasi sistem informasi desa.
+                            </p>
+                        </li>
+                        <li class="project-item">
+                            <a href="https://studywith.ilwa.my.id/" target="_blank" rel="noopener noreferrer"
+                                class="project-title">
+                                Instalasi Aplikasi Moodle
+                            </a>
+                            <p class="project-description">
+                                Jasa untuk menginstal dan mengkonfigurasi Moodle untuk keperluan pendidikan.
+                            </p>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -343,7 +594,8 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl font-bold">Latar Belakang Pendidikan</h2>
-                     <p class="mt-2 text-lg text-gray-600">Fondasi akademis yang mendukung keahlian dan perjalanan karier saya.</p>
+                    <p class="mt-2 text-lg text-gray-600">Fondasi akademis yang mendukung keahlian dan perjalanan karier
+                        .</p>
                 </div>
                 <div class="max-w-3xl mx-auto grid md:grid-cols-2 gap-8">
                     <div class="bg-gray-50 p-6 rounded-lg">
@@ -366,16 +618,11 @@
     <footer id="contact" class="bg-[#3d405b] text-white">
         <div class="container mx-auto px-6 py-12 text-center">
             <h2 class="text-2xl font-bold mb-4">Mari Terhubung</h2>
-            <p class="max-w-xl mx-auto mb-8">Saya terbuka untuk diskusi mengenai peluang kolaborasi, proyek pengembangan web, atau topik terkait teknologi pendidikan.</p>
-            <div class="mt-8 flex justify-center flex-wrap gap-3">
-                <a href="https://www.linkedin.com/in/ilham-wahyuni" target="_blank" rel="noopener noreferrer" class="social-button linkedin"><i class="fab fa-linkedin-in mr-2"></i> LinkedIn</a>
-                <a href="https://github.com/ilhamw-code" target="_blank" rel="noopener noreferrer" class="social-button github"><i class="fab fa-github mr-2"></i> GitHub</a>
-                <a href="mailto:wahyuilham20@gmail.com" class="social-button gmail"><i class="far fa-envelope mr-2"></i> Gmail</a>
-                <a href="https://www.instagram.com/ilhamwahyu_ni/" target="_blank" rel="noopener noreferrer" class="social-button instagram"><i class="fab fa-instagram mr-2"></i> Instagram</a>
-                <a href="https://www.youtube.com/@ilhamwahyu_ni" target="_blank" rel="noopener noreferrer" class="social-button youtube"><i class="fab fa-youtube mr-2"></i> YouTube</a>
-            </div>
-             <div class="mt-10 text-sm text-gray-400">
-                <p>&copy; <span id="currentYear"></span> Ilham Wahyuni. Dibuat secara interaktif.</p>
+            <p class="max-w-xl mx-auto mb-8"> terbuka untuk diskusi mengenai peluang kolaborasi, proyek pengembangan
+                web, atau topik terkait teknologi pendidikan.</p>
+
+            <div class="mt-10 text-sm text-gray-400">
+                <p>&copy; <span id="currentYear"></span> Ilham Wahyuni</p>
             </div>
         </div>
     </footer>
@@ -390,10 +637,10 @@
 
     <script>
         const { jsPDF } = window.jspdf;
-        
+
         // SINGLE SOURCE OF TRUTH
         const portfolioData = {
-             name: "Ilham Wahyuni",
+            name: "Ilham Wahyuni",
             title: "Pendidik & Pengembang Web | Laravel | TIK",
             contact: {
                 phone: "+6282323066956",
@@ -401,7 +648,7 @@
                 github: "github.com/ilhamw-code",
                 linkedin: "linkedin.com/in/ilham-wahyuni"
             },
-            profile: "Saya adalah seorang pendidik yang berdedikasi di bidang Teknologi Informasi dan Komunikasi (TIK) di MTsN Kota Padang Panjang. saya berkomitmen untuk mempersiapkan generasi muda menghadapi era digital.\n\nDi luar jam mengajar, saya aktif sebagai pengembang web dengan keahlian khusus dalam framework Laravel. Saya percaya bahwa kombinasi pengalaman mengajar dan keahlian teknis memungkinkan saya untuk memberikan perspektif unik dalam kedua bidang tersebut.",
+            profile: " Seorang pendidik yang berdedikasi di bidang Teknologi Informasi dan Komunikasi (TIK) di MTsN Kota Padang Panjang.  berkomitmen untuk mempersiapkan generasi muda menghadapi era digital.\n\nDi luar jam mengajar,  aktif sebagai pengembang web dengan keahlian khusus dalam framework Laravel.  percaya bahwa kombinasi pengalaman mengajar dan keahlian teknis memungkinkan  untuk memberikan perspektif unik dalam kedua bidang tersebut.",
             education: [
                 {
                     university: "UNIVERSITAS PUTRA INDONESIA (YPTK) PADANG",
@@ -423,11 +670,11 @@
                 "Profesional": ["Pemecahan Masalah", "Kolaborasi Tim", "Komunikasi Pemangku Kepentingan", "Perhatian terhadap Detail"]
             },
             experience: [
-                { role: 'Guru TIK', company: 'MTsN Padang Panjang', period: 'Agustus 2023 – Saat ini', startDate: '2023-08-01', endDate: new Date().toISOString().split('T')[0], details: [ 'Memberikan pelatihan kepada guru-guru informatika dan teknik komputer mengenai metode pengajaran inovatif untuk meningkatkan kualitas pendidikan.', 'Memproduksi konten streaming edukatif yang menarik di platform YouTube untuk memperkaya pengalaman belajar siswa.', 'Merancang dan membuat spanduk penghargaan prestasi siswa sebagai bentuk motivasi dan pengakuan atas keunggulan akademik.' ] },
-                { role: 'Freelance', company: 'Wiraswasta', period: 'Desember 2022 – Saat ini', startDate: '2022-12-01', endDate: new Date().toISOString().split('T')[0], details: [ 'Mengembangkan dan memelihara situs web untuk berbagai klien, termasuk sekolah bimbingan belajar dan situs web desa, yang dikelola dari jarak jauh.', 'Berkolaborasi secara proaktif dengan klien untuk memahami kebutuhan spesifik dan memberikan solusi digital yang disesuaikan.', 'Meningkatkan pengalaman pengguna secara signifikan dengan mengoptimalkan kinerja dan fungsionalitas situs web.' ] },
-                { role: 'Quality Assurance Tester', company: 'OPENDESA', period: 'Mei 2024 – Juni 2025', startDate: '2024-05-01', endDate: '2025-06-30', details: [ 'Melakukan pengujian jaminan kualitas secara menyeluruh pada aplikasi web komunitas Opendesa, berhasil mengidentifikasi dan memperbaiki bug secara efisien.', 'Berkolaborasi secara efektif dengan tim pengembang untuk memastikan perbaikan bug diimplementasikan secara akurat dan tepat waktu.', 'Menerapkan keterampilan pemecahan masalah dan perhatian tinggi terhadap detail untuk meningkatkan pengalaman pengguna aplikasi secara keseluruhan.' ] },
-                { role: 'Kontributor', company: 'Harian Haluan', period: 'Juni 2023 – Desember 2023', startDate: '2023-06-01', endDate: '2023-12-31', details: [ 'Menulis dan mempublikasikan artikel yang relevan dengan kondisi desa setempat, mencakup aspek pemerintahan, komunitas, dan lingkungan di Harianhaluan.id.' ] },
-                { role: 'Administrator Web', company: 'Nagari Batipuah Ateh', period: 'Februari 2019 – Agustus 2023', startDate: '2019-02-01', endDate: '2023-08-31', details: [ 'Mengimplementasikan sistem informasi desa open-source (Opesid) dari komunitas GitHub untuk meningkatkan transparansi dan layanan publik.', 'Mengelola situs web Nagari, memastikan aksesibilitas, fungsionalitas, dan keamanan informasi bagi komunitas lokal.', 'Bekerja sama dengan pemangku kepentingan untuk mengumpulkan persyaratan dan menyesuaikan sistem agar sesuai dengan kebutuhan spesifik nagari.' ] }
+                { role: 'Guru TIK', company: 'MTsN Padang Panjang', period: 'Agustus 2023 – Saat ini', startDate: '2023-08-01', endDate: new Date().toISOString().split('T')[0], details: ['Memberikan pelatihan kepada guru-guru informatika dan teknik komputer mengenai metode pengajaran inovatif untuk meningkatkan kualitas pendidikan.', 'Memproduksi konten streaming edukatif yang menarik di platform YouTube untuk memperkaya pengalaman belajar siswa.', 'Merancang dan membuat spanduk penghargaan prestasi siswa sebagai bentuk motivasi dan pengakuan atas keunggulan akademik.'] },
+                { role: 'Freelance', company: 'Wiraswasta', period: 'Desember 2022 – Saat ini', startDate: '2022-12-01', endDate: new Date().toISOString().split('T')[0], details: ['Mengembangkan dan memelihara situs web untuk berbagai klien, termasuk sekolah bimbingan belajar dan situs web desa, yang dikelola dari jarak jauh.', 'Berkolaborasi secara proaktif dengan klien untuk memahami kebutuhan spesifik dan memberikan solusi digital yang disesuaikan.', 'Meningkatkan pengalaman pengguna secara signifikan dengan mengoptimalkan kinerja dan fungsionalitas situs web.'] },
+                { role: 'Quality Assurance Tester', company: 'OPENDESA', period: 'Mei 2024 – Juni 2025', startDate: '2024-05-01', endDate: '2025-06-30', details: ['Melakukan pengujian jaminan kualitas secara menyeluruh pada aplikasi web komunitas Opendesa, berhasil mengidentifikasi dan memperbaiki bug secara efisien.', 'Berkolaborasi secara efektif dengan tim pengembang untuk memastikan perbaikan bug diimplementasikan secara akurat dan tepat waktu.', 'Menerapkan keterampilan pemecahan masalah dan perhatian tinggi terhadap detail untuk meningkatkan pengalaman pengguna aplikasi secara keseluruhan.'] },
+                { role: 'Kontributor', company: 'Harian Haluan', period: 'Juni 2023 – Desember 2023', startDate: '2023-06-01', endDate: '2023-12-31', details: ['Menulis dan mempublikasikan artikel yang relevan dengan kondisi desa setempat, mencakup aspek pemerintahan, komunitas, dan lingkungan di Harianhaluan.id.'] },
+                { role: 'Administrator Web', company: 'Nagari Batipuah Ateh', period: 'Februari 2019 – Agustus 2023', startDate: '2019-02-01', endDate: '2023-08-31', details: ['Mengimplementasikan sistem informasi desa open-source (Opesid) dari komunitas GitHub untuk meningkatkan transparansi dan layanan publik.', 'Mengelola situs web Nagari, memastikan aksesibilitas, fungsionalitas, dan keamanan informasi bagi komunitas lokal.', 'Bekerja sama dengan pemangku kepentingan untuk mengumpulkan persyaratan dan menyesuaikan sistem agar sesuai dengan kebutuhan spesifik nagari.'] }
             ],
             projects: [
                 {
@@ -446,7 +693,7 @@
                 }
             ]
         };
-        
+
         function showTab(tabName) {
             const tabs = ['projects', 'services'];
             tabs.forEach(tab => {
@@ -479,7 +726,7 @@
                     </div>
                 </div>
             `).join('<div style="margin-bottom: 3mm;"></div>');
-            
+
             const allSkills = Object.values(data.skills).flat().join(', ');
             const skillsHtml = `
                  <div class="pdf-pro-grid">
@@ -535,13 +782,12 @@
         function generateCV() {
             buildProfessionalPdfHtml();
             const content = document.getElementById('pdf-professional-container');
-            
+
             html2canvas(content, {
                 scale: 2,
                 useCORS: true,
-                logging: false 
+                logging: false
             }).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
                 const pdf = new jsPDF({
                     orientation: 'p',
                     unit: 'mm',
@@ -549,31 +795,59 @@
                 });
 
                 const pdfWidth = pdf.internal.pageSize.getWidth();
-                const canvasHeight = canvas.height;
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+
                 const canvasWidth = canvas.width;
-                const ratio = canvasWidth / canvasHeight;
+                const canvasHeight = canvas.height;
 
-                const imgHeight = pdfWidth / ratio;
-                let heightLeft = imgHeight;
-                let position = 0;
+                const marginTopMM = 0; // ubah nilai ini sesuai kebutuhan margin atas
+                const marginBottomMM = 19;
 
-                pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
-                heightLeft -= pdf.internal.pageSize.getHeight();
+                const usablePdfHeight = pdfHeight - marginTopMM - marginBottomMM;
+                const pageHeightInPx = canvasWidth * (usablePdfHeight / pdfWidth);
 
-                while (heightLeft > 0) {
-                    position = position - pdf.internal.pageSize.getHeight();
-                    pdf.addPage();
-                    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
-                    heightLeft -= pdf.internal.pageSize.getHeight();
+                let renderedHeight = 0;
+
+                while (renderedHeight < canvasHeight) {
+                    const pageCanvas = document.createElement('canvas');
+                    const context = pageCanvas.getContext('2d');
+
+                    pageCanvas.width = canvasWidth;
+                    pageCanvas.height = Math.min(pageHeightInPx, canvasHeight - renderedHeight);
+
+                    context.drawImage(
+                        canvas,
+                        0, renderedHeight,
+                        canvasWidth, pageCanvas.height,
+                        0, 0,
+                        canvasWidth, pageCanvas.height
+                    );
+
+                    const imgData = pageCanvas.toDataURL('image/png');
+                    if (renderedHeight > 0) pdf.addPage();
+                    const imgHeightMM = (pageCanvas.height * pdfWidth) / canvasWidth;
+
+                    pdf.addImage(
+                        imgData,
+                        'PNG',
+                        0,
+                        marginTopMM,
+                        pdfWidth,
+                        imgHeightMM
+                    );
+
+                    renderedHeight += pageCanvas.height;
                 }
-                
+
                 pdf.save('CV-Profesional-Ilham-Wahyuni.pdf');
             }).catch(err => {
                 console.error("Error generating PDF:", err);
             });
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+
+
+        document.addEventListener('DOMContentLoaded', function () {
             const data = portfolioData;
 
             const timelineContainer = document.getElementById('timeline-container');
@@ -595,7 +869,7 @@
                     </div>
                 `;
                 timelineContainer.appendChild(timelineItemContainer);
-                timelineItemContainer.querySelector('.timeline-content').addEventListener('click', function() {
+                timelineItemContainer.querySelector('.timeline-content').addEventListener('click', function () {
                     this.classList.toggle('active');
                 });
             });
@@ -633,7 +907,7 @@
                         legend: { display: false },
                         tooltip: {
                             callbacks: {
-                                label: function(context) {
+                                label: function (context) {
                                     const item = data.experience.slice().reverse()[context.dataIndex];
                                     return `${item.role}: ${item.period}`;
                                 }
@@ -646,4 +920,47 @@
         });
     </script>
 </body>
+
+</html>
+
+<style>
+    #backToTop {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #81b29a;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 40px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        z-index: 1000;
+    }
+
+    #backToTop:hover {
+        background-color: #3d405b;
+    }
+</style>
+
+<body>
+    <button id="backToTop" title="Kembali ke atas" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i
+            class="fas fa-arrow-up"></i></button>
+
+    <script>
+        // Fungsi untuk menampilkan/menyembunyikan tombol back to top
+        window.onscroll = function () {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("backToTop").style.display = "block";
+            } else {
+                document.getElementById("backToTop").style.display = "none";
+            }
+        };
+    </script>
+    </div>
+</body>
+
 </html>
