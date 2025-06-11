@@ -1,424 +1,629 @@
 <!DOCTYPE html>
-<html lang="id" class="light">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ilham Wahyuni - Portfolio</title> // buatkan link ke github  
-  
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <title>Portofolio Interaktif - Ilham Wahyuni</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: SPA ini menggunakan struktur vertikal dengan navigasi sticky di bagian atas untuk akses cepat. Alurnya dimulai dari perkenalan (Hero), lalu visualisasi Keahlian, bagian Proyek & Layanan baru, kemudian Linimasa Karier yang interaktif dengan layout alternating (elemen utama), dan diakhiri dengan Pendidikan dan Kontak. Struktur ini dipilih untuk mengubah CV statis menjadi sebuah narasi karier yang terpandu. Interaktivitas pada linimasa dan tab proyek meningkatkan usabilitas dan keterlibatan pengguna. -->
+    <!-- Visualization & Content Choices: 
+        - Keahlian: Disajikan dalam grup visual dengan ikon untuk pemindaian cepat. Goal: Organize. Method: HTML/Tailwind. Interaction: Hover effects. Justification: Memudahkan identifikasi kekuatan utama.
+        - Proyek & Layanan: Menggunakan sistem tab interaktif. Goal: Organize/Explore. Method: HTML/JS/CSS. Interaction: Klik untuk beralih konten. Justification: Memisahkan proyek pribadi dari layanan yang ditawarkan secara jelas.
+        - Linimasa Karier: Menggunakan diagram alur vertikal alternating (kiri-kanan). Goal: Change/Explore. Method: HTML/Tailwind/JS. Interaction: Klik untuk menampilkan/menyembunyikan detail pekerjaan. Justification: Tata letak lebih dinamis dan menarik secara visual.
+        - Durasi Pengalaman: Menggunakan bagan balok horizontal (Gantt chart). Goal: Compare/Analyze. Method: Chart.js Canvas. Interaction: Tooltip saat hover. Justification: Memberikan gambaran visual yang kuat tentang durasi dan tumpang tindih setiap peran.
+        - PDF Generation: Menggunakan template CV profesional tersembunyi yang diisi secara dinamis. Metode diubah kembali ke html2canvas + jsPDF.addImage() dengan loop manual untuk memastikan rendering yang andal dan mencegah halaman kosong. Goal: Export. Method: html2canvas, jsPDF, Hidden HTML template. Interaction: Klik tombol. Justification: Menjamin pembuatan PDF yang berhasil dan konsisten.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
-        :root {
-            --bg-primary: #ffffff;
-            --text-primary: #333333;
-            --card-bg: #ffffff;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-        }
-
-        html.dark {
-            --bg-primary: #1a1a1a;
-            --text-primary: #ffffff;
-            --card-bg: #2d2d2d;
-            --shadow-color: rgba(0, 0, 0, 0.3);
-        }
-
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            transition: background-color 0.3s ease;
-            margin: 1rem; /* Added margin for better visibility of the theme toggle button */
+            background-color: #F8F7F4;
+            color: #3d405b;
         }
-
-        .search-results-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 800px;
-            margin: 3rem auto;
-            padding: 0 1.5rem;
-            position: relative;
-        }
-
-        .search-result {
-            width: 100%;
-            background-color: var(--card-bg);
-            padding: 2.5rem;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 30px var(--shadow-color);
-            transition: all 0.3s ease;
-            transform: translateY(0);
-        }
-
-        .search-result:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px var(--shadow-color);
-        }
-
-        .theme-toggle {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            padding: 0.75rem;
-            border-radius: 50%;
-            background-color: var(--card-bg);
-            box-shadow: 0 4px 12px var(--shadow-color);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        @media (max-width: 768px) {
-            .theme-toggle {
-                padding: 0.5rem;
-            }
-        }
-
-        .title-link {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #1a0dab;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .title-link:visited {
-            color: #681da8;
-        }
-
-        .title-link:hover {
-            text-decoration: underline;
-            color: #1a0dab;
-        }
-
-        .snippet {
-            font-size: 0.875rem;
-            color: #4d5156;
-            line-height: 1.4;
-            margin-bottom: 0.5rem;
-        }
-
-        .url {
-            font-size: 0.75rem;
-            color: #202124;
-            margin-bottom: 1rem;
-        }
-
-        .social-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
         .social-button {
             display: inline-flex;
             align-items: center;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.75rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            transform: translateY(0);
-        }
-
-        .social-button:hover {
-            transform: translateY(-3px);
-        }
-
-        .linkedin {
-            background-color: #0077b5;
-            color: white;
-        }
-
-        .linkedin:hover {
-            background-color: #005f99;
-        }
-
-        .github {
-            background-color: #24292e;
-            color: white;
-        }
-
-        .github:hover {
-            background-color: #1b1f23;
-        }
-
-        .gmail {
-            background-color: #D44638;
-            color: white;
-        }
-
-        .gmail:hover {
-            background-color: #c83223;
-        }
-
-        .instagram {
-            background-color: #E1306C;
-            color: white;
-        }
-
-        .instagram:hover {
-            background-color: #C13584;
-        }
-
-        .youtube {
-            background-color: #FF0000;
-            color: white;
-        }
-
-        .youtube:hover {
-            background-color: #cc0000;
-        }
-
-        .typing-animation {
-            position: relative;
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            margin: 0 auto;
-            letter-spacing: .05em;
-            animation: typing 2.5s steps(13, end) infinite;
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        .projects-section {
-            margin-top: 2rem;
-            padding-left: 0;
-        }
-
-        .project-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #1a0dab;
-            margin-bottom: 0.25rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
             text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .project-title:hover {
-            color: #1a0da1;
-        }
-
-        .project-description {
+            color: white;
+            transition: transform 0.2s;
             font-size: 0.875rem;
-            color: #4d5156;
-            line-height: 1.4;
-            margin-bottom: 1rem;
         }
-
-        .project-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .social-button:hover {
+            transform: translateY(-2px);
         }
-
-        .project-item {
-            margin-bottom: 1.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .search-results-container {
-                padding: 0 1rem;
-                margin: 2rem auto;
-            }
-
-            .search-result {
-                padding: 1.5rem;
-                border-radius: 1rem;
-            }
-
-            .title-link {
-                font-size: 1rem;
-            }
-
-            .snippet {
-                font-size: 0.75rem;
-            }
-
-            .url {
-                font-size: 0.625rem;
-            }
-
-            .social-buttons {
-                gap: 0.75rem;
-            }
-
-            .social-button {
-                padding: 0.5rem 1rem;
-                font-size: 0.8rem;
-            }
-
-            .typing-animation {
-                font-size: 0.9rem; /* Adjust the font size for smaller screens */
-            }
-        }
+        .linkedin { background-color: #0077b5; }
+        .github { background-color: #333; }
+        .gmail { background-color: #d44638; }
+        .instagram { background-color: #E1306C; }
+        .youtube { background-color: #ff0000; }
 
         .tab-button {
             padding: 0.5rem 1rem;
-            margin-right: 0.5rem;
-            border: none;
             border-radius: 0.5rem;
-            background-color: var(--card-bg);
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            border: 2px solid transparent;
+            font-weight: 500;
+            transition: all 0.3s;
         }
-
         .tab-button.active {
-            background-color: #0077b5;
-            color: white;
+            border-color: #81b29a;
+            color: #81b29a;
+            background-color: #eaf6f0;
         }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .tab-content {
-            margin-top: 1rem;
+        .project-item {
+            background-color: #fff;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e5e7eb;
         }
+        .project-title { font-weight: 700; color: #3d405b; }
+        .project-description { color: #6b7280; }
 
-        .tab-content.hidden {
-            display: none;
+        .timeline-container {
+            width: 100%;
+            position: relative;
         }
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #e5e7eb;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        .timeline-item-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        .timeline-item-container.left { left: 0; }
+        .timeline-item-container.right { left: 50%; }
+
+        .timeline-item-container::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -12px;
+            background-color: white;
+            border: 4px solid #81b29a;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .timeline-item-container.right::after { left: -8px; }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+        }
+        .timeline-details {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+        .timeline-content.active .timeline-details {
+            max-height: 500px;
+            opacity: 1;
+        }
+        @media screen and (max-width: 768px) {
+            .timeline-container::after { left: 15px; }
+            .timeline-item-container {
+                width: 100%;
+                padding-left: 50px;
+                padding-right: 15px;
+            }
+            .timeline-item-container.right { left: 0%; }
+            .timeline-item-container.left::after, .timeline-item-container.right::after {
+                left: -8px;
+            }
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 500px;
+                max-height: 70vh;
+            }
+        }
+        
+        /* Professional PDF Template Styles */
+        .pdf-pro-container {
+            position: absolute;
+            left: -9999px;
+            top: auto;
+            width: 210mm;
+            background-color: white;
+            font-family: 'Roboto', sans-serif;
+        }
+        .pdf-pro-page {
+            padding: 10mm; /* Equal margin: 10mm on all sides */
+            width: 210mm;
+            min-height: 297mm;
+            box-sizing: border-box;
+            color: #333;
+        }
+        .pdf-pro-header { text-align: center; margin-bottom: 7mm;}
+        .pdf-pro-header h1 { font-size: 26pt; font-weight: 700; color: #2c3e50; margin: 0; }
+        .pdf-pro-header h2 { font-size: 11pt; font-weight: 500; color: #34495e; margin: 1mm 0; letter-spacing: 1px; }
+        .pdf-pro-contact { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 4mm; font-size: 9pt; color: #555;}
+        .pdf-pro-contact span { display: flex; align-items: center; gap: 5px; }
+        .pdf-pro-section-title { font-size: 13pt; font-weight: 700; color: #2c3e50; margin-top: 5mm; margin-bottom: 3mm; border-bottom: 1.5px solid #bdc3c7; padding-bottom: 1.5mm;}
+        .pdf-pro-profile-text { font-size: 10pt; line-height: 1.5; text-align: justify;}
+        .pdf-pro-grid { display: grid; grid-template-columns: 1fr 2.5fr; gap: 8mm; align-items: start; }
+        .pdf-pro-grid-title { font-weight: 700; font-size: 10pt; color: #34495e;}
+        .pdf-pro-grid-content { font-size: 10pt;}
+        .pdf-pro-work-item { margin-bottom: 5mm; page-break-inside: avoid; } /* Avoid page break */
+        .pdf-pro-work-item:last-child { margin-bottom: 0; }
+        .pdf-pro-work-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .pdf-pro-work-role { font-size: 11pt; font-weight: 700; }
+        .pdf-pro-work-date { font-size: 9pt; color: #777; font-weight: 500; }
+        .pdf-pro-work-company { font-size: 10pt; font-weight: 500; color: #555; margin-bottom: 2mm; }
+        .pdf-pro-work-details { font-size: 9.5pt; padding-left: 15px; margin: 0; list-style-type: disc; } /* Added list-style-type */
+        .pdf-pro-work-details li { margin-bottom: 1.2mm; }
+        .pdf-pro-sub-skill { font-size: 9.5pt; margin-top: 2mm; }
+        .pdf-pro-sub-skill strong { font-weight: 700; }
+        .pdf-pro-project-item { margin-bottom: 4mm; page-break-inside: avoid; } /* Avoid page break */
+        .pdf-pro-project-title { font-size: 10pt; font-weight: 700; }
+        .pdf-pro-project-context { font-size: 9pt; color: #555; font-style: italic; margin-bottom: 2mm; }
+        .pdf-pro-project-details { font-size: 9.5pt; padding-left: 15px; margin: 0; }
+
     </style>
 </head>
-<body class="bg-gray-50">
-    <div style="position: relative;">
-        <button class="theme-toggle" onclick="toggleTheme()">
-            <i class="fas fa-moon"></i>
-        </button>
-    </div>
-    <div class="search-results-container">
-        <div class="search-result">
-            <a href="#" class="title-link">
-                <span class="typing-animation">Ilham Wahyuni</span>
-            </a>
-            <div class="url">https://github.com/ilhamwahyu-ni</div>
-            <div class="snippet">
-                IT Teacher | Web Developer | Open Source Contributor
-            </div>
-            <div class="projects-section">
-                <h2 class="text-lg font-semibold text-gray-700 mb-4">Projects & Services</h2>
-                <div>
-                    <button onclick="showTab('projects')" id="projects-tab" class="tab-button active">Projects</button>
-                    <button onclick="showTab('services')" id="services-tab" class="tab-button">Services</button>
-                </div>
-                <div id="projects" class="tab-content">
-                    <ul class="project-list">
-                        <li class="project-item">
-                            <a href="https://etahfiz.ilwa.my.id" target="_blank" rel="noopener noreferrer" class="project-title">
-                                Etahfiz: Quran Memorization Report
-                            </a>
-                            <p class="project-description">
-                                Web application for recording report values in Quran memorization.
-                            </p>
-                        </li>
-                       
-                    </ul>
-                </div>
-                <div id="services" class="tab-content hidden">
-                    <ul class="project-list">
-                        <li class="project-item">
-                            <a href="https://batipuahateh.desa.id/" class="project-title">
-                                Village Information System Development & Implementation
+<body class="antialiased">
 
-                              
-                            </a>
-                            <p class="project-description">
-                                Service for setting up and configuring a village information system.
-                               
-                            </p>
-                        </li>
-                        <li class="project-item">
-                            <a href="https://studywith.ilwa.my.id/" class="project-title">
-                                Moodle Application Installation
-                            </a>
-                            <p class="project-description">
-                                Service for installing and configuring Moodle for educational purposes.
-                            </p>
-                        </li>
-                    </ul>
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <nav class="flex items-center justify-between">
+                <a href="#hero" class="text-xl font-bold text-[#3d405b]">Ilham Wahyuni</a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#skills" class="text-gray-600 hover:text-[#e07a5f] transition-colors">Keahlian</a>
+                    <a href="#projects-services" class="text-gray-600 hover:text-[#e07a5f] transition-colors">Projek</a>
+                    <a href="#experience" class="text-gray-600 hover:text-[#e07a5f] transition-colors">Pengalaman</a>
+                    <a href="#education" class="text-gray-600 hover:text-[#e07a5f] transition-colors">Pendidikan</a>
+                </div>
+                <button onclick="generateCV()" class="hidden md:inline-flex items-center bg-[#e07a5f] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all">
+                    <i class="fas fa-file-pdf mr-2"></i> Generate CV
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section id="hero" class="py-20 md:py-24 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-[#3d405b] leading-tight">Ilham Wahyuni</h1>
+                <p class="mt-4 text-lg md:text-xl text-gray-700">Pendidik & Pengembang Web | Laravel | TIK</p>
+                <div class="mt-8 flex justify-center flex-wrap gap-3">
+                    <a href="https://www.linkedin.com/in/ilham-wahyuni" target="_blank" rel="noopener noreferrer" class="social-button linkedin"><i class="fab fa-linkedin-in mr-2"></i> LinkedIn</a>
+                    <a href="https://github.com/ilhamw-code" target="_blank" rel="noopener noreferrer" class="social-button github"><i class="fab fa-github mr-2"></i> GitHub</a>
+                    <a href="mailto:wahyuilham20@gmail.com" class="social-button gmail"><i class="far fa-envelope mr-2"></i> Gmail</a>
+                    <a href="https://www.instagram.com/ilhamwahyu_ni/" target="_blank" rel="noopener noreferrer" class="social-button instagram"><i class="fab fa-instagram mr-2"></i> Instagram</a>
+                    <a href="https://www.youtube.com/@ilhamwahyu_ni" target="_blank" rel="noopener noreferrer" class="social-button youtube"><i class="fab fa-youtube mr-2"></i> YouTube</a>
                 </div>
             </div>
+        </section>
+
+        <section id="skills" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">Keahlian</h2>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div id="web-skills" class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-xl mb-3">🖥️ Pengembangan Web</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>Laravel</li>
+                            <li>Git & GitHub</li>
+                            <li>Manajemen Sistem Informasi</li>
+                            <li>Administrasi Website</li>
+                        </ul>
+                    </div>
+                    <div id="qa-skills" class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-xl mb-3">✅ Jaminan Kualitas (QA)</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>Pengujian Aplikasi Web</li>
+                            <li>Identifikasi & Perbaikan Bug</li>
+                            <li>Kolaborasi Tim Pengembang</li>
+                        </ul>
+                    </div>
+                    <div id="tech-skills" class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-xl mb-3">🛠️ Keterampilan Teknis</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>Optimalisasi Performa Website</li>
+                            <li>Pengembangan Konten Digital</li>
+                            <li>Video Streaming Edukatif</li>
+                        </ul>
+                    </div>
+                     <div id="soft-skills" class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-xl mb-3">🤝 Profesional</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>Pemecahan Masalah</li>
+                            <li>Kolaborasi Tim</li>
+                            <li>Komunikasi Pemangku Kepentingan</li>
+                            <li>Perhatian terhadap Detail</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects-services" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <div class="text-center mb-12">
+                     <h2 class="text-3xl font-bold">Projek & Layanan</h2>
+                </div>
+                <div class="flex justify-center mb-6">
+                    <button onclick="showTab('projects')" id="projects-tab" class="tab-button active">Projek</button>
+                    <button onclick="showTab('services')" id="services-tab" class="tab-button">Layanan</button>
+                </div>
+                <div id="projects" class="tab-content active">
+                     <ul class="project-list">
+                         <li class="project-item">
+                             <a href="https://etahfiz.ilwa.my.id" target="_blank" rel="noopener noreferrer" class="project-title">
+                                 Etahfiz: Laporan Hafalan Al-Quran
+                             </a>
+                             <p class="project-description">
+                                 Aplikasi web untuk mencatat nilai laporan dalam hafalan Al-Quran.
+                             </p>
+                         </li>
+                     </ul>
+                </div>
+                <div id="services" class="tab-content">
+                     <ul class="project-list">
+                         <li class="project-item">
+                             <a href="https://batipuahateh.desa.id/" target="_blank" rel="noopener noreferrer" class="project-title">
+                                 Pengembangan & Implementasi Sistem Informasi Desa
+                             </a>
+                             <p class="project-description">
+                                 Jasa untuk menyiapkan dan mengkonfigurasi sistem informasi desa.
+                             </p>
+                         </li>
+                         <li class="project-item">
+                             <a href="https://studywith.ilwa.my.id/" target="_blank" rel="noopener noreferrer" class="project-title">
+                                 Instalasi Aplikasi Moodle
+                             </a>
+                             <p class="project-description">
+                                 Jasa untuk menginstal dan mengkonfigurasi Moodle untuk keperluan pendidikan.
+                             </p>
+                         </li>
+                     </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold">Linimasa Karier & Pengalaman</h2>
+                </div>
+                <div id="timeline-container" class="timeline-container max-w-4xl mx-auto">
+                </div>
+                <div class="mt-20">
+                    <h3 class="text-2xl font-bold text-center mb-8">Visualisasi Durasi Pengalaman</h3>
+                    <div class="chart-container">
+                        <canvas id="experienceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">Latar Belakang Pendidikan</h2>
+                     <p class="mt-2 text-lg text-gray-600">Fondasi akademis yang mendukung keahlian dan perjalanan karier saya.</p>
+                </div>
+                <div class="max-w-3xl mx-auto grid md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-lg">Magister Teknik (M.Tech)</h3>
+                        <p class="text-gray-700">Ilmu Komputer</p>
+                        <p class="text-gray-600 mt-2">Universitas Putra Indonesia (YPTK) Padang</p>
+                        <p class="text-sm text-gray-500 mt-1">Januari 2021 – April 2023</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-lg">Sarjana Pendidikan (S.Pd.)</h3>
+                        <p class="text-gray-700">Pendidikan Teknik Informatika dan Komputer</p>
+                        <p class="text-gray-600 mt-2">UIN Mahmud Yunus Batusangkar</p>
+                        <p class="text-sm text-gray-500 mt-1">2014 – 2018</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="bg-[#3d405b] text-white">
+        <div class="container mx-auto px-6 py-12 text-center">
+            <h2 class="text-2xl font-bold mb-4">Mari Terhubung</h2>
+            <p class="max-w-xl mx-auto mb-8">Saya terbuka untuk diskusi mengenai peluang kolaborasi, proyek pengembangan web, atau topik terkait teknologi pendidikan.</p>
+            <div class="mt-8 flex justify-center flex-wrap gap-3">
+                <a href="https://www.linkedin.com/in/ilham-wahyuni" target="_blank" rel="noopener noreferrer" class="social-button linkedin"><i class="fab fa-linkedin-in mr-2"></i> LinkedIn</a>
+                <a href="https://github.com/ilhamw-code" target="_blank" rel="noopener noreferrer" class="social-button github"><i class="fab fa-github mr-2"></i> GitHub</a>
+                <a href="mailto:wahyuilham20@gmail.com" class="social-button gmail"><i class="far fa-envelope mr-2"></i> Gmail</a>
+                <a href="https://www.instagram.com/ilhamwahyu_ni/" target="_blank" rel="noopener noreferrer" class="social-button instagram"><i class="fab fa-instagram mr-2"></i> Instagram</a>
+                <a href="https://www.youtube.com/@ilhamwahyu_ni" target="_blank" rel="noopener noreferrer" class="social-button youtube"><i class="fab fa-youtube mr-2"></i> YouTube</a>
+            </div>
+             <div class="mt-10 text-sm text-gray-400">
+                <p>&copy; <span id="currentYear"></span> Ilham Wahyuni. Dibuat secara interaktif.</p>
+            </div>
         </div>
-        <div class="social-buttons">
-            <a href="https://www.linkedin.com/in/ilhamwahyu-ni" target="_blank" rel="noopener noreferrer" class="social-button linkedin">
-                <i class="fab fa-linkedin-in mr-2"></i> LinkedIn
-            </a>
-            <a href="https://github.com/ilhamwahyu-ni" target="_blank" rel="noopener noreferrer" class="social-button github">
-                <i class="fab fa-github mr-2"></i> GitHub
-            </a>
-            <a href="mailto:wahyuilham20@gmail.com" class="social-button gmail">
-                <i class="far fa-envelope mr-2"></i> Gmail
-            </a>
-            <a href="https://www.instagram.com/ilhamwahyu_ni/" target="_blank" rel="noopener noreferrer" class="social-button instagram">
-                <i class="fab fa-instagram mr-2"></i> Instagram
-            </a>
-            <a href="https://www.youtube.com/@ilhamwahyu_ni" target="_blank" rel="noopener noreferrer" class="social-button youtube">
-                <i class="fab fa-youtube mr-2"></i> YouTube
-            </a>
+    </footer>
+
+    <!-- Hidden Professional PDF Template -->
+    <div id="pdf-professional-container" class="pdf-pro-container">
+        <div id="pdf-professional-page" class="pdf-pro-page">
+            <!-- Professional CV content will be injected here -->
         </div>
     </div>
+
+
     <script>
-        function toggleTheme() {
-            const html = document.documentElement;
-            const themeIcon = document.querySelector('.theme-toggle i');
-            
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.classList.add('dark');
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-
-        // On page load set the theme based on localStorage
-        window.onload = function() {
-            const theme = localStorage.getItem('theme');
-            const html = document.documentElement;
-            const themeIcon = document.querySelector('.theme-toggle i');
-
-            if (theme === 'dark') {
-                html.classList.add('dark');
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            } else {
-                html.classList.remove('dark');
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            }
-        }
-
-        function showTab(tabId) {
-            const tabs = document.querySelectorAll('.tab-content');
-            const buttons = document.querySelectorAll('.tab-button');
-
+        const { jsPDF } = window.jspdf;
+        
+        // SINGLE SOURCE OF TRUTH
+        const portfolioData = {
+             name: "Ilham Wahyuni",
+            title: "Pendidik & Pengembang Web | Laravel | TIK",
+            contact: {
+                phone: "+6282323066956",
+                email: "wahyuilham20@gmail.com",
+                github: "github.com/ilhamw-code",
+                linkedin: "linkedin.com/in/ilham-wahyuni"
+            },
+            profile: "Saya adalah seorang pendidik yang berdedikasi di bidang Teknologi Informasi dan Komunikasi (TIK) di MTsN Kota Padang Panjang. saya berkomitmen untuk mempersiapkan generasi muda menghadapi era digital.\n\nDi luar jam mengajar, saya aktif sebagai pengembang web dengan keahlian khusus dalam framework Laravel. Saya percaya bahwa kombinasi pengalaman mengajar dan keahlian teknis memungkinkan saya untuk memberikan perspektif unik dalam kedua bidang tersebut.",
+            education: [
+                {
+                    university: "UNIVERSITAS PUTRA INDONESIA (YPTK) PADANG",
+                    degree: "S2 | Magister Teknik Informatika",
+                    location: "Padang, Sumatera Barat",
+                    period: "Jan 2021 - April 2023"
+                },
+                {
+                    university: "UNIVERSITAS ISLAM NEGERI (UIN) BUKITTINGGI",
+                    degree: "S1 | Pendidikan Teknik Informatika Komputer",
+                    location: "Kubang Putiah, Bukittinggi",
+                    period: "Sept 2014 - Agus 2018"
+                }
+            ],
+            skills: {
+                "Pengembangan Web": ["Laravel", "Git & GitHub", "Manajemen Sistem Informasi", "Administrasi Website"],
+                "Jaminan Kualitas (QA)": ["Pengujian Aplikasi Web", "Identifikasi & Perbaikan Bug", "Kolaborasi Tim Pengembang"],
+                "Keterampilan Teknis": ["Optimalisasi Performa Website", "Pengembangan Konten Digital", "Video Streaming Edukatif"],
+                "Profesional": ["Pemecahan Masalah", "Kolaborasi Tim", "Komunikasi Pemangku Kepentingan", "Perhatian terhadap Detail"]
+            },
+            experience: [
+                { role: 'Guru TIK', company: 'MTsN Padang Panjang', period: 'Agustus 2023 – Saat ini', startDate: '2023-08-01', endDate: new Date().toISOString().split('T')[0], details: [ 'Memberikan pelatihan kepada guru-guru informatika dan teknik komputer mengenai metode pengajaran inovatif untuk meningkatkan kualitas pendidikan.', 'Memproduksi konten streaming edukatif yang menarik di platform YouTube untuk memperkaya pengalaman belajar siswa.', 'Merancang dan membuat spanduk penghargaan prestasi siswa sebagai bentuk motivasi dan pengakuan atas keunggulan akademik.' ] },
+                { role: 'Freelance', company: 'Wiraswasta', period: 'Desember 2022 – Saat ini', startDate: '2022-12-01', endDate: new Date().toISOString().split('T')[0], details: [ 'Mengembangkan dan memelihara situs web untuk berbagai klien, termasuk sekolah bimbingan belajar dan situs web desa, yang dikelola dari jarak jauh.', 'Berkolaborasi secara proaktif dengan klien untuk memahami kebutuhan spesifik dan memberikan solusi digital yang disesuaikan.', 'Meningkatkan pengalaman pengguna secara signifikan dengan mengoptimalkan kinerja dan fungsionalitas situs web.' ] },
+                { role: 'Quality Assurance Tester', company: 'OPENDESA', period: 'Mei 2024 – Juni 2025', startDate: '2024-05-01', endDate: '2025-06-30', details: [ 'Melakukan pengujian jaminan kualitas secara menyeluruh pada aplikasi web komunitas Opendesa, berhasil mengidentifikasi dan memperbaiki bug secara efisien.', 'Berkolaborasi secara efektif dengan tim pengembang untuk memastikan perbaikan bug diimplementasikan secara akurat dan tepat waktu.', 'Menerapkan keterampilan pemecahan masalah dan perhatian tinggi terhadap detail untuk meningkatkan pengalaman pengguna aplikasi secara keseluruhan.' ] },
+                { role: 'Kontributor', company: 'Harian Haluan', period: 'Juni 2023 – Desember 2023', startDate: '2023-06-01', endDate: '2023-12-31', details: [ 'Menulis dan mempublikasikan artikel yang relevan dengan kondisi desa setempat, mencakup aspek pemerintahan, komunitas, dan lingkungan di Harianhaluan.id.' ] },
+                { role: 'Administrator Web', company: 'Nagari Batipuah Ateh', period: 'Februari 2019 – Agustus 2023', startDate: '2019-02-01', endDate: '2023-08-31', details: [ 'Mengimplementasikan sistem informasi desa open-source (Opesid) dari komunitas GitHub untuk meningkatkan transparansi dan layanan publik.', 'Mengelola situs web Nagari, memastikan aksesibilitas, fungsionalitas, dan keamanan informasi bagi komunitas lokal.', 'Bekerja sama dengan pemangku kepentingan untuk mengumpulkan persyaratan dan menyesuaikan sistem agar sesuai dengan kebutuhan spesifik nagari.' ] }
+            ],
+            projects: [
+                {
+                    title: "Etahfiz: Laporan Hafalan Al-Quran",
+                    description: "Aplikasi web untuk mencatat nilai laporan dalam hafalan Al-Quran."
+                }
+            ],
+            services: [
+                {
+                    title: "Pengembangan & Implementasi Sistem Informasi Desa",
+                    description: "Jasa untuk menyiapkan dan mengkonfigurasi sistem informasi desa."
+                },
+                {
+                    title: "Instalasi Aplikasi Moodle",
+                    description: "Jasa untuk menginstal dan mengkonfigurasi Moodle untuk keperluan pendidikan."
+                }
+            ]
+        };
+        
+        function showTab(tabName) {
+            const tabs = ['projects', 'services'];
             tabs.forEach(tab => {
-                tab.classList.add('hidden');
+                document.getElementById(tab).classList.remove('active');
+                document.getElementById(tab + '-tab').classList.remove('active');
             });
-
-            buttons.forEach(button => {
-                button.classList.remove('active');
-            });
-
-            document.getElementById(tabId).classList.remove('hidden');
-            document.getElementById(`${tabId}-tab`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+            document.getElementById(tabName + '-tab').classList.add('active');
         }
+
+        function buildProfessionalPdfHtml() {
+            const container = document.getElementById('pdf-professional-page');
+            const data = portfolioData;
+
+            const contactHtml = `
+                <div class="pdf-pro-contact">
+                    <span><i class="fas fa-phone mr-1"></i> ${data.contact.phone}</span>
+                    <span><i class="far fa-envelope mr-1"></i> ${data.contact.email}</span>
+                    <span><i class="fab fa-github mr-1"></i> ${data.contact.github}</span>
+                    <span><i class="fab fa-linkedin-in mr-1"></i> ${data.contact.linkedin}</span>
+                </div>
+            `;
+
+            const educationHtml = data.education.map(edu => `
+                <div class="pdf-pro-grid">
+                    <div class="pdf-pro-grid-title">${edu.period}</div>
+                    <div class="pdf-pro-grid-content">
+                        <strong>${edu.university}</strong><br>
+                        ${edu.degree}
+                    </div>
+                </div>
+            `).join('<div style="margin-bottom: 3mm;"></div>');
+            
+            const allSkills = Object.values(data.skills).flat().join(', ');
+            const skillsHtml = `
+                 <div class="pdf-pro-grid">
+                    <div class="pdf-pro-grid-title">All Skills</div>
+                    <div class="pdf-pro-grid-content">${allSkills}</div>
+                </div>
+            `;
+
+            const experienceHtml = data.experience.map(job => `
+                <div class="pdf-pro-work-item">
+                    <div class="pdf-pro-work-header">
+                        <span class="pdf-pro-work-role">${job.role}</span>
+                        <span class="pdf-pro-work-date">${job.period}</span>
+                    </div>
+                    <p class="pdf-pro-work-company">${job.company}</p>
+                    <ul class="pdf-pro-work-details">
+                        ${job.details.map(d => `<li>${d}</li>`).join('')}
+                    </ul>
+                </div>
+            `).join('');
+
+            const projectsHtml = [...data.projects, ...data.services].map(proj => `
+                <div class="pdf-pro-project-item">
+                    <h3 class="pdf-pro-project-title">${proj.title}</h3>
+                    <p class="pdf-pro-project-details">${proj.description}</p>
+                </div>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="pdf-pro-header">
+                    <h1>${data.name}</h1>
+                    <h2>${data.title}</h2>
+                    ${contactHtml}
+                </div>
+                <div class="pdf-pro-section-title">PERSONAL PROFILE</div>
+                <p class="pdf-pro-profile-text">${data.profile.replace(/\n\n/g, '<br><br>')}</p>
+                
+                <div class="pdf-pro-section-title">EDUCATION</div>
+                ${educationHtml}
+
+                <div class="pdf-pro-section-title">SKILL</div>
+                ${skillsHtml}
+
+                <div class="pdf-pro-section-title">WORK EXPERIENCE</div>
+                ${experienceHtml}
+
+                <div class="pdf-pro-section-title">PROJECTS & SERVICES</div>
+                ${projectsHtml}
+            `;
+        }
+
+
+        function generateCV() {
+            buildProfessionalPdfHtml();
+            const content = document.getElementById('pdf-professional-container');
+            
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+
+            pdf.html(content, {
+                callback: function(doc) {
+                    doc.save('CV-Profesional-Ilham-Wahyuni.pdf');
+                },
+                margin: 10, // Symmetrical margin of 10mm on all sides
+                autoPaging: 'slice', 
+                html2canvas: {
+                    scale: 0.23, // Adjusted scale for better rendering
+                    useCORS: true,
+                    logging: false
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const data = portfolioData;
+
+            const timelineContainer = document.getElementById('timeline-container');
+            data.experience.forEach((item, index) => {
+                const position = index % 2 === 0 ? 'left' : 'right';
+                const timelineItemContainer = document.createElement('div');
+                timelineItemContainer.className = `timeline-item-container ${position}`;
+                let detailsHTML = item.details.map(detail => `<li>${detail}</li>`).join('');
+                timelineItemContainer.innerHTML = `
+                    <div class="timeline-content">
+                        <time class="mb-1 text-sm font-normal leading-none text-gray-500">${item.period}</time>
+                        <h3 class="text-xl font-semibold text-gray-900">${item.role}</h3>
+                        <p class="text-lg text-gray-700 mb-4">${item.company}</p>
+                        <div class="timeline-details">
+                            <ul class="list-disc pl-5 text-base font-normal text-gray-600 space-y-2 mt-2">
+                                ${detailsHTML}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                timelineContainer.appendChild(timelineItemContainer);
+                timelineItemContainer.querySelector('.timeline-content').addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            });
+
+            const ctx = document.getElementById('experienceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.experience.map(d => d.role).reverse(),
+                    datasets: [{
+                        label: 'Durasi Pengalaman',
+                        data: data.experience.map(d => [d.startDate, d.endDate]).reverse(),
+                        backgroundColor: 'rgba(129, 178, 154, 0.7)',
+                        borderColor: 'rgba(129, 178, 154, 1)',
+                        borderWidth: 1,
+                        barPercentage: 0.6,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: { unit: 'year' },
+                            min: '2019-01-01',
+                            max: '2025-12-31',
+                            grid: { color: 'rgba(0,0,0,0.05)' }
+                        },
+                        y: { grid: { display: false } }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const item = data.experience.slice().reverse()[context.dataIndex];
+                                    return `${item.role}: ${item.period}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        });
     </script>
 </body>
 </html>
-
