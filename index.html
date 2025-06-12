@@ -868,7 +868,28 @@
 
 
         document.addEventListener('DOMContentLoaded', function () {
-            const data = portfolioData;
+            const data = portfolioData; // Pastikan portfolioData sudah didefinisikan di atas kode ini
+
+            // --- PERUBAHAN DIMULAI DI SINI ---
+
+            // 1. Tentukan urutan manual yang Anda inginkan
+            const desiredOrder = [
+                'Guru TIK',
+                'Freelance',
+                'Quality Assurance Tester',
+                'Kontributor',
+                'Administrator Web'
+            ];
+
+            // 2. Urutkan data experience berdasarkan array desiredOrder
+            data.experience.sort((a, b) => {
+                const indexA = desiredOrder.indexOf(a.role);
+                const indexB = desiredOrder.indexOf(b.role);
+                return indexA - indexB;
+            });
+
+            // --- AKHIR DARI PERUBAHAN ---
+
 
             const timelineContainer = document.getElementById('timeline-container');
             data.experience.forEach((item, index) => {
@@ -877,17 +898,17 @@
                 timelineItemContainer.className = `timeline-item-container ${position}`;
                 let detailsHTML = item.details.map(detail => `<li>${detail}</li>`).join('');
                 timelineItemContainer.innerHTML = `
-                    <div class="timeline-content">
-                        <time class="mb-1 text-sm font-normal leading-none text-gray-500">${item.period}</time>
-                        <h3 class="text-xl font-semibold text-gray-900">${item.role}</h3>
-                        <p class="text-lg text-gray-700 mb-4">${item.company}</p>
-                        <div class="timeline-details">
-                            <ul class="list-disc pl-5 text-base font-normal text-gray-600 space-y-2 mt-2">
-                                ${detailsHTML}
-                            </ul>
-                        </div>
-                    </div>
-                `;
+            <div class="timeline-content">
+                <time class="mb-1 text-sm font-normal leading-none text-gray-500">${item.period}</time>
+                <h3 class="text-xl font-semibold text-gray-900">${item.role}</h3>
+                <p class="text-lg text-gray-700 mb-4">${item.company}</p>
+                <div class="timeline-details">
+                    <ul class="list-disc pl-5 text-base font-normal text-gray-600 space-y-2 mt-2">
+                        ${detailsHTML}
+                    </ul>
+                </div>
+            </div>
+        `;
                 timelineContainer.appendChild(timelineItemContainer);
                 timelineItemContainer.querySelector('.timeline-content').addEventListener('click', function () {
                     this.classList.toggle('active');
@@ -898,10 +919,10 @@
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: data.experience.map(d => d.role).reverse(),
+                    labels: data.experience.map(d => d.role),
                     datasets: [{
                         label: 'Durasi Pengalaman',
-                        data: data.experience.map(d => [d.startDate, d.endDate]).reverse(),
+                        data: data.experience.map(d => [d.startDate, d.endDate === 'Present' ? new Date() : d.endDate]),
                         backgroundColor: 'rgba(129, 178, 154, 0.7)',
                         borderColor: 'rgba(129, 178, 154, 1)',
                         borderWidth: 1,
@@ -928,7 +949,7 @@
                         tooltip: {
                             callbacks: {
                                 label: function (context) {
-                                    const item = data.experience.slice().reverse()[context.dataIndex];
+                                    const item = data.experience[context.dataIndex];
                                     return `${item.role}: ${item.period}`;
                                 }
                             }
