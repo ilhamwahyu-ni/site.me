@@ -17,18 +17,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- Chosen Palette: Warm Neutrals -->
-    <!-- Application Structure Plan: SPA ini menggunakan struktur vertikal dengan navigasi sticky di bagian atas untuk akses cepat. Alurnya dimulai dari perkenalan (Hero), lalu visualisasi Keahlian, bagian Proyek & Layanan baru, kemudian Linimasa Karier yang interaktif dengan layout alternating (elemen utama), dan diakhiri dengan Pendidikan dan Kontak. Struktur ini dipilih untuk mengubah CV statis menjadi sebuah narasi karier yang terpandu. Interaktivitas pada linimasa dan tab proyek meningkatkan usabilitas dan keterlibatan pengguna. -->
+    <!-- Application Structure Plan: This SPA uses a vertical structure with sticky navigation at the top for quick access. The flow starts with an introduction (Hero), followed by Skills visualization, then the Projects & Services section, followed by an interactive Career Timeline with alternating layout (main elements), and ends with Education and Contact. This structure is chosen to transform a static CV into a guided career narrative. Interactivity in the timeline and project tabs enhances usability and user engagement. -->
     <!-- Visualization & Content Choices: 
-        - Keahlian: Disajikan dalam grup visual dengan ikon untuk pemindaian cepat. Goal: Organize. Method: HTML/Tailwind. Interaction: Hover effects. Justification: Memudahkan identifikasi kekuatan utama.
-        - Proyek & Layanan: Menggunakan sistem tab interaktif. Goal: Organize/Explore. Method: HTML/JS/CSS. Interaction: Klik untuk beralih konten. Justification: Memisahkan proyek pribadi dari layanan yang ditawarkan secara jelas.
-        - Linimasa Karier: Menggunakan diagram alur vertikal alternating (kiri-kanan). Goal: Change/Explore. Method: HTML/Tailwind/JS. Interaction: Klik untuk menampilkan/menyembunyikan detail pekerjaan. Justification: Tata letak lebih dinamis dan menarik secara visual.
-        - Durasi Pengalaman: Menggunakan bagan balok horizontal (Gantt chart). Goal: Compare/Analyze. Method: Chart.js Canvas. Interaction: Tooltip saat hover. Justification: Memberikan gambaran visual yang kuat tentang durasi dan tumpang tindih setiap peran.
+        - Skills: Presented in visual groups with icons for quick scanning. Goal: Organize. Method: HTML/Tailwind. Interaction: Hover effects. Justification: Facilitates easy identification of key strengths.
+        - Projects & Services: Uses an interactive tab system. Goal: Organize/Explore. Method: HTML/JS/CSS. Interaction: Click to switch content. Justification: Clearly separates personal projects from offered services.
+        - Career Timeline: Uses alternating vertical flow diagram (left-right). Goal: Change/Explore. Method: HTML/Tailwind/JS. Interaction: Click to show/hide job details. Justification: More dynamic and visually appealing layout.
+        - Experience Duration: Uses horizontal bar chart (Gantt chart). Goal: Compare/Analyze. Method: Chart.js Canvas. Interaction: Tooltip on hover. Justification: Provides a strong visual representation of duration and overlap of each role.
         - PDF Generation: Menggunakan template CV profesional tersembunyi (terinspirasi dari PDF user) yang diisi secara dinamis menggunakan SUMBER DATA YANG SAMA dengan konten web. Goal: Export. Method: jsPDF, html2canvas, Hidden HTML template. Interaction: Klik tombol. Justification: Menghasilkan PDF profesional, bukan sekadar screenshot, dan menjamin konsistensi data.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        
+        /* Light mode override */
+        body:not(.dark-mode) {
             background-color: #F8F7F4;
             color: #3d405b;
         }
@@ -225,6 +231,22 @@
             }
         }
 
+        /* Dark mode toggle button styles */
+        #darkModeToggle, #mobileDarkModeToggle {
+            transition: all 0.3s ease;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+        }
+        
+        #darkModeToggle:hover, #mobileDarkModeToggle:hover {
+            transform: scale(1.1);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark-mode #darkModeToggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
         /* Professional PDF Template Styles */
         .pdf-pro-container {
             position: absolute;
@@ -403,18 +425,22 @@
 
                 <div class="hidden md:flex items-center space-x-4 lg:space-x-8">
                     <a href="#skills"
-                        class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Keahlian</a>
+                        class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Skills</a>
                     <a href="#projects-services"
-                        class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Projek</a>
+                        class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Projects</a>
                     <a href="#experience"
-                        class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Pengalaman</a>
+                        class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Experience</a>
                     <a href="#education"
-                        class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Pendidikan</a>
+                        class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Education</a>
                 </div>
 
                 <button onclick="generateCV()"
                     class="hidden md:inline-flex items-center bg-[#e07a5f] text-white px-3 py-2 md:px-4 md:py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm md:text-base">
                     <i class="fas fa-file-pdf mr-2"></i> <span class="hidden sm:inline">Generate CV</span>
+                </button>
+
+                <button id="darkModeToggle" onclick="toggleDarkMode()" class="flex items-center text-[#3d405b] dark:text-[#e2e8f0] focus:outline-none">
+                    <i class="fas fa-sun"></i>
                 </button>
 
                 <button id="menuBtn" class="md:hidden text-[#3d405b] focus:outline-none">
@@ -432,16 +458,19 @@
             </button>
             <div class="flex flex-col space-y-6 mt-12">
                 <a href="#skills"
-                    class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Keahlian</a>
+                    class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Skills</a>
                 <a href="#projects-services"
-                    class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Projek</a>
+                    class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Projects</a>
                 <a href="#experience"
-                    class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Pengalaman</a>
+                    class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Experience</a>
                 <a href="#education"
-                    class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Pendidikan</a>
+                    class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Education</a>
                 <button onclick="generateCV()"
                     class="mt-4 inline-flex items-center justify-center bg-[#e07a5f] text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-all">
                     <i class="fas fa-file-pdf mr-2"></i> Generate CV
+                </button>
+                <button id="mobileDarkModeToggle" onclick="toggleDarkMode()" class="mt-4 inline-flex items-center justify-center bg-gray-700 text-gray-200 px-6 py-3 rounded-lg hover:bg-opacity-90 transition-all">
+                    <i class="fas fa-sun"></i> <span class="ml-2">Light Mode</span>
                 </button>
             </div>
         </div>
@@ -487,7 +516,7 @@
         <section id="hero" class="py-20 md:py-24 bg-white">
             <div class="container mx-auto px-6 text-center">
                 <h1 class="text-4xl md:text-6xl font-bold text-[#3d405b] leading-tight">Ilham Wahyuni</h1>
-                <p class="mt-4 text-lg md:text-xl text-gray-700">Guru & Web Developer | Laravel | TIK</p>
+                <p class="mt-4 text-lg md:text-xl text-gray-700">Teacher & Web Developer | Laravel | ICT</p>
                 <div class="mt-8 flex justify-center flex-wrap gap-3">
                     <a href="https://www.linkedin.com/in/ilhamwahyu-ni/" target="_blank" rel="noopener noreferrer"
                         class="social-button linkedin"><i class="fab fa-linkedin-in mr-2"></i> LinkedIn</a>
@@ -506,7 +535,7 @@
         <section id="skills" class="py-16 md:py-24">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold">Keahlian</h2>
+                    <h2 class="text-3xl font-bold">Skills</h2>
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <div id="web-skills" class="bg-gray-50 p-6 rounded-lg">
@@ -514,33 +543,33 @@
                         <ul class="space-y-2 text-gray-700">
                             <li>Laravel</li>
                             <li>Git & GitHub</li>
-                            <li>Manajemen Sistem Informasi</li>
-                            <li>Administrasi Website</li>
+                            <li>Information System Management</li>
+                            <li>Website Administration</li>
                         </ul>
                     </div>
                     <div id="qa-skills" class="bg-gray-50 p-6 rounded-lg">
                         <h3 class="font-bold text-xl mb-3">✅ Quality Assurance (QA)</h3>
                         <ul class="space-y-2 text-gray-700">
-                            <li>Pengujian Aplikasi Web</li>
-                            <li>Identifikasi & Perbaikan Bug</li>
-                            <li>Kolaborasi Tim Pengembang</li>
+                            <li>Web Application Testing</li>
+                            <li>Bug Identification & Fixing</li>
+                            <li>Developer Team Collaboration</li>
                         </ul>
                     </div>
                     <div id="tech-skills" class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="font-bold text-xl mb-3">🛠️ Teknis</h3>
+                        <h3 class="font-bold text-xl mb-3">🛠️ Technical</h3>
                         <ul class="space-y-2 text-gray-700">
-                            <li>Optimalisasi Performa Website</li>
-                            <li>Pengembangan Konten Digital</li>
-                            <li>Video Streaming Edukatif</li>
+                            <li>Website Performance Optimization</li>
+                            <li>Digital Content Development</li>
+                            <li>Educational Video Streaming</li>
                         </ul>
                     </div>
                     <div id="soft-skills" class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="font-bold text-xl mb-3">🤝 Profesional</h3>
+                        <h3 class="font-bold text-xl mb-3">🤝 Professional</h3>
                         <ul class="space-y-2 text-gray-700">
-                            <li>Pemecahan Masalah</li>
-                            <li>Kolaborasi Tim</li>
-                            <li>Komunikasi Pemangku Kepentingan</li>
-                            <li>Perhatian terhadap Detail</li>
+                            <li>Problem Solving</li>
+                            <li>Team Collaboration</li>
+                            <li>Stakeholder Communication</li>
+                            <li>Attention to Detail</li>
                         </ul>
                     </div>
                 </div>
@@ -550,21 +579,21 @@
         <section id="projects-services" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-6 max-w-4xl">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold">Projek & Layanan</h2>
+                    <h2 class="text-3xl font-bold">Projects & Services</h2>
                 </div>
                 <div class="flex justify-center mb-6">
-                    <button onclick="showTab('projects')" id="projects-tab" class="tab-button active">Projek</button>
-                    <button onclick="showTab('services')" id="services-tab" class="tab-button">Service/Layanan</button>
+                    <button onclick="showTab('projects')" id="projects-tab" class="tab-button active">Projects</button>
+                    <button onclick="showTab('services')" id="services-tab" class="tab-button">Services</button>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div id="projects" class="tab-content active">
                         <ul class="project-list">
                             <li class="project-item">
                                 <a href="https://etahfiz.ilwa.my.id" target="_blank" rel="noopener noreferrer" class="project-title">
-                                    Etahfiz: Laporan Hafalan Al-Quran
+                                    Etahfiz: Quran Memorization Report
                                 </a>
                                 <p class="project-description">
-                                    Aplikasi web untuk mencatat nilai laporan dalam hafalan Al-Quran.
+                                    Web application for recording report scores in Quran memorization.
                                 </p>
                                 <a href="http://etahfiz.ilwa.my.id" target="_blank" rel="noopener noreferrer">
                                     <img src="etahfiz.png" alt="etahfiz" class="project-image">
@@ -576,10 +605,10 @@
                         <ul class="project-list">
                             <li class="project-item">
                                 <a href="" target="_blank" rel="noopener noreferrer" class="project-title">
-                                    AbsensiGuru
+                                    Teacher Attendance (AbsensiGuru)
                                 </a>
                                 <p class="project-description">
-                                    Aplikasi web Realtime untuk mencatat kehadiran Guru di Kelas Mengajar
+                                    Realtime web application for recording teacher attendance in teaching classes
                                 </p>
                                 <a href="" target="_blank" rel="noopener noreferrer">
                                     <img src="absensiguru.png" alt="AbsensiGuru"class="project-image">
@@ -604,37 +633,37 @@
                         <li class="project-item">
                             <a href="https://batipuahateh.desa.id/" target="_blank" rel="noopener noreferrer"
                                 class="project-title">
-                                Implementasi Sistem Informasi Desa
+                                Village Information System Implementation
                             </a>
                             <p class="project-description">
-                                Jasa untuk menyiapkan dan mengkonfigurasi sistem informasi desa.
+                                Service to prepare and configure village information systems.
                             </p>
                         </li>
                         <li class="project-item">
                             <a href="https://studywith.ilwa.my.id/" target="_blank" rel="noopener noreferrer"
                                 class="project-title">
-                                Instalasi Aplikasi Moodle
+                                Moodle Application Installation
                             </a>
                             <p class="project-description">
-                                Jasa untuk menginstal dan mengkonfigurasi Moodle untuk keperluan pendidikan.
+                                Service to install and configure Moodle for educational purposes.
                             </p>
                         </li>
                         <li class="project-item">
                             <span class="project-title">
-                                Jasa Desain Spanduk & Banner
+                                Banner & Banner Design Service
                             </span>
                             <p class="project-description">
-                                Layanan desain spanduk, banner, dan media promosi visual untuk kebutuhan sekolah,
-                                organisasi, atau bisnis Anda.
+                                Design service for banners, banners, and visual promotional media for your school,
+                                organization, or business needs.
                             </p>
                         </li>
                         <li class="project-item">
                             <span class="project-title">
-                                Jual Laptop Bekas Bergaransi
+                                Sell Used Laptops with Warranty
                             </span>
                             <p class="project-description">
-                                Menyediakan laptop bekas berkualitas dengan garansi, cocok untuk pelajar, mahasiswa, dan
-                                kebutuhan kantor.
+                                Providing quality used laptops with warranty, suitable for students, college students, and
+                                office needs.
                             </p>
                         </li>
 
@@ -646,12 +675,12 @@
         <section id="experience" class="py-16 md:py-24">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl font-bold">Linimasa Karier & Pengalaman</h2>
+                    <h2 class="text-3xl font-bold">Career Timeline & Experience</h2>
                 </div>
                 <div id="timeline-container" class="timeline-container max-w-4xl mx-auto">
                 </div>
                 <div class="mt-20">
-                    <h3 class="text-2xl font-bold text-center mb-8">Visualisasi Durasi Pengalaman</h3>
+                    <h3 class="text-2xl font-bold text-center mb-8">Experience Duration Visualization</h3>
                     <div class="chart-container">
                         <canvas id="experienceChart"></canvas>
                     </div>
@@ -662,20 +691,19 @@
         <section id="education" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold">Latar Belakang Pendidikan</h2>
-                    <p class="mt-2 text-lg text-gray-600">Fondasi akademis yang mendukung keahlian dan perjalanan karier
-                        .</p>
+                    <h2 class="text-3xl font-bold">Educational Background</h2>
+                    <p class="mt-2 text-lg text-gray-600">Academic foundation that supports skills and career journey.</p>
                 </div>
                 <div class="max-w-3xl mx-auto grid md:grid-cols-2 gap-8">
                     <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="font-bold text-lg">Magister Teknik (M.Kom)</h3>
-                        <p class="text-gray-700">Ilmu Komputer</p>
-                        <p class="text-gray-600 mt-2">Universitas Putra Indonesia (YPTK) Padang</p>
-                        <p class="text-sm text-gray-500 mt-1">Januari 2021 – April 2023</p>
+                        <h3 class="font-bold text-lg">Master of Computer Science (M.Cs.)</h3>
+                        <p class="text-gray-700">Computer Science</p>
+                        <p class="text-gray-600 mt-2">Putra Indonesia University (YPTK) Padang</p>
+                        <p class="text-sm text-gray-500 mt-1">January 2021 – April 2023</p>
                     </div>
                     <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="font-bold text-lg">Sarjana Pendidikan (S.Pd)</h3>
-                        <p class="text-gray-700">Pendidikan Teknik Informatika dan Komputer</p>
+                        <h3 class="font-bold text-lg">Bachelor of Education (B.Ed.)</h3>
+                        <p class="text-gray-700">Informatics and Computer Engineering Education</p>
                         <p class="text-gray-600 mt-2">UIN Bukittinggi</p>
                         <p class="text-sm text-gray-500 mt-1">2014 – 2018</p>
                     </div>
@@ -686,9 +714,9 @@
 
     <footer id="contact" class="bg-[#3d405b] text-white">
         <div class="container mx-auto px-6 py-12 text-center">
-            <h2 class="text-2xl font-bold mb-4">Mari Terhubung</h2>
-            <p class="max-w-xl mx-auto mb-8"> Terbuka untuk diskusi mengenai peluang kolaborasi, proyek pengembangan
-                web, atau topik terkait teknologi pendidikan.</p>
+            <h2 class="text-2xl font-bold mb-4">Let's Connect</h2>
+            <p class="max-w-xl mx-auto mb-8"> Open to discussions about collaboration opportunities, web development
+                projects, or topics related to educational technology.</p>
 
             <div class="mt-10 text-sm text-gray-400">
                 <p>&copy; <span id="currentYear"></span> Ilham Wahyuni</p>
@@ -710,55 +738,55 @@
         // SINGLE SOURCE OF TRUTH
         const portfolioData = {
             name: "Ilham Wahyuni",
-            title: "Guru & Developer | Laravel | TIK",
+            title: "Teacher & Developer | Laravel | ICT",
             contact: {
                 phone: "+6282323066956",
                 email: "wahyuilham20@gmail.com",
                 github: "github.com/ilhamwahyu-ni",
                 linkedin: "linkedin.com/in/ilhamwahyu-ni/"
             },
-            profile: " Seorang pendidik yang berdedikasi di bidang Teknologi Informasi dan Komunikasi (TIK) di MTsN Kota Padang Panjang.  berkomitmen untuk mempersiapkan generasi muda menghadapi era digital.\n\nDi luar jam mengajar,  aktif sebagai pengembang web dengan keahlian khusus dalam framework Laravel.  percaya bahwa kombinasi pengalaman mengajar dan keahlian teknis memungkinkan  untuk memberikan perspektif unik dalam kedua bidang tersebut.",
+            profile: " A dedicated educator in the field of Information and Communication Technology (ICT) at MTsN Padang Panjang City. Committed to preparing young generations for the digital era.\n\nOutside of teaching hours, actively works as a web developer with specialized expertise in the Laravel framework. I believe that the combination of teaching experience and technical skills enables me to provide a unique perspective in both fields.",
             education: [
                 {
-                    university: "UNIVERSITAS PUTRA INDONESIA (YPTK) PADANG",
-                    degree: "S2 | Magister Teknik Informatika",
-                    location: "Padang, Sumatera Barat",
+                    university: "PUTRA INDONESIA UNIVERSITY (YPTK) PADANG",
+                    degree: "MSc | Master of Computer Science",
+                    location: "Padang, West Sumatra",
                     period: "Jan 2021 - April 2023"
                 },
                 {
-                    university: "UNIVERSITAS ISLAM NEGERI (UIN) BUKITTINGGI",
-                    degree: "S1 | Pendidikan Teknik Informatika Komputer",
+                    university: "ISLAMIC STATE UNIVERSITY (UIN) BUKITTINGGI",
+                    degree: "B.Ed. | Informatics and Computer Engineering Education",
                     location: "Kubang Putiah, Bukittinggi",
-                    period: "Sept 2014 - Agus 2018"
+                    period: "Sept 2014 - Aug 2018"
                 }
             ],
             skills: {
-                "Web Developer": ["Laravel", "Git & GitHub", "Manajemen Sistem Informasi", "Administrasi Website"],
-                "Quality Assurance (QA)": ["Pengujian Aplikasi Web", "Identifikasi & Perbaikan Bug", "Kolaborasi Tim Pengembang"],
-                "Keterampilan Teknis": ["Optimalisasi Performa Website", "Pengembangan Konten Digital", "Video Streaming Edukatif"],
-                "Profesional": ["Pemecahan Masalah", "Kolaborasi Tim", "Komunikasi Pemangku Kepentingan", "Perhatian terhadap Detail"]
+                "Web Developer": ["Laravel", "Git & GitHub", "Information System Management", "Website Administration"],
+                "Quality Assurance (QA)": ["Web Application Testing", "Bug Identification & Fixing", "Developer Team Collaboration"],
+                "Technical Skills": ["Website Performance Optimization", "Digital Content Development", "Educational Video Streaming"],
+                "Professional": ["Problem Solving", "Team Collaboration", "Stakeholder Communication", "Attention to Detail"]
             },
             experience: [
-                { role: 'Guru TIK', company: 'MTsN Padang Panjang', period: 'Agustus 2023 – Saat ini', startDate: '2023-08-01', endDate: new Date().toISOString().split('T')[0], details: ['Memberikan pelatihan kepada guru-guru informatika dan teknik komputer mengenai metode pengajaran inovatif untuk meningkatkan kualitas pendidikan.', 'Memproduksi konten streaming edukatif yang menarik di platform YouTube untuk memperkaya pengalaman belajar siswa.', 'Merancang dan membuat spanduk penghargaan prestasi siswa sebagai bentuk motivasi dan pengakuan atas keunggulan akademik.'] },
-                { role: 'Freelance', company: '', period: 'Desember 2022 – Saat ini', startDate: '2022-12-01', endDate: new Date().toISOString().split('T')[0], details: ['Mengembangkan dan memelihara situs web untuk berbagai klien, termasuk sekolah bimbingan belajar dan situs web desa, yang dikelola dari jarak jauh.', 'Berkolaborasi secara proaktif dengan klien untuk memahami kebutuhan spesifik dan memberikan solusi digital yang disesuaikan.', 'Meningkatkan pengalaman pengguna secara signifikan dengan mengoptimalkan kinerja dan fungsionalitas situs web.'] },
-                { role: 'Quality Assurance Tester', company: 'OPENDESA', period: 'Mei 2024 – Juni 2025', startDate: '2024-05-01', endDate: '2025-06-30', details: ['Melakukan pengujian jaminan kualitas secara menyeluruh pada aplikasi web komunitas Opendesa, berhasil mengidentifikasi dan memperbaiki bug secara efisien.', 'Berkolaborasi secara efektif dengan tim pengembang untuk memastikan perbaikan bug diimplementasikan secara akurat dan tepat waktu.', 'Menerapkan keterampilan pemecahan masalah dan perhatian tinggi terhadap detail untuk meningkatkan pengalaman pengguna aplikasi secara keseluruhan.'] },
-                { role: 'Kontributor', company: 'Harian Haluan', period: 'Juni 2023 – Desember 2023', startDate: '2023-06-01', endDate: '2023-12-31', details: ['Menulis dan mempublikasikan artikel yang relevan dengan kondisi desa setempat, mencakup aspek pemerintahan, komunitas, dan lingkungan di Harianhaluan.id.'] },
-                { role: 'Administrator Web', company: 'Nagari Batipuah Ateh', period: 'Februari 2019 – Agustus 2023', startDate: '2019-02-01', endDate: '2023-08-31', details: ['Mengimplementasikan sistem informasi desa open-source (Opesid) dari komunitas GitHub untuk meningkatkan transparansi dan layanan publik.', 'Mengelola situs web Nagari, memastikan aksesibilitas, fungsionalitas, dan keamanan informasi bagi komunitas lokal.', 'Bekerja sama dengan pemangku kepentingan untuk mengumpulkan persyaratan dan menyesuaikan sistem agar sesuai dengan kebutuhan spesifik nagari.'] }
+                { role: 'ICT Teacher', company: 'MTsN Padang Panjang', period: 'August 2023 – Present', startDate: '2023-08-01', endDate: new Date().toISOString().split('T')[0], details: ['Providing training to informatics and computer engineering teachers on innovative teaching methods to improve education quality.', 'Producing engaging educational streaming content on YouTube platform to enrich students\' learning experience.', 'Designing and creating student achievement award banners as a form of motivation and recognition of academic excellence.'] },
+                { role: 'Freelance', company: '', period: 'December 2022 – Present', startDate: '2022-12-01', endDate: new Date().toISOString().split('T')[0], details: ['Developing and maintaining websites for various clients, including tutoring schools and village websites, managed remotely.', 'Proactively collaborating with clients to understand specific needs and provide customized digital solutions.', 'Significantly improving user experience by optimizing website performance and functionality.'] },
+                { role: 'Quality Assurance Tester', company: 'OPENDESA', period: 'May 2024 – June 2025', startDate: '2024-05-01', endDate: '2025-06-30', details: ['Conducting comprehensive quality assurance testing on the Opendesa community web application, successfully identifying and fixing bugs efficiently.', 'Effectively collaborating with the development team to ensure bug fixes are implemented accurately and on time.', 'Applying problem-solving skills and high attention to detail to enhance the overall user experience of the application.'] },
+                { role: 'Contributor', company: 'Harian Haluan', period: 'June 2023 – December 2023', startDate: '2023-06-01', endDate: '2023-12-31', details: ['Writing and publishing articles relevant to local village conditions, covering aspects of governance, community, and environment at Harianhaluan.id.'] },
+                { role: 'Web Administrator', company: 'Nagari Batipuah Ateh', period: 'February 2019 – August 2023', startDate: '2019-02-01', endDate: '2023-08-31', details: ['Implementing open-source village information system (Opesid) from GitHub community to increase transparency and public services.', 'Managing the Nagari website, ensuring accessibility, functionality, and security of information for the local community.', 'Collaborating with stakeholders to gather requirements and customize the system to meet specific nagari needs.'] }
             ],
             projects: [
                 {
-                    title: "Etahfiz: Laporan Hafalan Al-Quran",
-                    description: "Aplikasi web untuk mencatat nilai laporan dalam hafalan Al-Quran."
+                    title: "Etahfiz: Quran Memorization Report",
+                    description: "Web application for recording report scores in Quran memorization."
                 }
             ],
             services: [
                 {
-                    title: "Pengembangan & Implementasi Sistem Informasi Desa",
-                    description: "Jasa untuk menyiapkan dan mengkonfigurasi sistem informasi desa."
+                    title: "Village Information System Development & Implementation",
+                    description: "Service to prepare and configure village information systems."
                 },
                 {
-                    title: "Instalasi Aplikasi Moodle",
-                    description: "Jasa untuk menginstal dan mengkonfigurasi Moodle untuk keperluan pendidikan."
+                    title: "Moodle Application Installation",
+                    description: "Service to install and configure Moodle for educational purposes."
                 }
             ]
         };
@@ -836,7 +864,7 @@
                 <div class="pdf-pro-section-title">EDUCATION</div>
                 ${educationHtml}
 
-                <div class="pdf-pro-section-title">SKILL</div>
+                <div class="pdf-pro-section-title">SKILLS</div>
                 ${skillsHtml}
 
                 <div class="pdf-pro-section-title">WORK EXPERIENCE</div>
@@ -916,33 +944,48 @@
 
 
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const data = portfolioData; // Pastikan portfolioData sudah didefinisikan di atas kode ini
+        console.log('Script is loaded');
+document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM Content Loaded, starting to generate content');
+            const data = portfolioData; // Ensure portfolioData is defined above this code
 
             // --- PERUBAHAN DIMULAI DI SINI ---
 
-            // 1. Tentukan urutan manual yang Anda inginkan
+            // 1. Define the manual order you want
             const desiredOrder = [
-                'Guru TIK',
+                'ICT Teacher',
                 'Freelance',
                 'Quality Assurance Tester',
-                'Kontributor',
-                'Administrator Web'
+                'Contributor',
+                'Web Administrator'
             ];
 
-            // 2. Urutkan data experience berdasarkan array desiredOrder
+            // 2. Sort experience data based on desiredOrder array
+            console.log('Before sorting:', data.experience.map(e => e.role));
             data.experience.sort((a, b) => {
                 const indexA = desiredOrder.indexOf(a.role);
                 const indexB = desiredOrder.indexOf(b.role);
+                console.log(`Sorting: ${a.role} (${indexA}) vs ${b.role} (${indexB})`);
                 return indexA - indexB;
             });
+            console.log('After sorting:', data.experience.map(e => e.role));
 
             // --- AKHIR DARI PERUBAHAN ---
 
 
+            try {
             const timelineContainer = document.getElementById('timeline-container');
+            console.log('Timeline container element:', timelineContainer);
+            if (!timelineContainer) {
+                console.error('Timeline container not found!');
+                return;
+            }
+            console.log('Generating timeline items, experience data:', data.experience);
+            console.log('Experience data length:', data.experience.length);
             data.experience.forEach((item, index) => {
+                console.log('Processing experience item:', item);
                 const position = index % 2 === 0 ? 'left' : 'right';
+                console.log('Creating timeline item:', index, position, item);
                 const timelineItemContainer = document.createElement('div');
                 timelineItemContainer.className = `timeline-item-container ${position}`;
                 let detailsHTML = item.details.map(detail => `<li>${detail}</li>`).join('');
@@ -958,20 +1001,35 @@
                 </div>
             </div>
         `;
+                console.log('Timeline item HTML:', timelineItemContainer.innerHTML);
+                console.log('Adding timeline item to container:', timelineItemContainer);
                 timelineContainer.appendChild(timelineItemContainer);
+                console.log('Added timeline item to container, container child count:', timelineContainer.children.length);
                 timelineItemContainer.querySelector('.timeline-content').addEventListener('click', function () {
                     this.classList.toggle('active');
                 });
             });
+            } catch (error) {
+                console.error('Error generating timeline:', error);
+            }
 
-            const ctx = document.getElementById('experienceChart').getContext('2d');
-            new Chart(ctx, {
+            console.log('Generating experience chart');
+            try {
+                console.log('Generating experience chart');
+                const ctx = document.getElementById('experienceChart').getContext('2d');
+                new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: data.experience.map(d => d.role),
                     datasets: [{
-                        label: 'Durasi Pengalaman',
-                        data: data.experience.map(d => [d.startDate, d.endDate === 'Present' ? new Date() : d.endDate]),
+                        label: 'Experience Duration',
+                        data: data.experience.map(d => {
+                    console.log('Processing dates for chart:', d.startDate, d.endDate);
+                    const startDate = new Date(d.startDate);
+                    const endDate = new Date(d.endDate);
+                    console.log('Converted dates:', startDate, endDate);
+                    return [startDate, endDate];
+                }),
                         backgroundColor: 'rgba(129, 178, 154, 0.7)',
                         borderColor: 'rgba(129, 178, 154, 1)',
                         borderWidth: 1,
@@ -1006,41 +1064,12 @@
                     }
                 }
             });
+            } catch (error) {
+                console.error('Error generating chart:', error);
+            }
             document.getElementById('currentYear').textContent = new Date().getFullYear();
         });
-    </script>
-</body>
-
-</html>
-
-<style>
-    #backToTop {
-        display: none;
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #81b29a;
-        color: white;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        text-align: center;
-        line-height: 40px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        z-index: 1000;
-    }
-
-    #backToTop:hover {
-        background-color: #3d405b;
-    }
-</style>
-
-<body>
-    <button id="backToTop" title="Kembali ke atas" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i
-            class="fas fa-arrow-up"></i></button>
-
-    <script>
+        
         // Fungsi untuk menampilkan/menyembunyikan tombol back to top
         window.onscroll = function () {
             if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -1049,8 +1078,264 @@
                 document.getElementById("backToTop").style.display = "none";
             }
         };
+        
+        // Dark/Light mode toggle functionality
     </script>
-    </div>
+    
+    <script>
+        window.toggleDarkMode = function() {
+            console.log('Toggling dark mode');
+            const body = document.body;
+            const isDarkMode = body.classList.toggle('dark-mode');
+            console.log('Dark mode is now:', isDarkMode);
+            
+            // Save preference to localStorage
+            localStorage.setItem('darkMode', isDarkMode);
+            console.log('Saved dark mode preference to localStorage');
+            
+            // Update toggle button icons
+            if (typeof updateDarkModeButtons === 'function') {
+                updateDarkModeButtons(isDarkMode);
+            }
+        }
+    </script>
+    
+    <script>
+        // Set dark mode as default and check for saved preference
+        (function() {
+            console.log('Setting dark mode as default and checking saved preference');
+            const savedDarkMode = localStorage.getItem('darkMode');
+            let isDarkMode = true; // Default to dark mode
+            
+            // If user has explicitly chosen light mode, use that
+            if (savedDarkMode === 'false') {
+                isDarkMode = false;
+            }
+            
+            console.log('Dark mode preference:', isDarkMode);
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+                console.log('Applied dark mode class to body');
+            }
+            
+            // We need to wait for the DOM to be loaded before updating the buttons
+            if (document.readyState === 'loading') {
+                // DOM is still loading, wait for it to complete
+                document.addEventListener('DOMContentLoaded', function() {
+                    if (typeof updateDarkModeButtons === 'function') {
+                        updateDarkModeButtons(isDarkMode);
+                    }
+                });
+            } else {
+                // DOM is already loaded
+                if (typeof updateDarkModeButtons === 'function') {
+                    updateDarkModeButtons(isDarkMode);
+                }
+            }
+        })();
+        
+        window.updateDarkModeButtons = function(isDarkMode) {
+            // Update desktop toggle button
+            const desktopToggleButton = document.getElementById('darkModeToggle');
+            console.log('Desktop toggle button found for initialization:', !!desktopToggleButton);
+            if (desktopToggleButton) {
+                desktopToggleButton.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                console.log('Initialized desktop toggle to', isDarkMode ? 'sun' : 'moon', 'icon');
+            }
+            
+            // Update mobile menu toggle button
+            const mobileToggleButton = document.getElementById('mobileDarkModeToggle');
+            console.log('Mobile toggle button found for initialization:', !!mobileToggleButton);
+            if (mobileToggleButton) {
+                if (isDarkMode) {
+                    mobileToggleButton.innerHTML = '<i class="fas fa-sun"></i> <span class="ml-2">Light Mode</span>';
+                    mobileToggleButton.classList.remove('bg-gray-200', 'text-gray-800');
+                    mobileToggleButton.classList.add('bg-gray-700', 'text-gray-200');
+                } else {
+                    mobileToggleButton.innerHTML = '<i class="fas fa-moon"></i> <span class="ml-2">Dark Mode</span>';
+                    mobileToggleButton.classList.remove('bg-gray-700', 'text-gray-200');
+                    mobileToggleButton.classList.add('bg-gray-200', 'text-gray-800');
+                }
+                console.log('Initialized mobile toggle to', isDarkMode ? 'light' : 'dark', 'mode');
+            }
+        }
+    </script>
+    
+    <button id="backToTop" title="Back to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i
+            class="fas fa-arrow-up"></i></button>
+    
+    <style>
+        /* Dark mode styles */
+        .dark-mode {
+            background-color: #1a202c !important;
+            color: #e2e8f0 !important;
+        }
+        
+        .dark-mode .bg-white {
+            background-color: #2d3748 !important;
+        }
+        
+        .dark-mode .text-\[\#3d405b\] {
+            color: #e2e8f0 !important;
+        }
+        
+        .dark-mode .text-gray-700 {
+            color: #cbd5e0 !important;
+        }
+        
+        .dark-mode .text-gray-600 {
+            color: #a0aec0 !important;
+        }
+        
+        .dark-mode .bg-gray-50 {
+            background-color: #4a5568 !important;
+        }
+        
+        .dark-mode .timeline-content {
+            background-color: #4a5568 !important;
+            border-color: #718096 !important;
+        }
+        
+        .dark-mode .project-item {
+            background-color: #4a5568 !important;
+            border-color: #718096 !important;
+        }
+        
+        .dark-mode .project-title {
+            color: #e2e8f0 !important;
+        }
+        
+        .dark-mode .project-description {
+            color: #cbd5e0 !important;
+        }
+        
+        .dark-mode #header {
+            background-color: #2d3748 !important;
+        }
+        
+        .dark-mode #contact {
+            background-color: #2d3748 !important;
+        }
+        
+        .dark-mode .tab-button.active {
+            border-color: #68d391;
+            color: #68d391;
+            background-color: #2d3748;
+        }
+        
+        .dark-mode .pdf-pro-page {
+            background-color: #2d3748 !important;
+            color: #e2e8f0 !important;
+        }
+        
+        .dark-mode .pdf-pro-header h1 {
+            color: #e2e8f0 !important;
+        }
+        
+        .dark-mode .pdf-pro-header h2 {
+            color: #cbd5e0 !important;
+        }
+        
+        .dark-mode .pdf-pro-section-title {
+            color: #e2e8f0 !important;
+            border-bottom-color: #718096 !important;
+        }
+        
+        .dark-mode .pdf-pro-grid-title {
+            color: #cbd5e0 !important;
+        }
+        
+        .dark-mode .pdf-pro-work-role {
+            color: #e2e8f0 !important;
+        }
+        
+        .dark-mode .pdf-pro-work-company {
+            color: #cbd5e0 !important;
+        }
+        
+        .dark-mode .pdf-pro-work-date {
+            color: #a0aec0 !important;
+        }
+        
+        .dark-mode .pdf-pro-project-title {
+            color: #e2e8f0 !important;
+        }
+        
+        /* Additional dark mode styles */
+        .dark-mode {
+            background-color: #1a202c !important;
+            color: #e2e8f0 !important;
+        }
+        
+        .dark-mode .social-button {
+            color: #e2e8f0 !important;
+        }
+        
+        .dark-mode .timeline-container::after {
+            background-color: #718096 !important;
+        }
+        
+        .dark-mode header {
+            background-color: #2d3748 !important;
+        }
+        
+        .dark-mode .project-item {
+            background-color: #2d3748 !important;
+            border-color: #4a5568 !important;
+        }
+        
+        .dark-mode .bg-gray-50 {
+            background-color: #2d3748 !important;
+        }
+        
+        .dark-mode .text-gray-700 {
+            color: #cbd5e0 !important;
+        }
+        
+        .dark-mode .text-gray-600 {
+            color: #a0aec0 !important;
+        }
+        
+        .dark-mode .tab-button.active {
+            background-color: #4a5568 !important;
+            border-color: #68d391 !important;
+            color: #68d391 !important;
+        }
+        
+        .dark-mode .timeline-item-container::after {
+            background-color: #2d3748 !important;
+            border-color: #68d391 !important;
+        }
+        
+        .dark-mode .tab-button {
+            color: #a0aec0 !important;
+        }
+        
+        .dark-mode .tab-button:hover {
+            color: #e2e8f0 !important;
+        }
+        
+        .dark-mode footer a {
+            color: #68d391 !important;
+        }
+        
+        .dark-mode .mobile-link {
+            color: #a0aec0 !important;
+        }
+        
+        .dark-mode .mobile-link:hover {
+            color: #68d391 !important;
+        }
+        
+        .dark-mode #mobileMenuContent {
+            background-color: #2d3748 !important;
+        }
+        
+        .dark-mode #backToTop {
+            background-color: #4a5568 !important;
+            color: #e2e8f0 !important;
+        }
+    </style>
 </body>
 
 </html>
