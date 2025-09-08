@@ -1,0 +1,95 @@
+<header id="header" class="bg-white sticky top-0 z-50 shadow-sm">
+    <div class="container mx-auto px-6 py-4">
+        <nav class="flex items-center justify-between">
+            <a href="#hero" class="text-lg md:text-xl font-bold text-[#3d405b]">Ilham Wahyuni</a>
+
+            <div class="hidden md:flex items-center space-x-4 lg:space-x-8">
+                <a href="#skills"
+                    class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Skills</a>
+                <a href="#projects-services"
+                    class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Projects</a>
+                <a href="#experience"
+                    class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Experience</a>
+                <a href="#education"
+                    class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Education</a>
+            </div>
+
+            <button onclick="generateCV()"
+                class="hidden md:inline-flex items-center bg-[#e07a5f] text-white px-3 py-2 md:px-4 md:py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm md:text-base">
+                <i class="fas fa-file-pdf mr-2"></i> <span class="hidden sm:inline">Generate CV</span>
+            </button>
+
+            <button id="darkModeToggle" onclick="toggleDarkMode()"
+                class="flex items-center text-[#3d405b] dark:text-[#e2e8f0] focus:outline-none">
+                <i class="fas fa-sun"></i>
+            </button>
+
+            <button id="menuBtn" class="md:hidden text-[#3d405b] focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </nav>
+    </div>
+
+    <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-black bg-opacity-50 z-40" aria-hidden="true">
+    </div>
+    <div id="mobileMenuContent"
+        class="hidden md:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 p-6 transform translate-x-full transition-transform duration-300 ease-in-out dark:bg-gray-80">
+        <button id="closeMenuBtn" class="absolute top-6 right-6 text-[#3d405b]">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+        <div class="flex flex-col space-y-6 mt-12">
+            <a href="#skills"
+                class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Skills</a>
+            <a href="#projects-services"
+                class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Projects</a>
+            <a href="#experience"
+                class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Experience</a>
+            <a href="#education"
+                class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Education</a>
+            <button onclick="generateCV()"
+                class="mt-4 inline-flex items-center justify-center bg-[#e07a5f] text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-all">
+                <i class="fas fa-file-pdf mr-2"></i> Generate CV
+            </button>
+            <button id="mobileDarkModeToggle" onclick="toggleDarkMode()"
+                class="mt-4 inline-flex items-center justify-center bg-gray-700 text-gray-200 px-6 py-3 rounded-lg hover:bg-opacity-90 transition-all">
+                <i class="fas fa-sun"></i> <span class="ml-2">Light Mode</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk menu mobile
+        const menuBtn = document.getElementById('menuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuContent = document.getElementById('mobileMenuContent');
+
+        const openMenu = () => {
+            mobileMenu.classList.remove('hidden');
+            mobileMenuContent.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            // Trigger reflow untuk transisi
+            mobileMenuContent.offsetWidth;
+            mobileMenuContent.classList.remove('translate-x-full');
+        };
+
+        const closeMenu = () => {
+            mobileMenuContent.classList.add('translate-x-full');
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuContent.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300); // Sesuaikan dengan durasi transisi
+        };
+
+        menuBtn.addEventListener('click', openMenu);
+        closeMenuBtn.addEventListener('click', closeMenu);
+        mobileMenu.addEventListener('click', closeMenu); // Menutup jika klik di luar area menu
+
+        // Menutup menu saat link diklik
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    </script>
+</header>

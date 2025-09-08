@@ -1,0 +1,167 @@
+<section id="projects-services" class="py-16 md:py-24 bg-white dark:from-gray-800 dark:to-gray-900">
+    <div class="container mx-auto px-6 max-w-5xl">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold relative inline-block">
+                <span class="relative z-10">Projects & Services</span>
+                <span class="absolute bottom-0 left-0 w-full h-2 bg-[#e07a5f] opacity-20 rounded-full"></span>
+            </h2>
+            <p class="mt-4 text-gray-800 dark:text-gray-300 max-w-2xl mx-auto">Explore my featured projects and
+                professional services</p>
+        </div>
+        <div class="flex justify-center mb-8">
+            <div class="inline-flex p-1 bg-gray-100 dark:bg-gray-800 rounded-xl shadow-inner">
+                <button onclick="showTab('projects')" id="projects-tab"
+                    class="tab-button active">Projects</button>
+                <button onclick="showTab('services')" id="services-tab" class="tab-button">Services</button>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div id="projects" class="tab-content active">
+                <ul class="project-list">
+                    <li class="project-item">
+                        <a href="https://etahfiz.ilwa.my.id" target="_blank" rel="noopener noreferrer"
+                            class="project-title">
+                            <i class="fas fa-book-quran mr-2 text-[#e07a5f]"></i>Etahfiz: Quran Memorization
+                            Report
+                        </a>
+                        <p class="project-description text-gray-800 dark:text-gray-400">
+                            Web application for recording report scores in Quran memorization.
+                        </p>
+                        <a href="http://etahfiz.ilwa.my.id" target="_blank" rel="noopener noreferrer">
+                            <img src="etahfiz.png" alt="etahfiz" class="project-image">
+                        </a>
+                        <a href="https://wa.me/6282323066956?text=Hi%20Ilham,%20I%20want%20to%20order%20the%20Etahfiz%20project" 
+                           target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center mt-4 bg-[#e07a5f] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm w-full">
+                            <i class="fas fa-message mr-2"></i> Order Now
+                        </a>
+                    </li>
+                    <li class="project-item">
+                        <span class="project-title">
+                            <i class="fas fa-graduation-cap mr-2 text-[#489fb5]"></i>E-learning with Moodle
+                        </span>
+                        <p class="project-description text-gray-800 dark:text-gray-400">
+                            Comprehensive e-learning platform using Moodle for online exams, course materials, modules, and more. Moodle capabilities include:
+                            <ul class="list-disc pl-5 mt-2 space-y-1">
+                                <li>Online exams and quizzes with automatic grading</li>
+                                <li>Course materials and resource management</li>
+                                <li>Interactive modules and activities</li>
+                                <li>Student progress tracking and reporting</li>
+                                <li>Communication tools (forums, messaging)</li>
+                                <li>Gradebook and assessment tools</li>
+                                <li>Multi-media content support</li>
+                                <li>Mobile learning compatibility</li>
+                            </ul>
+                        </p>
+                        <img src="moodle.png" alt="Moodle E-learning" class="project-image">
+                        <a href="https://wa.me/6282323066956?text=Hi%20Ilham,%20I%20want%20to%20order%20the%20E-learning%20with%20Moodle%20project" 
+                           target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center mt-4 bg-[#489fb5] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm w-full">
+                            <i class="fas fa-message mr-2"></i> Order Now
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="projects2" class="tab-content active">
+                <ul class="project-list">
+                    <li class="project-item">
+                        <a href="" target="_blank" rel="noopener noreferrer" class="project-title">
+                            <i class="fas fa-user-clock mr-2 text-[#81b29a]"></i>Teacher Attendance
+                            (AbsensiGuru)
+                        </a>
+                        <p class="project-description text-gray-800 dark:text-gray-400">
+                            Realtime web application for recording teacher attendance in teaching classes
+                        </p>
+                        <a href="" target="_blank" rel="noopener noreferrer">
+                            <img src="absensiguru.png" alt="AbsensiGuru" class="project-image">
+                        </a>
+                        <a href="https://wa.me/6282323066956?text=Hi%20Ilham,%20I%20want%20to%20order%20the%20Teacher%20Attendance%20project" 
+                           target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center mt-4 bg-[#81b29a] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm w-full">
+                            <i class="fas fa-message mr-2"></i> Order Now
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <style>
+        .project-image {
+            width: 100%;
+            height: 15rem;
+            /* 48 Tailwind = 192px */
+            object-fit: cover;
+            border-radius: 0.75rem;
+            background: #f3f4f6;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .project-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+    <div id="services" class="tab-content">
+        <ul class="project-list">
+            <li class="project-item">
+                <a href="https://batipuahateh.desa.id/" target="_blank" rel="noopener noreferrer"
+                    class="project-title">
+                    <i class="fas fa-desktop mr-2 text-[#9c89b8]"></i>Village Information System Implementation
+                </a>
+                <p class="project-description">
+                    Service to prepare and configure village information systems.
+                </p>
+                <a href="https://wa.me/6282323066956?text=Hi%20Ilham,%20I%20want%20to%20order%20the%20Village%20Information%20System%20service" 
+                   target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center justify-center mt-4 bg-[#9c89b8] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm w-full">
+                    <i class="fas fa-message mr-2"></i> Order Now
+                </a>
+            </li>
+            <li class="project-item">
+                <a href="https://studywith.ilwa.my.id/" target="_blank" rel="noopener noreferrer"
+                    class="project-title">
+                    <i class="fas fa-graduation-cap mr-2 text-[#489fb5]"></i>Moodle Application Installation
+                </a>
+                <p class="project-description">
+                    Service to install and configure Moodle for educational purposes.
+                </p>
+                <a href="https://wa.me/6282323066956?text=Hi%20Ilham,%20I%20want%20to%20order%20the%20Moodle%20Application%20Installation%20service" 
+                   target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center justify-center mt-4 bg-[#489fb5] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm w-full">
+                    <i class="fas fa-message mr-2"></i> Order Now
+                </a>
+            </li>
+            <li class="project-item">
+                <span class="project-title">
+                    <i class="fas fa-paintbrush mr-2 text-[#f0a6ca]"></i>Banner & Banner Design Service
+                </span>
+                <p class="project-description">
+                    Design service for banners, banners, and visual promotional media for your school,
+                    organization, or business needs.
+                </p>
+                <a href="https://wa.me/6282323066956?text=Hi%20Ilham,%20I%20want%20to%20order%20the%20Banner%20Design%20service" 
+                   target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center justify-center mt-4 bg-[#f0a6ca] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm w-full">
+                    <i class="fas fa-message mr-2"></i> Order Now
+                </a>
+            </li>
+            <li class="project-item">
+                <span class="project-title">
+                    <i class="fas fa-laptop mr-2 text-[#ffd166]"></i>Sell Used Laptops with Warranty
+                </span>
+                <p class="project-description">
+                    Providing quality used laptops with warranty, suitable for students, college students, and
+                    office needs.
+                </p>
+                <a href="https://wa.me/6282323066956?text=Hi%20Ilham,%20I%20want%20to%20order%20the%20Used%20Laptop%20service" 
+                   target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center justify-center mt-4 bg-[#ffd166] text-gray-800 px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm w-full">
+                    <i class="fas fa-message mr-2"></i> Order Now
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
