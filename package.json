@@ -1,0 +1,23 @@
+{
+  "name": "site-me",
+  "version": "1.0.0",
+  "description": "Personal portfolio website",
+  "main": "index.html",
+  "scripts": {
+    "build:css": "tailwindcss build src/css/input.css -o css/output.css",
+    "watch:css": "tailwindcss build src/css/input.css -o css/output.css --watch",
+    "build": "npm run build:css"
+  },
+  "keywords": [
+    "portfolio",
+    "tailwind",
+    "css"
+  ],
+  "author": "Ilham Wahyuni",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.35",
+    "autoprefixer": "^10.4.17"
+  }
+}
