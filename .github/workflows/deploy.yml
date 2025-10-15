@@ -1,0 +1,25 @@
+name: Deploy Static Site to aaPanel
+
+on:
+  push:
+    branches:
+      - main  # Sesuaikan dengan branch yang digunakan
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to aaPanel via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 2202
+          script: |
+            cd /www/wwwroot/ilwa.my.id
+            sudo -u www git pull origin main
