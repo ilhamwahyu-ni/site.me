@@ -5,6 +5,7 @@
   "main": "index.html",
   "scripts": {
     "build": "tailwindcss -i ./src/input.css -o ./dist/output.css",
+    "build:prod": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
     "build:watch": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
     "init:tailwind": "mkdir -p src && touch src/input.css"
   },
