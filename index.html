@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portofolio - Ilham Wahyuni</title>
     <link rel="icon" type="image/x-icon" href="https://placehold.co/32x32/81B29A/FFFFFF?text=IW">
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,32 +17,44 @@
 
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+
     <style>
         /* Custom base styles */
         body {
             font-family: 'Inter', sans-serif;
         }
+
         /* Custom animation for tab content */
         .tab-content.active {
             animation: fadeIn 0.5s ease-in-out;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         /* Styling for the timeline line */
         .timeline-container::after {
             content: '';
             position: absolute;
             width: 3px;
-            background-color: #e5e7eb; /* light gray */
+            background-color: #e5e7eb;
+            /* light gray */
             top: 0;
             bottom: 0;
             left: 50%;
             margin-left: -1.5px;
             z-index: 0;
         }
+
         /* Responsive adjustments for timeline */
         @media screen and (max-width: 768px) {
             .timeline-container::after {
@@ -60,10 +72,6 @@
             <nav class="flex items-center justify-between">
                 <a href="#hero" class="text-xl md:text-2xl font-bold text-gray-900">Ilham Wahyuni</a>
                 <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
-                    <a href="#skills" class="text-gray-600 hover:text-[#e07a5f] transition-colors">Skills</a>
-                    <a href="#projects" class="text-gray-600 hover:text-[#e07a5f] transition-colors">Projects</a>
-                    <a href="#experience" class="text-gray-600 hover:text-[#e07a5f] transition-colors">Experience</a>
-                    <a href="#education" class="text-gray-600 hover:text-[#e07a5f] transition-colors">Education</a>
                 </div>
                 <div class="flex items-center space-x-4">
                     <button id="menuBtn" class="md:hidden text-gray-700 text-2xl">
@@ -73,17 +81,14 @@
             </nav>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-black bg-opacity-50 z-40" aria-hidden="true"></div>
-        <div id="mobileMenuContent" class="hidden md:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 p-6 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-black bg-opacity-50 z-40" aria-hidden="true">
+        </div>
+        <div id="mobileMenuContent"
+            class="hidden md:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 p-6 transform translate-x-full transition-transform duration-300 ease-in-out">
             <button id="closeMenuBtn" class="absolute top-6 right-6 text-gray-700">
                 <i class="fas fa-times text-2xl"></i>
             </button>
-            <div class="flex flex-col space-y-6 mt-12">
-                <a href="#skills" class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Skills</a>
-                <a href="#projects" class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Projects</a>
-                <a href="#experience" class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Experience</a>
-                <a href="#education" class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Education</a>
-            </div>
+
         </div>
     </header>
 
@@ -94,14 +99,37 @@
                 <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">Ilham Wahyuni</h1>
                 <p class="mt-4 text-lg md:text-xl text-gray-600">Guru & Web Developer | Laravel | TIK</p>
                 <div class="mt-8 flex justify-center flex-wrap gap-3">
-                    <a href="https://www.linkedin.com/in/ilhamwahyu-ni/" target="_blank" rel="noopener noreferrer" class="social-button bg-[#0077b5]"><i class="fab fa-linkedin-in mr-2"></i> LinkedIn</a>
-                    <a href="https://github.com/ilhamwahyu-ni" target="_blank" rel="noopener noreferrer" class="social-button bg-[#333]"><i class="fab fa-github mr-2"></i> GitHub</a>
-                    <a href="mailto:wahyuilham20@gmail.com" class="social-button bg-[#d44638]"><i class="far fa-envelope mr-2"></i> Gmail</a>
-                    <a href="https://www.instagram.com/ilhamwahyu_ni/" target="_blank" rel="noopener noreferrer" class="social-button bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"><i class="fab fa-instagram mr-2"></i> Instagram</a>
-                    <a href="https://www.youtube.com/@ilhamwahyu_ni" target="_blank" rel="noopener noreferrer" class="social-button bg-[#ff0000]"><i class="fab fa-youtube mr-2"></i> YouTube</a>
+                    <a href="https://www.linkedin.com/in/ilhamwahyu-ni/" target="_blank" rel="noopener noreferrer"
+                        class="social-button bg-[#0077b5]"><i class="fab fa-linkedin-in mr-2"></i> LinkedIn</a>
+                    <a href="https://github.com/ilhamwahyu-ni" target="_blank" rel="noopener noreferrer"
+                        class="social-button bg-[#333]"><i class="fab fa-github mr-2"></i> GitHub</a>
+                    <a href="mailto:wahyuilham20@gmail.com" class="social-button bg-[#d44638]"><i
+                            class="far fa-envelope mr-2"></i> Gmail</a>
+                    <a href="https://www.instagram.com/ilhamwahyu_ni/" target="_blank" rel="noopener noreferrer"
+                        class="social-button bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"><i
+                            class="fab fa-instagram mr-2"></i> Instagram</a>
+                    <a href="https://www.youtube.com/@ilhamwahyu_ni" target="_blank" rel="noopener noreferrer"
+                        class="social-button bg-[#ff0000]"><i class="fab fa-youtube mr-2"></i> YouTube</a>
                 </div>
             </div>
-            <style>.social-button { display: inline-flex; align-items: center; padding: 0.5rem 1rem; border-radius: 0.5rem; text-decoration: none; color: white; transition: transform 0.2s; font-size: 0.875rem; font-weight: 500;} .social-button:hover { transform: translateY(-3px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }</style>
+            <style>
+                .social-button {
+                    display: inline-flex;
+                    align-items: center;
+                    padding: 0.5rem 1rem;
+                    border-radius: 0.5rem;
+                    text-decoration: none;
+                    color: white;
+                    transition: transform 0.2s;
+                    font-size: 0.875rem;
+                    font-weight: 500;
+                }
+
+                .social-button:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                }
+            </style>
         </section>
 
         <!-- Section Heading Helper Component -->
@@ -109,7 +137,8 @@
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 relative inline-block pb-2">
                     <span class="relative z-10" data-title></span>
-                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-1 bg-[#e07a5f] rounded-full"></span>
+                    <span
+                        class="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-1 bg-[#e07a5f] rounded-full"></span>
                 </h2>
                 <p class="mt-4 text-gray-600 max-w-2xl mx-auto" data-subtitle></p>
             </div>
@@ -132,14 +161,11 @@
                 <!-- Heading inserted by JS -->
                 <div id="projects-heading"></div>
                 <div class="flex justify-center mb-10">
-                    <div class="inline-flex p-1 bg-gray-100 rounded-xl shadow-inner">
-                        <button data-tab="projects" class="tab-button active">Proyek</button>
-                        <button data-tab="services" class="tab-button">Layanan</button>
-                    </div>
-                    <style>.tab-button { padding: 0.6rem 1.25rem; border-radius: 0.65rem; border: 2px solid transparent; font-weight: 600; transition: all 0.3s; background-color: transparent; color: #64748b; } .tab-button.active { background-color: #ffffff; color: #e07a5f; box-shadow: 0 4px 6px rgba(0,0,0,0.07); } .tab-button:hover:not(.active) { color: #475569; }</style>
+
                 </div>
                 <!-- Projects Content -->
-                <div id="projects-content" class="tab-content active grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div id="projects-content"
+                    class="tab-content active grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Project items will be inserted here by JS -->
                 </div>
                 <!-- Services Content -->
@@ -152,26 +178,17 @@
         <!-- Experience Section -->
         <section id="experience" class="py-16 md:py-24 bg-gray-50">
             <div class="container mx-auto px-6">
-                 <!-- Heading inserted by JS -->
+                <!-- Heading inserted by JS -->
                 <div id="experience-heading"></div>
-                
+
                 <!-- Experience Timeline -->
                 <!-- <div class="timeline-container relative max-w-4xl mx-auto"> -->
-                    <!-- Timeline items will be inserted here by JS -->
-                </div>
+                <!-- Timeline items will be inserted here by JS -->
+            </div>
             </div>
         </section>
 
-        <!-- Education Section -->
-        <section id="education" class="py-16 md:py-24 bg-white">
-            <div class="container mx-auto px-6 max-w-4xl">
-                 <!-- Heading inserted by JS -->
-                <div id="education-heading"></div>
-                <div class="space-y-8">
-                    <!-- Education items will be inserted here by JS -->
-                </div>
-            </div>
-        </section>
+
     </main>
 
     <!-- Footer -->
@@ -183,7 +200,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            
+
             // --- DATA SOURCE ---
             const portfolioData = {
                 personal: {
@@ -202,15 +219,10 @@
                 projects: [
                     { title: 'Etahfiz: Laporan Hafalan Quran', icon: 'fa-solid fa-book-quran', color: 'text-[#e07a5f]', description: 'Aplikasi web untuk mencatat skor laporan dalam hafalan Al-Quran.', link: 'https://etahfiz.ilwa.my.id', image: 'https://placehold.co/600x400/F8F9FA/3d405b?text=Etahfiz', orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20tertarik%20dengan%20proyek%20Etahfiz' },
                     { title: 'AbsensiGuru', icon: 'fa-solid fa-user-clock', color: 'text-[#81b29a]', description: 'Aplikasi web realtime untuk mencatat kehadiran guru di kelas mengajar.', link: '#', image: 'https://placehold.co/600x400/F8F9FA/3d405b?text=AbsensiGuru', orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20tertarik%20dengan%20proyek%20AbsensiGuru' },
-                    { title: 'E-learning dengan Moodle', icon: 'fa-solid fa-graduation-cap', color: 'text-[#489fb5]', description: 'Platform e-learning komprehensif menggunakan Moodle untuk ujian online, materi kursus, modul, dan lainnya.', link: '#', image: 'https://placehold.co/600x400/F8F9FA/3d405b?text=Moodle', orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20tertarik%20dengan%20proyek%20E-learning%20Moodle' },
-                    { title: 'Open Source Point of Sale', icon: 'fa-solid fa-cash-register', color: 'text-[#f3722c]', description: 'Aplikasi kasir (POS) berbasis web dengan PHP CodeIgniter. Cocok untuk bisnis Anda.', link: 'https://github.com/ilhamwahyu-ni/opensourcepos', image: 'https://placehold.co/600x400/F8F9FA/3d405b?text=OpenPOS', orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20butuh%20aplikasi%20kasir.' }
+                    { title: 'E-learning dengan Moodle', icon: 'fa-solid fa-graduation-cap', color: 'text-[#489fb5]', description: 'Platform e-learning komprehensif menggunakan Moodle untuk ujian online, materi kursus, modul, dan lainnya.', link: 'https://studywith.ilwa.my.id', image: 'https://placehold.co/600x400/F8F9FA/3d405b?text=Moodle', orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20tertarik%20dengan%20proyek%20E-learning%20Moodle' },
+                    { title: 'Open Source Point of Sale', icon: 'fa-solid fa-cash-register', color: 'text-[#f3722c]', description: 'Aplikasi kasir (POS) berbasis web dengan PHP CodeIgniter. Cocok untuk bisnis Anda.', link: 'https://pos.ilwa.my.id', image: 'https://placehold.co/600x400/F8F9FA/3d405b?text=OpenPOS', orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20butuh%20aplikasi%20kasir.' }
                 ],
-                services: [
-                    { title: 'Pengembangan Aplikasi Web Kustom', icon: 'fa-solid fa-code', description: 'Membangun solusi web yang disesuaikan dengan kebutuhan bisnis Anda menggunakan teknologi modern seperti Laravel.' },
-                    { title: 'Manajemen & Pemeliharaan Website', icon: 'fa-solid fa-server', description: 'Menyediakan layanan pemeliharaan rutin, pembaruan keamanan, dan optimisasi kinerja untuk website Anda.' },
-                    { title: 'Pelatihan TIK & Pemrograman', icon: 'fa-solid fa-chalkboard-user', description: 'Memberikan sesi pelatihan untuk individu atau kelompok tentang dasar-dasar TIK, pengembangan web, dan topik terkait.' },
-                    { title: 'Konsultasi Sistem Informasi', icon: 'fa-solid fa-comments', description: 'Membantu merencanakan dan mengimplementasikan sistem informasi yang efisien untuk sekolah atau organisasi.' }
-                ],
+
                 experience: [
                     { company: 'Kementrian Agama Kota Padang Panjang', role: 'Guru TIK & Prakarya', period: 'Juli 2022 - Sekarang', details: ['Mengajar TIK dan Prakarya, fokus pada pemecahan masalah dan kolaborasi.', 'Mengembangkan konten digital dan streaming video edukasi untuk meningkatkan keterlibatan siswa.'] },
                     { company: 'SMP IT Juara', role: 'Web Developer & Guru TIK', period: 'Juli 2019 - Juni 2022', details: ['Mengelola dan mengoptimalkan kinerja website sekolah.', 'Berkolaborasi dengan tim pengembang untuk mengidentifikasi dan memperbaiki bug aplikasi web.'] },
@@ -223,7 +235,7 @@
             };
 
             // --- UI RENDERING FUNCTIONS ---
-            
+
             // Function to create section headings
             function createSectionHeading(containerId, title, subtitle) {
                 const container = document.getElementById(containerId);
@@ -232,7 +244,7 @@
                 template.querySelector('[data-subtitle]').textContent = subtitle;
                 container.appendChild(template);
             }
-            
+
             // Render Skills
             function renderSkills() {
                 const container = document.querySelector('#skills .grid');
@@ -266,9 +278,9 @@
 
             // Render Projects
             function renderProjects(containerId, data) {
-                 const container = document.getElementById(containerId);
-                 container.innerHTML = ''; // Clear existing
-                 data.forEach(item => {
+                const container = document.getElementById(containerId);
+                container.innerHTML = ''; // Clear existing
+                data.forEach(item => {
                     const isProject = 'link' in item; // Differentiate between project and service
                     const card = `
                     <div class="project-item bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group">
@@ -283,40 +295,10 @@
                         </div>
                     </div>`;
                     container.innerHTML += card;
-                 });
-            }
-            
-            // Render Experience
-            function renderExperience() {
-                const container = document.querySelector('.timeline-container');
-                portfolioData.experience.forEach((job, index) => {
-                    const side = index % 2 === 0 ? 'left' : 'right';
-                    const item = `
-                        <div class="timeline-item-container ${side} md:w-1/2 w-full md:px-5 px-10 py-4">
-                            <div class="timeline-content-wrapper relative">
-                                <div class="absolute -left-11 md:left-auto md:${side === 'left' ? '-right-5' : '-left-5'} top-5 z-10 w-6 h-6 bg-gray-50 rounded-full flex items-center justify-center">
-                                    <div class="w-4 h-4 bg-[#81b29a] rounded-full border-4 border-white"></div>
-                                </div>
-                                <div class="timeline-content bg-white p-6 rounded-lg shadow-md border border-gray-200 cursor-pointer hover:border-[#81b29a] transition-colors">
-                                    <div class="flex justify-between items-start">
-                                        <div>
-                                            <h3 class="font-bold text-lg text-gray-900">${job.role}</h3>
-                                            <p class="font-semibold text-[#e07a5f]">${job.company}</p>
-                                            <p class="text-sm text-gray-500 mt-1">${job.period}</p>
-                                        </div>
-                                        <i class="fas fa-chevron-down details-toggle transition-transform duration-300 ml-2 mt-1"></i>
-                                    </div>
-                                    <div class="timeline-details max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
-                                        <ul class="list-disc pl-5 mt-4 space-y-2 text-gray-600">
-                                            ${job.details.map(detail => `<li>${detail}</li>`).join('')}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`;
-                    container.innerHTML += item;
                 });
             }
+
+
 
             // Render Education
             function renderEducation() {
@@ -337,22 +319,20 @@
                     container.innerHTML += item;
                 });
             }
-            
+
             // --- INITIALIZE UI ---
             function initUI() {
                 createSectionHeading('skills-heading', 'Keahlian', 'Kompetensi teknis dan profesional yang saya miliki.');
-                createSectionHeading('projects-heading', 'Proyek & Layanan', 'Jelajahi proyek unggulan dan layanan profesional saya.');
-               
-                
+                createSectionHeading('projects-heading', 'Proyek', 'Jelajahi proyek unggulan dan layanan profesional saya.');
+
+
                 renderSkills();
                 renderProjects('projects-content', portfolioData.projects);
                 renderProjects('services-content', portfolioData.services);
-                renderExperience();
-                renderEducation();
 
                 document.getElementById('current-year').textContent = new Date().getFullYear();
             }
-            
+
             initUI();
 
             // --- MOBILE MENU LOGIC ---
@@ -414,7 +394,7 @@
                 item.addEventListener('click', () => {
                     const details = item.querySelector('.timeline-details');
                     const toggleIcon = item.querySelector('.details-toggle');
-                    
+
                     if (details.style.maxHeight) {
                         details.style.maxHeight = null;
                         details.style.opacity = 0;
@@ -432,4 +412,3 @@
 </body>
 
 </html>
-
