@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio - Ilham Wahyuni</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: This SPA uses a vertical structure with sticky navigation at the top for quick access. The flow starts with an introduction (Hero), followed by Skills visualization, then the Projects & Services section, followed by an interactive Career Timeline with alternating layout (main elements), and ends with Education and Contact. This structure is chosen to transform a static CV into a guided career narrative. Interactivity in the timeline and project tabs enhances usability and user engagement. -->
+    <!-- Visualization & Content Choices: 
+        - Skills: Presented in visual groups with icons for quick scanning. Goal: Organize. Method: HTML/Tailwind. Interaction: Hover effects. Justification: Facilitates easy identification of key strengths.
+        - Projects & Services: Uses an interactive tab system. Goal: Organize/Explore. Method: HTML/JS/CSS. Interaction: Click to switch content. Justification: Clearly separates personal projects from offered services.
+        - Career Timeline: Uses alternating vertical flow diagram (left-right). Goal: Change/Explore. Method: HTML/Tailwind/JS. Interaction: Click to show/hide job details. Justification: More dynamic and visually appealing layout.
+        - Experience Duration: Uses horizontal bar chart (Gantt chart). Goal: Compare/Analyze. Method: Chart.js Canvas. Interaction: Tooltip on hover. Justification: Provides a strong visual representation of duration and overlap of each role.
+        - PDF Generation: Menggunakan template CV profesional tersembunyi (terinspirasi dari PDF user) yang diisi secara dinamis menggunakan SUMBER DATA YANG SAMA dengan konten web. Goal: Export. Method: jsPDF, html2canvas, Hidden HTML template. Interaction: Klik tombol. Justification: Menghasilkan PDF profesional, bukan sekadar screenshot, dan menjamin konsistensi data.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+
+        /* Light mode override */
+        body:not(.dark-mode) {
+            background-color: #ffffff;
+            color: #3d405b;
+        }
+
+        .social-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.2s;
+            font-size: 0.875rem;
+        }
+
+        .social-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .linkedin {
+            background-color: #0077b5;
+        }
+
+        .github {
+            background-color: #333;
+        }
+
+        .gmail {
+            background-color: #d44638;
+        }
+
+        .instagram {
+            background-color: #E1306C;
+        }
+
+        .youtube {
+            background-color: #ff0000;
+        }
+
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            border: 2px solid transparent;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: #f8fafc;
+            color: #64748b;
+            margin: 0 0.25rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .tab-button.active {
+            border-color: #e07a5f;
+            color: #e07a5f;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            transform: translateY(-2px);
+        }
+
+        .tab-button:hover:not(.active) {
+            background-color: #f1f5f9;
+            color: #475569;
+            transform: translateY(-1px);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-item {
+            animation: slideInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .project-item:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .project-item:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .project-item:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .project-item:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .project-item:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .project-item {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #e07a5f, #81b29a);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .project-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-color: #cbd5e0;
+        }
+
+        .project-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-title {
+            font-weight: 800;
+            color: #3d405b;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            display: block;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .project-title:hover {
+            color: #e07a5f;
+        }
+
+        .project-description {
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+        }
+
+        .timeline-container {
+            width: 100%;
+            position: relative;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #e5e7eb;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-item-container.left {
+            left: 0;
+        }
+
+        .timeline-item-container.right {
+            left: 50%;
+        }
+
+        .timeline-item-container::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -12px;
+            background-color: white;
+            border: 4px solid #81b29a;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item-container.right::after {
+            left: -8px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+        }
+
+        .timeline-details {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+
+        .timeline-content.active .timeline-details {
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        @media screen and (max-width: 768px) {
+            .timeline-container::after {
+                left: 15px;
+            }
+
+            .timeline-item-container {
+                width: 100%;
+                padding-left: 50px;
+                padding-right: 15px;
+            }
+
+            .timeline-item-container.right {
+                left: 0%;
+            }
+
+            .timeline-item-container.left::after,
+            .timeline-item-container.right::after {
+                left: -8px;
+            }
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 500px;
+                max-height: 70vh;
+            }
+        }
+
+        /* Dark mode toggle button styles */
+        #darkModeToggle,
+        #mobileDarkModeToggle {
+            transition: all 0.3s ease;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+        }
+
+        #darkModeToggle:hover,
+        #mobileDarkModeToggle:hover {
+            transform: scale(1.1);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode #darkModeToggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Professional PDF Template Styles */
+        .pdf-pro-container {
+            position: absolute;
+            left: -9999px;
+            /* top: 10mm; */
+            width: 210mm;
+            background-color: white;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .pdf-pro-page {
+            padding: 10mm;
+            /* Equal margin: 10mm on all sides */
+            width: 100%;
+            min-height: calc(297mm - 20mm);
+            box-sizing: border-box;
+            color: #333;
+        }
+
+        .pdf-pro-header {
+            text-align: center;
+            margin-bottom: 7mm;
+        }
+
+        .pdf-pro-header h1 {
+            font-size: 26pt;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .pdf-pro-header h2 {
+            font-size: 11pt;
+            font-weight: 500;
+            color: #34495e;
+            margin: 1mm 0;
+            letter-spacing: 1px;
+        }
+
+        .pdf-pro-contact {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 4mm;
+            font-size: 9pt;
+            color: #555;
+        }
+
+        .pdf-pro-contact span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .pdf-pro-section-title {
+            font-size: 13pt;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-top: 5mm;
+            margin-bottom: 3mm;
+            border-bottom: 1.5px solid #bdc3c7;
+            padding-bottom: 1.5mm;
+        }
+
+        .pdf-pro-profile-text {
+            font-size: 10pt;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        .pdf-pro-grid {
+            display: grid;
+            grid-template-columns: 1fr 2.5fr;
+            gap: 8mm;
+            align-items: start;
+        }
+
+        .pdf-pro-grid-title {
+            font-weight: 700;
+            font-size: 10pt;
+            color: #34495e;
+        }
+
+        .pdf-pro-grid-content {
+            font-size: 10pt;
+        }
+
+        .pdf-pro-work-item {
+            margin-bottom: 5mm;
+            page-break-inside: avoid;
+        }
+
+        /* Avoid page break */
+        .pdf-pro-work-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .pdf-pro-work-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .pdf-pro-work-role {
+            font-size: 11pt;
+            font-weight: 700;
+        }
+
+        .pdf-pro-work-date {
+            font-size: 9pt;
+            color: #777;
+            font-weight: 500;
+        }
+
+        .pdf-pro-work-company {
+            font-size: 10pt;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 2mm;
+        }
+
+        .pdf-pro-work-details {
+            font-size: 9.5pt;
+            padding-left: 15px;
+            margin: 0;
+            list-style-type: disc;
+        }
+
+        /* Added list-style-type */
+        .pdf-pro-work-details li {
+            margin-bottom: 1.2mm;
+        }
+
+        .pdf-pro-sub-skill {
+            font-size: 9.5pt;
+            margin-top: 2mm;
+        }
+
+        .pdf-pro-sub-skill strong {
+            font-weight: 700;
+        }
+
+        .pdf-pro-project-item {
+            margin-bottom: 4mm;
+            page-break-inside: avoid;
+        }
+
+        /* Avoid page break */
+        .pdf-pro-project-title {
+            font-size: 10pt;
+            font-weight: 700;
+        }
+
+        .pdf-pro-project-context {
+            font-size: 9pt;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 2mm;
+        }
+
+        .pdf-pro-project-details {
+            font-size: 9.5pt;
+            padding-left: 15px;
+            margin: 5;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <!-- Include Header Partial -->
+    <header id="header" class="bg-white sticky top-0 z-50 shadow-sm">
+    <div class="container mx-auto px-6 py-4">
+        <nav class="flex items-center justify-between">
+            <a href="#hero" class="text-lg md:text-xl font-bold text-[#3d405b]">Ilham Wahyuni</a>
+
+            <div class="hidden md:flex items-center space-x-4 lg:space-x-8">
+                <a href="#skills"
+                    class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Skills</a>
+                <a href="#projects-services"
+                    class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Projects</a>
+                <a href="#experience"
+                    class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Experience</a>
+                <a href="#education"
+                    class="text-gray-600 hover:text-[#e07a5f] transition-colors text-base lg:text-lg">Education</a>
+            </div>
+
+            <button onclick="generateCV()"
+                class="hidden md:inline-flex items-center bg-[#e07a5f] text-white px-3 py-2 md:px-4 md:py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm md:text-base">
+                <i class="fas fa-file-pdf mr-2"></i> <span class="hidden sm:inline">Generate CV</span>
+            </button>
+
+            <button id="darkModeToggle" onclick="toggleDarkMode()"
+                class="flex items-center text-[#3d405b] dark:text-[#e2e8f0] focus:outline-none">
+                <i class="fas fa-sun"></i>
+            </button>
+
+            <button id="menuBtn" class="md:hidden text-[#3d405b] focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </nav>
+    </div>
+
+    <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-black bg-opacity-50 z-40" aria-hidden="true">
+    </div>
+    <div id="mobileMenuContent"
+        class="hidden md:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 p-6 transform translate-x-full transition-transform duration-300 ease-in-out dark:bg-gray-80">
+        <button id="closeMenuBtn" class="absolute top-6 right-6 text-[#3d405b]">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+        <div class="flex flex-col space-y-6 mt-12">
+            <a href="#skills"
+                class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Skills</a>
+            <a href="#projects-services"
+                class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Projects</a>
+            <a href="#experience"
+                class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Experience</a>
+            <a href="#education"
+                class="mobile-link text-lg text-gray-600 hover:text-[#e07a5f] transition-colors">Education</a>
+            <button onclick="generateCV()"
+                class="mt-4 inline-flex items-center justify-center bg-[#e07a5f] text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-all">
+                <i class="fas fa-file-pdf mr-2"></i> Generate CV
+            </button>
+            <button id="mobileDarkModeToggle" onclick="toggleDarkMode()"
+                class="mt-4 inline-flex items-center justify-center bg-gray-700 text-gray-200 px-6 py-3 rounded-lg hover:bg-opacity-90 transition-all">
+                <i class="fas fa-sun"></i> <span class="ml-2">Light Mode</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk menu mobile
+        const menuBtn = document.getElementById('menuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuContent = document.getElementById('mobileMenuContent');
+
+        const openMenu = () => {
+            mobileMenu.classList.remove('hidden');
+            mobileMenuContent.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            // Trigger reflow untuk transisi
+            mobileMenuContent.offsetWidth;
+            mobileMenuContent.classList.remove('translate-x-full');
+        };
+
+        const closeMenu = () => {
+            mobileMenuContent.classList.add('translate-x-full');
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuContent.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300); // Sesuaikan dengan durasi transisi
+        };
+
+        menuBtn.addEventListener('click', openMenu);
+        closeMenuBtn.addEventListener('click', closeMenu);
+        mobileMenu.addEventListener('click', closeMenu); // Menutup jika klik di luar area menu
+
+        // Menutup menu saat link diklik
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    </script>
+</header>
+
+    <main id="main-content">
+        <!-- Include Hero Partial -->
+        <section id="hero" class="py-20 md:py-24 bg-white">
+    <div class="container mx-auto px-6 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-[#3d405b] leading-tight">Ilham Wahyuni</h1>
+        <p class="mt-4 text-lg md:text-xl text-gray-700">Teacher & Web Developer | Laravel | ICT</p>
+        <div class="mt-8 flex justify-center flex-wrap gap-3">
+            <a href="https://www.linkedin.com/in/ilhamwahyu-ni/" target="_blank" rel="noopener noreferrer"
+                class="social-button linkedin"><i class="fab fa-linkedin-in mr-2"></i> LinkedIn</a>
+            <a href="https://github.com/ilhamwahyu-ni" target="_blank" rel="noopener noreferrer"
+                class="social-button github"><i class="fab fa-github mr-2"></i> GitHub</a>
+            <a href="mailto:wahyuilham20@gmail.com" class="social-button gmail"><i
+                    class="far fa-envelope mr-2"></i> Gmail</a>
+            <a href="https://www.instagram.com/ilhamwahyu_ni/" target="_blank" rel="noopener noreferrer"
+                class="social-button instagram"><i class="fab fa-instagram mr-2"></i> Instagram</a>
+            <a href="https://www.youtube.com/@ilhamwahyu_ni" target="_blank" rel="noopener noreferrer"
+                class="social-button youtube"><i class="fab fa-youtube mr-2"></i> YouTube</a>
+        </div>
+    </div>
+</section>
+        
+        <!-- Include Skills Partial -->
+        <section id="skills" class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold relative inline-block">
+                <span class="relative z-10">Skills</span>
+                <span class="absolute bottom-0 left-0 w-full h-2 bg-[#e07a5f] opacity-20 rounded-full"></span>
+            </h2>
+            <p class="mt-4 text-gray-800 dark:text-gray-300 max-w-2xl mx-auto">Technical expertise and
+                professional competencies</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div id="web-skills"
+                class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <h3 class="font-bold text-xl mb-4 flex items-center">
+                    <span
+                        class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">🖥️</span>
+                    Web Developer
+                </h3>
+                <ul class="space-y-3 text-gray-800 dark:text-gray-300">
+                    <li class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span>Laravel Vibe Coder</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span>Git & GitHub</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span>Information System Management</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span>Website Administration</span>
+                    </li>
+                </ul>
+            </div>
+            <div id="qa-skills"
+                class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <h3 class="font-bold text-xl mb-4 flex items-center">
+                    <span
+                        class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">✅</span>
+                    Quality Assurance (QA)
+                </h3>
+                <ul class="space-y-3 text-[#1a202c] dark:text-gray-300">
+                    <li class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span>Web Application Testing</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span>Bug Identification & Fixing</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span>Developer Team Collaboration</span>
+                    </li>
+                </ul>
+            </div>
+            <div id="tech-skills"
+                class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <h3 class="font-bold text-xl mb-4 flex items-center">
+                    <span
+                        class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">🛠️</span>
+                    Technical
+                </h3>
+                <ul class="space-y-3 text-[#1a202c] dark:text-gray-300">
+                    <li class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span>Website Performance Optimization</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span>Digital Content Development</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span>Educational Video Streaming</span>
+                    </li>
+                </ul>
+            </div>
+            <div id="soft-skills"
+                class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <h3 class="font-bold text-xl mb-4 flex items-center">
+                    <span
+                        class="bg-yellow-100 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">🤝</span>
+                    Professional
+                </h3>
+                <ul class="space-y-3 text-[#1a202c] dark:text-gray-300">
+                    <li class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span>Problem Solving</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span>Team Collaboration</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span>Stakeholder Communication</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span>Attention to Detail</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+        
+        <!-- Include Projects & Services Partial -->
+        <section id="projects-services" class="py-16 md:py-24 bg-white dark:from-gray-800 dark:to-gray-900">
+    <div class="container mx-auto px-6 max-w-5xl">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold relative inline-block">
+                <span class="relative z-10">Projects & Services</span>
+                <span class="absolute bottom-0 left-0 w-full h-2 bg-[#e07a5f] opacity-20 rounded-full"></span>
+            </h2>
+            <p class="mt-4 text-gray-800 dark:text-gray-300 max-w-2xl mx-auto">Explore my featured projects and
+                professional services</p>
+        </div>
+        <div class="flex justify-center mb-8">
+            <div class="inline-flex p-1 bg-gray-100 dark:bg-gray-800 rounded-xl shadow-inner">
+                <button onclick="showTab('projects')" id="projects-tab"
+                    class="tab-button active">Projects</button>
+                <button onclick="showTab('services')" id="services-tab" class="tab-button">Services</button>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div id="projects" class="tab-content active">
+                <ul class="project-list">
+                    <li class="project-item">
+                        <a href="https://etahfiz.ilwa.my.id" target="_blank" rel="noopener noreferrer"
+                            class="project-title">
+                            <i class="fas fa-book-quran mr-2 text-[#e07a5f]"></i>Etahfiz: Quran Memorization
+                            Report
+                        </a>
+                        <p class="project-description text-gray-800 dark:text-gray-400">
+                            Web application for recording report scores in Quran memorization.
+                        </p>
+                        <a href="http://etahfiz.ilwa.my.id" target="_blank" rel="noopener noreferrer">
+                            <img src="etahfiz.png" alt="etahfiz" class="project-image">
+                        </a>
+                        <a href="https://wa.me/6282323066956?text=Hi%20Ilham,%20I%20want%20to%20order%20the%20Etahfiz%20project" 
+                           target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center mt-4 bg-[#e07a5f] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm w-full">
+                            <i class="fas fa-message mr-2"></i> Order Now
+                        </a>
+                    </li>
+                    <li class="project-item">
+                        <span class="project-title">
+                            <i class="fas fa-graduation-cap mr-2 text-[#489fb5]"></i>E-learning with Moodle
+                        </span>
+                        <p class="project-description text-gray-800 dark:text-gray-400">
+                            Comprehensive e-learning platform using Moodle for online exams, course materials, modules, and more. Moodle capabilities include:
+                            <ul class="list-disc pl-5 mt-2 space-y-1">
+                                <li>Online exams and quizzes with automatic grading</li>
+                                <li>Course materials and resource management</li>
+                                <li>Interactive modules and activities</li>
+                                <li>Student progress tracking and reporting</li>
+                                <li>Communication tools (forums, messaging)</li>
+                                <li>Gradebook and assessment tools</li>
+                                <li>Multi-media content support</li>
+                                <li>Mobile learning compatibility</li>
+                            </ul>
+                        </p>
+                        <img src="moodle.png" alt="Moodle E-learning" class="project-image">
+                        <a href="https://wa.me/6282323066956?text=Hi%20Ilham,%20I%20want%20to%20order%20the%20E-learning%20with%20Moodle%20project" 
+                           target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center mt-4 bg-[#489fb5] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm w-full">
+                            <i class="fas fa-message mr-2"></i> Order Now
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="projects2" class="tab-content active">
+                <ul class="project-list">
+                    <li class="project-item">
+                        <a href="" target="_blank" rel="noopener noreferrer" class="project-title">
+                            <i class="fas fa-user-clock mr-2 text-[#81b29a]"></i>Teacher Attendance
+                            (AbsensiGuru)
+                        </a>
+                        <p class="project-description text-gray-800 dark:text-gray-400">
+                            Realtime web application for recording teacher attendance in teaching classes
+                        </p>
+                        <a href="" target="_blank" rel="noopener noreferrer">
+                            <img src="absensiguru.png" alt="AbsensiGuru" class="project-image">
+                        </a>
+                        <a href="https://wa.me/6282323066956?text=Hi%20Ilham,%20I%20want%20to%20order%20the%20Teacher%20Attendance%20project" 
+                           target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center mt-4 bg-[#81b29a] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm w-full">
+                            <i class="fas fa-message mr-2"></i> Order Now
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <style>
+        .project-image {
+            width: 100%;
+            height: 15rem;
+            /* 48 Tailwind = 192px */
+            object-fit: cover;
+            border-radius: 0.75rem;
+            background: #f3f4f6;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .project-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+    <div id="services" class="tab-content">
+        <ul class="project-list">
+            <li class="project-item">
+                <a href="https://batipuahateh.desa.id/" target="_blank" rel="noopener noreferrer"
+                    class="project-title">
+                    <i class="fas fa-desktop mr-2 text-[#9c89b8]"></i>Village Information System Implementation
+                </a>
+                <p class="project-description">
+                    Service to prepare and configure village information systems.
+                </p>
+                <a href="https://wa.me/6282323066956?text=Hi%20Ilham,%20I%20want%20to%20order%20the%20Village%20Information%20System%20service" 
+                   target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center justify-center mt-4 bg-[#9c89b8] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm w-full">
+                    <i class="fas fa-message mr-2"></i> Order Now
+                </a>
+            </li>
+            <li class="project-item">
+                <a href="https://studywith.ilwa.my.id/" target="_blank" rel="noopener noreferrer"
+                    class="project-title">
+                    <i class="fas fa-graduation-cap mr-2 text-[#489fb5]"></i>Moodle Application Installation
+                </a>
+                <p class="project-description">
+                    Service to install and configure Moodle for educational purposes.
+                </p>
+                <a href="https://wa.me/6282323066956?text=Hi%20Ilham,%20I%20want%20to%20order%20the%20Moodle%20Application%20Installation%20service" 
+                   target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center justify-center mt-4 bg-[#489fb5] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm w-full">
+                    <i class="fas fa-message mr-2"></i> Order Now
+                </a>
+            </li>
+            <li class="project-item">
+                <span class="project-title">
+                    <i class="fas fa-paintbrush mr-2 text-[#f0a6ca]"></i>Banner & Banner Design Service
+                </span>
+                <p class="project-description">
+                    Design service for banners, banners, and visual promotional media for your school,
+                    organization, or business needs.
+                </p>
+                <a href="https://wa.me/6282323066956?text=Hi%20Ilham,%20I%20want%20to%20order%20the%20Banner%20Design%20service" 
+                   target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center justify-center mt-4 bg-[#f0a6ca] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm w-full">
+                    <i class="fas fa-message mr-2"></i> Order Now
+                </a>
+            </li>
+            <li class="project-item">
+                <span class="project-title">
+                    <i class="fas fa-laptop mr-2 text-[#ffd166]"></i>Sell Used Laptops with Warranty
+                </span>
+                <p class="project-description">
+                    Providing quality used laptops with warranty, suitable for students, college students, and
+                    office needs.
+                </p>
+                <a href="https://wa.me/6282323066956?text=Hi%20Ilham,%20I%20want%20to%20order%20the%20Used%20Laptop%20service" 
+                   target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center justify-center mt-4 bg-[#ffd166] text-gray-800 px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all text-sm w-full">
+                    <i class="fas fa-message mr-2"></i> Order Now
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+        
+        <!-- Include Experience Partial -->
+        <section id="experience" class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold relative inline-block">
+                <span class="relative z-10">Career Timeline & Experience</span>
+                <span class="absolute bottom-0 left-0 w-full h-2 bg-[#9c89b8] opacity-20 rounded-full"></span>
+            </h2>
+            <p class="mt-4 text-gray-800 dark:text-gray-300 max-w-2xl mx-auto">Professional journey and key
+                milestones</p>
+        </div>
+        <div id="timeline-container" class="timeline-container max-w-4xl mx-auto">
+        </div>
+        <div class="mt-20">
+            <h3 class="text-2xl font-bold text-center mb-8">Experience Duration Visualization</h3>
+            <div class="chart-container">
+                <canvas id="experienceChart"></canvas>
+            </div>
+        </div>
+    </div>
+</section>
+        
+        <!-- Include Education Partial -->
+        <section id="education" class="py-16 md:py-24 bg-white dark:from-gray-900 dark:to-gray-800">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold relative inline-block">
+                <span class="relative z-10">Educational Background</span>
+                <span class="absolute bottom-0 left-0 w-full h-2 bg-[#81b29a] opacity-20 rounded-full"></span>
+            </h2>
+            <p class="mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Academic foundation that supports
+                skills and career journey.</p>
+        </div>
+        <div class="max-w-3xl mx-auto grid md:grid-cols-2 gap-8">
+            <div
+                class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <div class="flex items-center mb-3">
+                    <i class="fas fa-graduation-cap text-blue-500 text-xl mr-3"></i>
+                    <h3 class="font-bold text-lg">Master of Computer Science (M.Cs.)</h3>
+                </div>
+                <p class="text-gray-700 dark:text-gray-300 mb-2">
+                    <i class="fas fa-laptop-code mr-2 text-gray-500"></i>Computer Science
+                </p>
+                <p class="text-gray-600 dark:text-gray-400 mt-2 flex items-start">
+                    <i class="fas fa-university mr-2 mt-1 text-gray-500"></i>
+                    <span>Putra Indonesia University (YPTK) Padang</span>
+                </p>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-3 flex items-center">
+                    <i class="fas fa-calendar-alt mr-2"></i>
+                    <span>January 2021 – April 2023</span>
+                </p>
+            </div>
+            <div
+                class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <div class="flex items-center mb-3">
+                    <i class="fas fa-graduation-cap text-green-500 text-xl mr-3"></i>
+                    <h3 class="font-bold text-lg">Bachelor of Education (B.Ed.)</h3>
+                </div>
+                <p class="text-gray-700 dark:text-gray-300 mb-2">
+                    <i class="fas fa-laptop-code mr-2 text-gray-500"></i>Informatics and Computer Engineering
+                    Education
+                </p>
+                <p class="text-gray-600 dark:text-gray-400 mt-2 flex items-start">
+                    <i class="fas fa-university mr-2 mt-1 text-gray-500"></i>
+                    <span>UIN Bukittinggi</span>
+                </p>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-3 flex items-center">
+                    <i class="fas fa-calendar-alt mr-2"></i>
+                    <span>2014 – 2018</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+    </main>
+
+    <!-- Include Footer Partial -->
+    <footer id="contact" class="bg-white text-gray-800">
+    <div class="container mx-auto px-6 py-12 text-center">
+        <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Let's Connect</h2>
+        <p class="max-w-xl mx-auto mb-8 text-gray-800 dark:text-gray-300"> Open to discussions about collaboration
+            opportunities, web development
+            projects, or topics related to educational technology.</p>
+
+        <div class="mt-10 text-sm text-gray-700 dark:text-gray-400">
+            <p>&copy; <span id="currentYear"></span> Ilham Wahyuni</p>
+        </div>
+    </div>
+</footer>
+
+    <!-- Hidden Professional PDF Template -->
+    <div id="pdf-professional-container" class="pdf-pro-container">
+        <div id="pdf-professional-page" class="pdf-pro-page">
+            <!-- Professional CV content will be injected here -->
+        </div>
+    </div>
+
+    <script>
+        const { jsPDF } = window.jspdf;
+
+        // SINGLE SOURCE OF TRUTH
+        const portfolioData = {
+            name: "Ilham Wahyuni",
+            title: "Teacher & Developer | Laravel | ICT",
+            contact: {
+                phone: "+6282323066956",
+                email: "wahyuilham20@gmail.com",
+                github: "github.com/ilhamwahyu-ni",
+                linkedin: "linkedin.com/in/ilhamwahyu-ni/"
+            },
+            profile: " A dedicated educator in the field of Information and Communication Technology (ICT) at MTsN Padang Panjang City. Committed to preparing young generations for the digital era.\n\nOutside of teaching hours, actively works as a web developer with specialized expertise in the Laravel framework. I believe that the combination of teaching experience and technical skills enables me to provide a unique perspective in both fields.",
+            education: [
+                {
+                    university: "PUTRA INDONESIA UNIVERSITY (YPTK) PADANG",
+                    degree: "MSc | Master of Computer Science",
+                    location: "Padang, West Sumatra",
+                    period: "Jan 2021 - April 2023"
+                },
+                {
+                    university: "ISLAMIC STATE UNIVERSITY (UIN) BUKITTINGGI",
+                    degree: "B.Ed. | Informatics and Computer Engineering Education",
+                    location: "Kubang Putiah, Bukittinggi",
+                    period: "Sept 2014 - Aug 2018"
+                }
+            ],
+            skills: {
+                "Web Developer": ["Laravel Vibe Coder", "Git & GitHub", "Information System Management", "Website Administration"],
+                "Quality Assurance (QA)": ["Web Application Testing", "Bug Identification & Fixing", "Developer Team Collaboration"],
+                "Technical Skills": ["Website Performance Optimization", "Digital Content Development", "Educational Video Streaming"],
+                "Professional": ["Problem Solving", "Team Collaboration", "Stakeholder Communication", "Attention to Detail"]
+            },
+            experience: [
+                { role: 'ICT Teacher', company: 'MTsN Padang Panjang', period: 'August 2023 – Present', startDate: '2023-08-01', endDate: new Date().toISOString().split('T')[0], details: ['Providing training to informatics and computer engineering teachers on innovative teaching methods to improve education quality.', 'Producing engaging educational streaming content on YouTube platform to enrich students\' learning experience.', 'Designing and creating student achievement award banners as a form of motivation and recognition of academic excellence.'] },
+                { role: 'Freelance', company: '', period: 'December 2022 – Present', startDate: '2022-12-01', endDate: new Date().toISOString().split('T')[0], details: ['Developing and maintaining websites for various clients, including tutoring schools and village websites, managed remotely.', 'Proactively collaborating with clients to understand specific needs and provide customized digital solutions.', 'Significantly improving user experience by optimizing website performance and functionality.'] },
+                { role: 'Quality Assurance Tester', company: 'OPENDESA', period: 'May 2024 – June 2025', startDate: '2024-05-01', endDate: '2025-06-30', details: ['Conducting comprehensive quality assurance testing on the Opendesa community web application, successfully identifying and fixing bugs efficiently.', 'Effectively collaborating with the development team to ensure bug fixes are implemented accurately and on time.', 'Applying problem-solving skills and high attention to detail to enhance the overall user experience of the application.'] },
+                { role: 'Contributor', company: 'Harian Haluan', period: 'June 2023 – December 2023', startDate: '2023-06-01', endDate: '2023-12-31', details: ['Writing and publishing articles relevant to local village conditions, covering aspects of governance, community, and environment at Harianhaluan.id.'] },
+                { role: 'Web Administrator', company: 'Nagari Batipuah Ateh', period: 'February 2019 – August 2023', startDate: '2019-02-01', endDate: '2023-08-31', details: ['Implementing open-source village information system (Opesid) from GitHub community to increase transparency and public services.', 'Managing the Nagari website, ensuring accessibility, functionality, and security of information for the local community.', 'Collaborating with stakeholders to gather requirements and customize the system to meet specific nagari needs.'] }
+            ],
+            projects: [
+                {
+                    title: "Etahfiz: Quran Memorization Report",
+                    description: "Web application for recording report scores in Quran memorization."
+                }
+            ],
+            services: [
+                {
+                    title: "Village Information System Development & Implementation",
+                    description: "Service to prepare and configure village information systems."
+                },
+                {
+                    title: "Moodle Application Installation",
+                    description: "Service to install and configure Moodle for educational purposes."
+                }
+            ]
+        };
+
+        function showTab(tabName) {
+            const tabs = ['projects', 'services'];
+            tabs.forEach(tab => {
+                document.getElementById(tab).classList.remove('active');
+                document.getElementById(tab + '-tab').classList.remove('active');
+            });
+            document.getElementById(tabName).classList.add('active');
+            document.getElementById(tabName + '-tab').classList.add('active');
+        }
+
+        function buildProfessionalPdfHtml() {
+            const container = document.getElementById('pdf-professional-page');
+            const data = portfolioData;
+
+            const contactHtml = `
+                <div class="pdf-pro-contact">
+                    <span><i class="fas fa-phone mr-1"></i> ${data.contact.phone}</span>
+                    <span><i class="far fa-envelope mr-1"></i> ${data.contact.email}</span>
+                    <span><i class="fab fa-github mr-1"></i> ${data.contact.github}</span>
+                    <span><i class="fab fa-linkedin-in mr-1"></i> ${data.contact.linkedin}</span>
+                </div>
+            `;
+
+            const educationHtml = data.education.map(edu => `
+                <div class="pdf-pro-grid">
+                    <div class="pdf-pro-grid-title">${edu.period}</div>
+                    <div class="pdf-pro-grid-content">
+                        <strong>${edu.university}</strong><br>
+                        ${edu.degree}
+                    </div>
+                </div>
+            `).join('<div style="margin-bottom: 3mm;"></div>');
+
+            const allSkills = Object.values(data.skills).flat().join(', ');
+            const skillsHtml = `
+                 <div class="pdf-pro-grid">
+                    <div class="pdf-pro-grid-title">All Skills</div>
+                    <div class="pdf-pro-grid-content">${allSkills}</div>
+                </div>
+            `;
+
+            const experienceHtml = data.experience.map(job => `
+                <div class="pdf-pro-work-item">
+                    <div class="pdf-pro-work-header">
+                        <span class="pdf-pro-work-role">${job.role}</span>
+                        <span class="pdf-pro-work-date">${job.period}</span>
+                    </div>
+                    <p class="pdf-pro-work-company">${job.company}</p>
+                    <ul class="pdf-pro-work-details">
+                        ${job.details.map(d => `<li>${d}</li>`).join('')}
+                    </ul>
+                </div>
+            `).join('');
+
+            const projectsHtml = [...data.projects, ...data.services].map(proj => `
+                <div class="pdf-pro-project-item">
+                    <h3 class="pdf-pro-project-title">${proj.title}</h3>
+                    <p class="pdf-pro-project-details">${proj.description}</p>
+                </div>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="pdf-pro-header">
+                    <h1>${data.name}</h1>
+                    <h2>${data.title}</h2>
+                    ${contactHtml}
+                </div>
+                <div class="pdf-pro-section-title">PERSONAL PROFILE</div>
+                <p class="pdf-pro-profile-text">${data.profile.replace(/\n\n/g, '<br><br>')}</p>
+                
+                <div class="pdf-pro-section-title">EDUCATION</div>
+                ${educationHtml}
+
+                <div class="pdf-pro-section-title">SKILLS</div>
+                ${skillsHtml}
+
+                <div class="pdf-pro-section-title">WORK EXPERIENCE</div>
+                ${experienceHtml}
+
+                <div class="pdf-pro-section-title">PROJECTS & SERVICES</div>
+                ${projectsHtml}
+            `;
+        }
+
+        function generateCV() {
+            buildProfessionalPdfHtml();
+            const content = document.getElementById('pdf-professional-container');
+
+            html2canvas(content, {
+                scale: 2,
+                useCORS: true,
+                logging: false
+            }).then(canvas => {
+                const pdf = new jsPDF({
+                    orientation: 'p',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+
+                const canvasWidth = canvas.width;
+                const canvasHeight = canvas.height;
+
+                const marginTopMM = 0; // ubah nilai ini sesuai kebutuhan margin atas
+                const marginBottomMM = 19;
+
+                const usablePdfHeight = pdfHeight - marginTopMM - marginBottomMM;
+                const pageHeightInPx = canvasWidth * (usablePdfHeight / pdfWidth);
+
+                let renderedHeight = 0;
+
+                while (renderedHeight < canvasHeight) {
+                    const pageCanvas = document.createElement('canvas');
+                    const context = pageCanvas.getContext('2d');
+
+                    pageCanvas.width = canvasWidth;
+                    pageCanvas.height = Math.min(pageHeightInPx, canvasHeight - renderedHeight);
+
+                    context.drawImage(
+                        canvas,
+                        0, renderedHeight,
+                        canvasWidth, pageCanvas.height,
+                        0, 0,
+                        canvasWidth, pageCanvas.height
+                    );
+
+                    const imgData = pageCanvas.toDataURL('image/png');
+                    if (renderedHeight > 0) pdf.addPage();
+                    const imgHeightMM = (pageCanvas.height * pdfWidth) / canvasWidth;
+
+                    pdf.addImage(
+                        imgData,
+                        'PNG',
+                        0,
+                        marginTopMM,
+                        pdfWidth,
+                        imgHeightMM
+                    );
+
+                    renderedHeight += pageCanvas.height;
+                }
+
+                pdf.save('CV-Profesional-Ilham-Wahyuni.pdf');
+            }).catch(err => {
+                console.error("Error generating PDF:", err);
+            });
+        }
+
+        console.log('Script is loaded');
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM Content Loaded, starting to generate content');
+            const data = portfolioData; // Ensure portfolioData is defined above this code
+
+            // --- PERUBAHAN DIMULAI DI SINI ---
+
+            // 1. Define the manual order you want
+            const desiredOrder = [
+                'ICT Teacher',
+                'Freelance',
+                'Quality Assurance Tester',
+                'Contributor',
+                'Web Administrator'
+            ];
+
+            // 2. Sort experience data based on desiredOrder array
+            console.log('Before sorting:', data.experience.map(e => e.role));
+            data.experience.sort((a, b) => {
+                const indexA = desiredOrder.indexOf(a.role);
+                const indexB = desiredOrder.indexOf(b.role);
+                console.log(`Sorting: ${a.role} (${indexA}) vs ${b.role} (${indexB})`);
+                return indexA - indexB;
+            });
+            console.log('After sorting:', data.experience.map(e => e.role));
+
+            // --- AKHIR DARI PERUBAHAN ---
+
+
+            try {
+                const timelineContainer = document.getElementById('timeline-container');
+                console.log('Timeline container element:', timelineContainer);
+                if (!timelineContainer) {
+                    console.error('Timeline container not found!');
+                    return;
+                }
+                console.log('Generating timeline items, experience data:', data.experience);
+                console.log('Experience data length:', data.experience.length);
+                data.experience.forEach((item, index) => {
+                    console.log('Processing experience item:', item);
+                    const position = index % 2 === 0 ? 'left' : 'right';
+                    console.log('Creating timeline item:', index, position, item);
+                    const timelineItemContainer = document.createElement('div');
+                    timelineItemContainer.className = `timeline-item-container ${position}`;
+                    let detailsHTML = item.details.map(detail => `<li>${detail}</li>`).join('');
+                    timelineItemContainer.innerHTML = `
+            <div class="timeline-content">
+                <time class="mb-1 text-sm font-normal leading-none text-gray-500">${item.period}</time>
+                <h3 class="text-xl font-semibold text-gray-900">${item.role}</h3>
+                <p class="text-lg text-gray-700 mb-4">${item.company}</p>
+                <div class="timeline-details">
+                    <ul class="list-disc pl-5 text-base font-normal text-gray-600 space-y-2 mt-2">
+                        ${detailsHTML}
+                    </ul>
+                </div>
+            </div>
+        `;
+                    console.log('Timeline item HTML:', timelineItemContainer.innerHTML);
+                    console.log('Adding timeline item to container:', timelineItemContainer);
+                    timelineContainer.appendChild(timelineItemContainer);
+                    console.log('Added timeline item to container, container child count:', timelineContainer.children.length);
+                    timelineItemContainer.querySelector('.timeline-content').addEventListener('click', function () {
+                        this.classList.toggle('active');
+                    });
+                });
+            } catch (error) {
+                console.error('Error generating timeline:', error);
+            }
+
+            console.log('Generating experience chart');
+            try {
+                console.log('Generating experience chart');
+                const ctx = document.getElementById('experienceChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.experience.map(d => d.role),
+                        datasets: [{
+                            label: 'Experience Duration',
+                            data: data.experience.map(d => {
+                                console.log('Processing dates for chart:', d.startDate, d.endDate);
+                                const startDate = new Date(d.startDate);
+                                const endDate = new Date(d.endDate);
+                                console.log('Converted dates:', startDate, endDate);
+                                return [startDate, endDate];
+                            }),
+                            backgroundColor: 'rgba(129, 178, 154, 0.7)',
+                            borderColor: 'rgba(129, 178, 154, 1)',
+                            borderWidth: 1,
+                            barPercentage: 0.6,
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                type: 'time',
+                                time: { unit: 'year' },
+                                min: '2019-01-01',
+                                max: '2025-12-31',
+                                grid: { color: 'rgba(0,0,0,0.05)' }
+                            },
+                            y: { grid: { display: false } }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        const item = data.experience[context.dataIndex];
+                                        return `${item.role}: ${item.period}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error generating chart:', error);
+            }
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        });
+
+        // Fungsi untuk menampilkan/menyembunyikan tombol back to top
+        window.onscroll = function () {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("backToTop").style.display = "block";
+            } else {
+                document.getElementById("backToTop").style.display = "none";
+            }
+        };
+
+        // Dark/Light mode toggle functionality
+    </script>
+
+    <script>
+        window.toggleDarkMode = function () {
+            console.log('Toggling dark mode');
+            const body = document.body;
+            const isDarkMode = body.classList.toggle('dark-mode');
+            console.log('Dark mode is now:', isDarkMode);
+
+            // Save preference to localStorage
+            localStorage.setItem('darkMode', isDarkMode);
+            console.log('Saved dark mode preference to localStorage');
+
+            // Update toggle button icons
+            if (typeof updateDarkModeButtons === 'function') {
+                updateDarkModeButtons(isDarkMode);
+            }
+        }
+    </script>
+
+    <script>
+            // Set dark mode as default and check for saved preference
+            (function () {
+                console.log('Setting dark mode as default and checking saved preference');
+                const savedDarkMode = localStorage.getItem('darkMode');
+                let isDarkMode = true; // Default to dark mode
+
+                // If user has explicitly chosen light mode, use that
+                if (savedDarkMode === 'false') {
+                    isDarkMode = false;
+                }
+
+                console.log('Dark mode preference:', isDarkMode);
+                if (isDarkMode) {
+                    document.body.classList.add('dark-mode');
+                    console.log('Applied dark mode class to body');
+                }
+
+                // We need to wait for the DOM to be loaded before updating the buttons
+                if (document.readyState === 'loading') {
+                    // DOM is still loading, wait for it to complete
+                    document.addEventListener('DOMContentLoaded', function () {
+                        if (typeof updateDarkModeButtons === 'function') {
+                            updateDarkModeButtons(isDarkMode);
+                        }
+                    });
+                } else {
+                    // DOM is already loaded
+                    if (typeof updateDarkModeButtons === 'function') {
+                        updateDarkModeButtons(isDarkMode);
+                    }
+                }
+            })();
+
+        window.updateDarkModeButtons = function (isDarkMode) {
+            // Update desktop toggle button
+            const desktopToggleButton = document.getElementById('darkModeToggle');
+            console.log('Desktop toggle button found for initialization:', !!desktopToggleButton);
+            if (desktopToggleButton) {
+                desktopToggleButton.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                console.log('Initialized desktop toggle to', isDarkMode ? 'sun' : 'moon', 'icon');
+            }
+
+            // Update mobile menu toggle button
+            const mobileToggleButton = document.getElementById('mobileDarkModeToggle');
+            console.log('Mobile toggle button found for initialization:', !!mobileToggleButton);
+            if (mobileToggleButton) {
+                if (isDarkMode) {
+                    mobileToggleButton.innerHTML = '<i class="fas fa-sun"></i> <span class="ml-2">Light Mode</span>';
+                    mobileToggleButton.classList.remove('bg-gray-200', 'text-gray-800');
+                    mobileToggleButton.classList.add('bg-gray-700', 'text-gray-200');
+                } else {
+                    mobileToggleButton.innerHTML = '<i class="fas fa-moon"></i> <span class="ml-2">Dark Mode</span>';
+                    mobileToggleButton.classList.remove('bg-gray-700', 'text-gray-200');
+                    mobileToggleButton.classList.add('bg-gray-200', 'text-gray-800');
+                }
+                console.log('Initialized mobile toggle to', isDarkMode ? 'light' : 'dark', 'mode');
+            }
+        }
+    </script>
+
+    <button id="backToTop" title="Back to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i
+            class="fas fa-arrow-up"></i></button>
+
+    <style>
+        /* Dark mode styles */
+        .dark-mode {
+            background-color: #1a202c !important;
+            color: #e2e8f0 !important;
+        }
+
+        .dark-mode .bg-white {
+            background-color: #2d3748 !important;
+            border-color: #4a5568 !important;
+        }
+
+        .dark-mode .text-gray-700 {
+            color: #cbd5e0 !important;
+        }
+
+        .dark-mode .text-gray-600 {
+            color: #a0aec0 !important;
+        }
+
+        .dark-mode .text-gray-500 {
+            color: #718096 !important;
+        }
+
+        .dark-mode .text-\[\#3d405b\] {
+            color: #e2e8f0 !important;
+        }
+
+        .dark-mode .text-gray-700 {
+            color: #cbd5e0 !important;
+        }
+
+        .dark-mode .text-gray-600 {
+            color: #a0aec0 !important;
+        }
+
+        .dark-mode .bg-gray-50 {
+            background-color: #4a5568 !important;
+        }
+
+        .dark-mode .timeline-content {
+            background-color: #4a5568 !important;
+            border-color: #718096 !important;
+        }
+
+        .dark-mode .timeline-item-container::after {
+            background-color: #2d3748 !important;
+            border-color: #68d391 !important;
+        }
+
+        .dark-mode .project-item {
+            background: linear-gradient(145deg, #2d3748, #2c3545) !important;
+            border-color: #4a5568 !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .dark-mode .project-image {
+            background: #2d3748 !important;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .dark-mode .project-image:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        .dark-mode .bg-white {
+            background-color: #2d3748 !important;
+            border-color: #4a5568 !important;
+        }
+
+        .dark-mode .project-item:hover {
+            border-color: #718096 !important;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .dark-mode .project-title {
+            color: #e2e8f0 !important;
+        }
+
+        .dark-mode .project-title:hover {
+            color: #fbd38d !important;
+        }
+
+        .dark-mode .project-description {
+            color: #cbd5e0 !important;
+        }
+
+        .dark-mode .tab-button {
+            background-color: #2d3748 !important;
+            color: #a0aec0 !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .dark-mode .tab-button.active {
+            background-color: #4a5568 !important;
+            border-color: #e07a5f !important;
+            color: #fbd38d !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .dark-mode .tab-button.active {
+            background-color: #4a5568 !important;
+            border-color: #e07a5f !important;
+            color: #fbd38d !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .dark-mode .tab-button:hover:not(.active) {
+            background-color: #4a5568 !important;
+            color: #e2e8f0 !important;
+        }
+
+        .dark-mode .project-title {
+            color: #e2e8f0 !important;
+        }
+
+        .dark-mode .project-description {
+            color: #cbd5e0 !important;
+        }
+
+        .dark-mode #header {
+            background-color: #2d3748 !important;
+        }
+
+        .dark-mode #contact {
+            background-color: #2d3748 !important;
+        }
+
+        .dark-mode .tab-button.active {
+            border-color: #68d391;
+            color: #68d391;
+            background-color: #2d3748;
+        }
+
+        .dark-mode .pdf-pro-page {
+            background-color: #2d3748 !important;
+            color: #e2e8f0 !important;
+        }
+
+        .dark-mode .pdf-pro-header h1 {
+            color: #e2e8f0 !important;
+        }
+
+        .dark-mode .pdf-pro-header h2 {
+            color: #cbd5e0 !important;
+        }
+
+        .dark-mode .pdf-pro-section-title {
+            color: #e2e8f0 !important;
+            border-bottom-color: #718096 !important;
+        }
+
+        .dark-mode .pdf-pro-grid-title {
+            color: #cbd5e0 !important;
+        }
+
+        .dark-mode .pdf-pro-work-role {
+            color: #e2e8f0 !important;
+        }
+
+        .dark-mode .pdf-pro-work-company {
+            color: #cbd5e0 !important;
+        }
+
+        .dark-mode .pdf-pro-work-date {
+            color: #a0aec0 !important;
+        }
+
+        .dark-mode .pdf-pro-project-title {
+            color: #e2e8f0 !important;
+        }
+
+        /* Additional dark mode styles */
+        .dark-mode {
+            background-color: #1a202c !important;
+            color: #e2e8f0 !important;
+        }
+
+        .dark-mode .social-button {
+            color: #e2e8f0 !important;
+        }
+
+        .dark-mode .social-button:hover {
+            color: #fbd38d !important;
+        }
+
+        .dark-mode .timeline-container::after {
+            background-color: #718096 !important;
+        }
+
+        .dark-mode header {
+            background-color: #2d3748 !important;
+        }
+
+        .dark-mode .project-item {
+            background-color: #2d3748 !important;
+            border-color: #4a5568 !important;
+        }
+
+        .dark-mode .bg-white {
+            background-color: #2d3748 !important;
+            border-color: #4a5568 !important;
+        }
+
+        .dark-mode .text-gray-700 {
+            color: #cbd5e0 !important;
+        }
+
+        .dark-mode .text-gray-600 {
+            color: #a0aec0 !important;
+        }
+
+        .dark-mode .tab-button.active {
+            background-color: #4a5568 !important;
+            border-color: #68d391 !important;
+            color: #68d391 !important;
+        }
+
+        .dark-mode .timeline-item-container::after {
+            background-color: #2d3748 !important;
+            border-color: #68d391 !important;
+        }
+
+        .dark-mode .tab-button {
+            color: #a0aec0 !important;
+        }
+
+        .dark-mode .tab-button:hover {
+            color: #e2e8f0 !important;
+        }
+
+        .dark-mode footer a {
+            color: #68d391 !important;
+        }
+
+        .dark-mode .mobile-link {
+            color: #a0aec0 !important;
+        }
+
+        .dark-mode .mobile-link:hover {
+            color: #68d391 !important;
+        }
+
+        .dark-mode .mobile-link:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(104, 211, 145, 0.5);
+        }
+
+        .dark-mode .mobile-link:active {
+            color: #fbd38d !important;
+        }
+
+        .dark-mode #mobileMenuContent {
+            background-color: #2d3748 !important;
+        }
+
+        .dark-mode .mobile-link {
+            color: #a0aec0 !important;
+        }
+
+        .dark-mode .mobile-link:hover {
+            color: #68d391 !important;
+        }
+
+        .dark-mode .mobile-link:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(104, 211, 145, 0.5);
+        }
+
+        .dark-mode #backToTop {
+            background-color: #4a5568 !important;
+            color: #e2e8f0 !important;
+        }
+
+        .dark-mode #backToTop:hover {
+            background-color: #2d3748 !important;
+            color: #fbd38d !important;
+        }
+
+        .dark-mode #mobileDarkModeToggle {
+            background-color: #4a5568 !important;
+            color: #e2e8f0 !important;
+        }
+
+        .dark-mode #mobileDarkModeToggle:hover {
+            background-color: #2d3748 !important;
+            color: #fbd38d !important;
+        }
+
+        .dark-mode #mobileDarkModeToggle:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(104, 211, 145, 0.5);
+        }
+    </style>
+</body>
+
+</html>
