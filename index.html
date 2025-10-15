@@ -168,26 +168,11 @@
                     class="tab-content active grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Project items will be inserted here by JS -->
                 </div>
-                <!-- Services Content -->
-                <div id="services-content" class="tab-content hidden grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Service items will be inserted here by JS -->
-                </div>
+               
             </div>
         </section>
 
-        <!-- Experience Section -->
-        <section id="experience" class="py-16 md:py-24 bg-gray-50">
-            <div class="container mx-auto px-6">
-                <!-- Heading inserted by JS -->
-                <div id="experience-heading"></div>
-
-                <!-- Experience Timeline -->
-                <!-- <div class="timeline-container relative max-w-4xl mx-auto"> -->
-                <!-- Timeline items will be inserted here by JS -->
-            </div>
-            </div>
-        </section>
-
+     
 
     </main>
 
@@ -220,7 +205,26 @@
                     { title: 'Etahfiz: Laporan Hafalan Quran', icon: 'fa-solid fa-book-quran', color: 'text-[#e07a5f]', description: 'Aplikasi web untuk mencatat skor laporan dalam hafalan Al-Quran.', link: 'https://etahfiz.ilwa.my.id', image: 'etahfiz.png', orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20tertarik%20dengan%20proyek%20Etahfiz' },
                     { title: 'AbsensiGuru', icon: 'fa-solid fa-user-clock', color: 'text-[#81b29a]', description: 'Aplikasi web realtime untuk mencatat kehadiran guru di kelas mengajar.', link: '#', image: 'absensiguru.png', orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20tertarik%20dengan%20proyek%20AbsensiGuru' },
                     { title: 'E-learning dengan Moodle', icon: 'fa-solid fa-graduation-cap', color: 'text-[#489fb5]', description: 'Platform e-learning komprehensif menggunakan Moodle untuk ujian online, materi kursus, modul, dan lainnya.', link: 'https://studywith.ilwa.my.id', image: 'moodle.png', orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20tertarik%20dengan%20proyek%20E-learning%20Moodle' },
-                    { title: 'Open Source Point of Sale', icon: 'fa-solid fa-cash-register', color: 'text-[#f3722c]', description: 'Aplikasi kasir (POS) berbasis web dengan PHP CodeIgniter. Cocok untuk bisnis Anda.', link: 'https://pos.ilwa.my.id', image: 'https://placehold.co/600x400/F8F9FA/3d405b?text=OpenPOS', orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20butuh%20aplikasi%20kasir.' }
+                    { 
+                        title: 'Open Source Point of Sale', 
+                        icon: 'fa-solid fa-cash-register', 
+                        color: 'text-[#f3722c]', 
+                        description: `
+                            <div>
+                                <span>Aplikasi kasir (POS) berbasis web dengan PHP CodeIgniter. Cocok untuk bisnis Anda.</span>
+                                <hr class="my-3 border-t-2 border-dashed border-gray-200">
+                                <span class="font-semibold text-green-900 block">
+                                    Silakan mencoba dengan login  username : <b>admin</b> </b>.
+                                </span>
+                                <span class="font-semibold text-green-900 block">
+                                    password :             <b>pointofsale</b>.
+                                </span>
+                            </div>
+                        `,
+                        link: 'https://pos.ilwa.my.id', 
+                        image: 'appkasir.png', 
+                        orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20butuh%20aplikasi%20kasir.' 
+                    }
                 ],
 
                 experience: [
