@@ -168,11 +168,11 @@
                     class="tab-content active grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Project items will be inserted here by JS -->
                 </div>
-               
+
             </div>
         </section>
 
-     
+
 
     </main>
 
@@ -190,52 +190,63 @@
             const portfolioData = {
                 personal: {
                     name: 'Ilham Wahyuni',
-                    title: 'Guru & Web Developer | Laravel | TIK',
+                    title: 'Teacher & Web Developer | Laravel | ICT',
                     email: 'wahyuilham20@gmail.com',
                     phone: '+62 823-2306-6956',
-                    location: 'Padang Panjang, Sumatera Barat'
+                    location: 'Padang Panjang, West Sumatra, Indonesia'
                 },
                 skills: [
-                    { title: 'Web Developer', icon: '🖥️', color: 'blue', items: ['Laravel Vibe Coder', 'Git & GitHub', 'Manajemen Sistem Informasi', 'Administrasi Website'] },
-                    { title: 'Quality Assurance (QA)', icon: '✅', color: 'green', items: ['Pengujian Aplikasi Web', 'Identifikasi & Perbaikan Bug', 'Kolaborasi Tim Pengembang'] },
-                    { title: 'Teknis', icon: '🛠️', color: 'purple', items: ['Optimisasi Kinerja Website', 'Pengembangan Konten Digital', 'Streaming Video Edukasi'] },
-                    { title: 'Profesional', icon: '🤝', color: 'yellow', items: ['Pemecahan Masalah', 'Kolaborasi Tim', 'Komunikasi dengan Pemangku Kepentingan', 'Perhatian pada Detail'] }
+                    { title: 'Web Developer', icon: '🖥️', color: 'blue', items: ['Laravel Vibe Coder', 'Git & GitHub', 'Information System Management', 'Website Administration'] },
+                    { title: 'Quality Assurance (QA)', icon: '✅', color: 'green', items: ['Web Application Testing', 'Bug Identification & Fixing', 'Developer Team Collaboration'] },
+                    { title: 'Technical', icon: '🛠️', color: 'purple', items: ['Website Performance Optimization', 'Digital Content Development', 'Educational Video Streaming'] },
+                    { title: 'Professional', icon: '🤝', color: 'yellow', items: ['Problem Solving', 'Team Collaboration', 'Stakeholder Communication', 'Attention to Detail'] }
                 ],
                 projects: [
-                    { title: 'Etahfiz: Laporan Hafalan Quran', icon: 'fa-solid fa-book-quran', color: 'text-[#e07a5f]', description: 'Aplikasi web untuk mencatat skor laporan dalam hafalan Al-Quran.', link: 'https://etahfiz.ilwa.my.id', image: 'etahfiz.png', orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20tertarik%20dengan%20proyek%20Etahfiz' },
-                    { title: 'AbsensiGuru', icon: 'fa-solid fa-user-clock', color: 'text-[#81b29a]', description: 'Aplikasi web realtime untuk mencatat kehadiran guru di kelas mengajar.', link: '#', image: 'absensiguru.png', orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20tertarik%20dengan%20proyek%20AbsensiGuru' },
-                    { title: 'E-learning dengan Moodle', icon: 'fa-solid fa-graduation-cap', color: 'text-[#489fb5]', description: 'Platform e-learning komprehensif menggunakan Moodle untuk ujian online, materi kursus, modul, dan lainnya.', link: 'https://studywith.ilwa.my.id', image: 'moodle.png', orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20tertarik%20dengan%20proyek%20E-learning%20Moodle' },
-                    { 
-                        title: 'Open Source Point of Sale', 
-                        icon: 'fa-solid fa-cash-register', 
-                        color: 'text-[#f3722c]', 
+                    { title: 'Etahfiz: Quran Memorization Reports', icon: 'fa-solid fa-book-quran', color: 'text-[#e07a5f]', description: 'Web application for recording and tracking Quran memorization progress scores.', link: 'https://etahfiz.ilwa.my.id', image: 'etahfiz.png', orderLink: 'https://wa.me/6282323066956?text=Hi%20Ilham,%20I%27m%20interested%20in%20the%20Etahfiz%20project' },
+                    {
+                        title: 'School Landing Page',
+                        icon: 'fa-solid fa-graduation-cap',
+                        color: 'text-[#f3722c]',
                         description: `
                             <div>
-                                <span>Aplikasi kasir (POS) berbasis web dengan PHP CodeIgniter. Cocok untuk bisnis Anda.</span>
+                                <span>School Website Landing Page for MTsN Padang Panjang City</span>
+                                
+                            </div>
+                        `,
+                        link: 'https://mtsnpadangpanjang.sch.id',
+                        image: 'mts.png',
+                        orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20butuh%20aplikasi%20kasir.'
+                    },
+
+                    { title: 'TeacherAttendance', icon: 'fa-solid fa-user-clock', color: 'text-[#81b29a]', description: 'Realtime web application for recording teacher attendance in teaching classes.', link: 'https://absensiguru.ilwa.my.id/', image: 'absensiguru.png', orderLink: 'https://wa.me/6282323066956?text=Hi%20Ilham,%20I%27m%20interested%20in%20the%20TeacherAttendance%20project' },
+                    { title: 'E-learning with Moodle', icon: 'fa-solid fa-graduation-cap', color: 'text-[#489fb5]', description: 'Comprehensive e-learning platform using Moodle for online exams, course materials, modules, and more.', link: 'https://studywith.ilwa.my.id', image: 'moodle.png', orderLink: 'https://wa.me/6282323066956?text=Hi%20Ilham,%20I%27m%20interested%20in%20the%20Moodle%20E-learning%20project' },
+                    {
+                        title: 'Open Source Point of Sale',
+                        icon: 'fa-solid fa-cash-register',
+                        color: 'text-[#f3722c]',
+                        description: `
+                            <div>
+                                <span>Web-based Point of Sale (POS) application built with PHP CodeIgniter. Perfect for your business needs.</span>
                                 <hr class="my-3 border-t-2 border-dashed border-gray-200">
                                 <span class="font-semibold text-green-900 block">
-                                    Silakan mencoba dengan login  username : <b>admin</b> </b>.
+                                    Try it out with login
                                 </span>
                                 <span class="font-semibold text-green-900 block">
-                                    password :             <b>pointofsale</b>.
+                                    username: <b>admin</b> </b>.
+                                </span>
+                                <span class="font-semibold text-green-900 block">
+                                    password: <b>pointofsale</b>.
                                 </span>
                             </div>
                         `,
-                        link: 'https://pos.ilwa.my.id', 
-                        image: 'appkasir.png', 
-                        orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20butuh%20aplikasi%20kasir.' 
-                    }
+                        link: 'https://pos.ilwa.my.id',
+                        image: 'appkasir.png',
+                        orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20butuh%20aplikasi%20kasir.'
+                    },
+
                 ],
 
-                experience: [
-                    { company: 'Kementrian Agama Kota Padang Panjang', role: 'Guru TIK & Prakarya', period: 'Juli 2022 - Sekarang', details: ['Mengajar TIK dan Prakarya, fokus pada pemecahan masalah dan kolaborasi.', 'Mengembangkan konten digital dan streaming video edukasi untuk meningkatkan keterlibatan siswa.'] },
-                    { company: 'SMP IT Juara', role: 'Web Developer & Guru TIK', period: 'Juli 2019 - Juni 2022', details: ['Mengelola dan mengoptimalkan kinerja website sekolah.', 'Berkolaborasi dengan tim pengembang untuk mengidentifikasi dan memperbaiki bug aplikasi web.'] },
-                    { company: 'Yayasan Miftahul Ulum', role: 'Staf Administrasi & Operator', period: 'Juli 2017 - Juni 2019', details: ['Mengelola administrasi dan sistem informasi yayasan.', 'Berkomunikasi dengan pemangku kepentingan untuk memastikan kelancaran operasional.'] }
-                ],
-                education: [
-                    { institution: 'UIN Imam Bonjol Padang', degree: 'S1 Manajemen Pendidikan Islam', period: '2015 - 2019' },
-                    { institution: 'MAS KMM Diniyyah Puteri', degree: 'Jurusan IPA', period: '2012 - 2015' }
-                ]
+
             };
 
             // --- UI RENDERING FUNCTIONS ---
@@ -288,7 +299,7 @@
                     const isProject = 'link' in item; // Differentiate between project and service
                     const card = `
                     <div class="project-item bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group">
-                         ${isProject ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer"><img src="${item.image}" alt="${item.title}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"></a>` : ''}
+                         ${isProject ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="block h-48 overflow-hidden"><img src="${item.image}" alt="${item.title}" class="w-full h-full object-contain bg-gray-50 group-hover:scale-105 transition-transform duration-300"></a>` : ''}
                         <div class="p-6">
                             <h3 class="font-extrabold text-xl mb-3 text-gray-900 flex items-center">
                                <i class="fas ${item.icon} ${item.color || ''} mr-3"></i>
@@ -326,8 +337,8 @@
 
             // --- INITIALIZE UI ---
             function initUI() {
-                createSectionHeading('skills-heading', 'Keahlian', 'Kompetensi teknis dan profesional yang saya miliki.');
-                createSectionHeading('projects-heading', 'Proyek', 'Jelajahi proyek unggulan dan layanan profesional saya.');
+                createSectionHeading('skills-heading', 'Skills', 'Technical and professional competencies');
+                createSectionHeading('projects-heading', 'Projects', 'Explore my featured projects and professional services');
 
 
                 renderSkills();
