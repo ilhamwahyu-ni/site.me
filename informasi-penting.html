@@ -23,6 +23,49 @@
             font-family: 'Inter', sans-serif;
         }
     </style>
+
+    <!-- Structured Data for Identity Consistency and AI Authority -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://ilwa.my.id/#organization",
+          "name": "ILWA Digital",
+          "url": "https://ilwa.my.id",
+          "logo": "https://media.licdn.com/dms/image/v2/D5603AQG3ASaTIGaQ7Q/profile-displayphoto-shrink_200_200/0/1691986892210?e=1764806400&v=beta&t=8PuBScI23PQdkF5IblLfHoFVeQWGoFIyuGBMP_cfxyU",
+          "description": "Portofolio Ilham Wahyuni — Guru & Web Developer",
+          "sameAs": [
+            "https://github.com/ilhamwahyu-ni",
+            "https://www.linkedin.com/in/ilhamwahyu-ni/",
+            "https://www.instagram.com/ilhamwahyu_ni/",
+            "https://www.youtube.com/@ilhamwahyu_ni"
+          ]
+        },
+        {
+          "@type": "Person",
+          "@id": "https://ilwa.my.id/#person",
+          "name": "Ilham Wahyuni",
+          "url": "https://ilwa.my.id/about-founder.html",
+          "image": "https://media.licdn.com/dms/image/v2/D5603AQG3ASaTIGaQ7Q/profile-displayphoto-shrink_200_200/0/1691986892210?e=1764806400&v=beta&t=8PuBScI23PQdkF5IblLfHoFVeQWGoFIyuGBMP_cfxyU",
+          "jobTitle": "Web Developer & Teacher",
+          "worksFor": {
+            "@id": "https://ilwa.my.id/#organization"
+          },
+          "knowsAbout": ["Laravel", "Web Development", "PHP", "Education Technology", "System Administration"],
+          "sameAs": [
+            "https://github.com/ilhamwahyu-ni",
+            "https://www.linkedin.com/in/ilhamwahyu-ni/",
+            "https://www.instagram.com/ilhamwahyu_ni/",
+            "https://www.youtube.com/@ilhamwahyu_ni",
+            "https://dev.to/ilhamwahyuni",
+            "https://medium.com/@wahyuilham20"
+          ]
+        }
+      ]
+    }
+    </script>
 </head>
 
 <body class="bg-gray-50 text-gray-800 antialiased">
@@ -35,6 +78,9 @@
                 <div class="flex items-center space-x-6">
                     <a href="index.html" class="text-gray-700 hover:text-[#e07a5f] transition-colors">
                         <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <a href="about-founder.html" class="text-gray-700 hover:text-[#e07a5f] transition-colors">
+                        <i class="fas fa-user-circle mr-2"></i>About Founder
                     </a>
                     <a href="informasi-penting.html" class="text-[#e07a5f] font-semibold">
                         <i class="fas fa-info-circle mr-2"></i>Important Info
@@ -59,7 +105,8 @@
             <!-- Information Cards -->
             <div class="space-y-6">
                 <!-- Featured Card: Teaching Materials -->
-                <div class="bg-gradient-to-r from-[#81b29a] to-[#489fb5] rounded-xl shadow-2xl p-6 border-4 border-[#81b29a] hover:shadow-3xl transition-all transform hover:-translate-y-1">
+                <div
+                    class="bg-gradient-to-r from-[#81b29a] to-[#489fb5] rounded-xl shadow-2xl p-6 border-4 border-[#81b29a] hover:shadow-3xl transition-all transform hover:-translate-y-1">
                     <div class="flex items-start">
                         <div class="flex-shrink-0">
                             <i class="fas fa-book-open text-4xl text-white mr-4"></i>
@@ -69,12 +116,13 @@
                                 <i class="fas fa-star text-yellow-300 mr-2"></i>Grade 9 Teaching Materials
                             </h2>
                             <p class="text-white leading-relaxed mb-4">
-                                Access comprehensive teaching materials and learning resources for Grade 9 students. This collection includes interactive lessons, exercises, and educational content designed to enhance the learning experience.
+                                Access comprehensive teaching materials and learning resources for Grade 9 students.
+                                This collection includes interactive lessons, exercises, and educational content
+                                designed to enhance the learning experience.
                             </p>
-                            <a href="https://ilhamwahyu-ni.github.io/bahan_ajar_kelas9/"
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               class="inline-flex items-center bg-white text-[#81b29a] px-6 py-3 rounded-lg font-bold text-lg hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg">
+                            <a href="https://ilhamwahyu-ni.github.io/bahan_ajar_kelas9/" target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-flex items-center bg-white text-[#81b29a] px-6 py-3 rounded-lg font-bold text-lg hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg">
                                 <i class="fas fa-external-link-alt mr-3"></i>
                                 Visit Teaching Materials
                             </a>
@@ -83,7 +131,8 @@
                 </div>
 
                 <!-- Card 1 -->
-                <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500 hover:shadow-xl transition-shadow">
+                <div
+                    class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500 hover:shadow-xl transition-shadow">
                     <div class="flex items-start">
                         <div class="flex-shrink-0">
                             <i class="fas fa-bell text-3xl text-blue-500 mr-4"></i>
@@ -91,7 +140,8 @@
                         <div>
                             <h2 class="text-2xl font-bold text-gray-900 mb-3">General Announcement</h2>
                             <p class="text-gray-700 leading-relaxed">
-                                Welcome to the Important Information page. This page contains various information and announcements that need to be known by website visitors.
+                                Welcome to the Important Information page. This page contains various information and
+                                announcements that need to be known by website visitors.
                             </p>
                         </div>
                     </div>
@@ -99,13 +149,13 @@
             </div>
 
             <!-- Call to Action -->
-            <div class="mt-12 text-center bg-gradient-to-r from-[#e07a5f] to-[#f3722c] rounded-xl p-8 text-white shadow-xl">
+            <div
+                class="mt-12 text-center bg-gradient-to-r from-[#e07a5f] to-[#f3722c] rounded-xl p-8 text-white shadow-xl">
                 <h2 class="text-3xl font-bold mb-4">Have Questions?</h2>
                 <p class="text-lg mb-6">Don't hesitate to contact me if you need more information</p>
                 <a href="https://wa.me/6282323066956?text=Hello%20Ilham,%20I%20would%20like%20to%20ask%20about..."
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="inline-flex items-center bg-white text-[#e07a5f] px-8 py-3 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors">
+                    target="_blank" rel="noopener noreferrer"
+                    class="inline-flex items-center bg-white text-[#e07a5f] px-8 py-3 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors">
                     <i class="fab fa-whatsapp mr-3 text-2xl"></i>
                     Contact via WhatsApp
                 </a>
