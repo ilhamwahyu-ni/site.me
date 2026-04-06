@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Beras Kuriak Kusuik Premium Asli Batipuah - Dipanen semai sendiri, dijual dengan harga normal tanpa mengurangi kualitas." />
+    <meta name="keywords" content="Beras Kuriak Kusuik, Beras Asli Batipuah, Jual Beras Premium, Ilham Wahyuni" />
+    <meta name="author" content="Ilham Wahyuni" />
+    <title>Jual Beras Kuriak Kusuik Premium - Ilham Wahyuni</title>
+    <link rel="icon" type="image/x-icon" href="profile.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <nav class="flex items-center justify-between">
+                <a href="index.html" class="text-xl md:text-2xl font-bold text-gray-900">Ilham Wahyuni</a>
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-[#e07a5f] transition-colors">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <a href="about-founder.html" class="text-gray-700 hover:text-[#e07a5f] transition-colors">
+                        <i class="fas fa-user-circle mr-2"></i>About
+                    </a>
+                    <a href="jual-beras.html" class="text-[#e07a5f] font-semibold">
+                        <i class="fas fa-shopping-cart mr-2"></i>Jual Beras
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="menuBtn" class="md:hidden text-gray-700 text-2xl">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-black bg-opacity-50 z-40" aria-hidden="true">
+        </div>
+        <div id="mobileMenuContent"
+            class="hidden md:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 p-6 transform translate-x-full transition-transform duration-300 ease-in-out">
+            <button id="closeMenuBtn" class="absolute top-6 right-6 text-gray-700">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <nav class="mt-16 space-y-4">
+                <a href="index.html"
+                    class="mobile-link block text-gray-700 hover:text-[#e07a5f] transition-colors text-lg">
+                    <i class="fas fa-home mr-3"></i>Home
+                </a>
+                <a href="about-founder.html"
+                    class="mobile-link block text-gray-700 hover:text-[#e07a5f] transition-colors text-lg">
+                    <i class="fas fa-user-circle mr-3"></i>About
+                </a>
+                <a href="jual-beras.html"
+                    class="mobile-link block text-[#e07a5f] font-semibold text-lg">
+                    <i class="fas fa-shopping-cart mr-3"></i>Jual Beras
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-16 md:py-24">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <!-- Page Title -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+                    <i class="fas fa-store text-[#e07a5f] mr-3"></i>
+                    Jual Beras
+                </h1>
+                <p class="text-lg text-gray-600">Menyediakan Beras Berkualitas Asli dari Hasil Tani Sendiri</p>
+            </div>
+
+            <!-- Featured Product -->
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 flex flex-col md:flex-row mb-12">
+                <!-- Image Section -->
+                <div class="md:w-1/2 p-8 bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center">
+                    <div class="text-center">
+                        <i class="fas fa-wheat-awn text-8xl text-green-600 mb-4 drop-shadow-md"></i>
+                        <h2 class="text-3xl font-extrabold text-green-800 uppercase tracking-wide">Beras Kuriak Kusuik <br>Premium</h2>
+                    </div>
+                </div>
+
+                <!-- Product Details Section -->
+                <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                    <div class="mb-6 inline-block bg-green-100 text-green-800 text-sm font-semibold px-4 py-2 rounded-full uppercase tracking-wider">
+                        <i class="fas fa-certificate mr-1"></i> Kualitas Terjamin
+                    </div>
+                    <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 leading-tight">Beras Jenis Kuriak Kusuik Asli Batipuah</h2>
+                    
+                    <ul class="space-y-4 text-gray-700 text-lg mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3 text-xl"></i>
+                            <span><b>Asli Batipuah:</b> Dipanen dari bibit padi khas pilihan dari daerah Batipuah.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3 text-xl"></i>
+                            <span><b>Mandiri & Berkualitas:</b> Dipanen, mulai dari semai sendiri, bajak lahan sendiri, hingga panen sendiri. Mutu jelas terjaga.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3 text-xl"></i>
+                            <span><b>Harga Normal:</b> Kemudian dijual dengan harga yang wajar dan bersahabat tanpa mengurangi kualitas beras.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3 text-xl"></i>
+                            <span><b>Pembayaran Fleksibel:</b> Menerima pembayaran secara Tunai, Transfer, dan COD khusus wilayah Kota Padang Panjang sekitarnya.</span>
+                        </li>
+                    </ul>
+
+                    <div class="border-t border-gray-200 pt-6 mt-2">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Pesan Sekarang</h3>
+                        <a href="https://wa.me/6282323066956?text=Halo%20Ilham,%20saya%20tertarik%20untuk%20memesan%20Beras%20Kuriak%20Kusuik%20Premium."
+                            target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center justify-center w-full md:w-auto bg-[#e07a5f] text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-opacity-90 hover:shadow-lg transition-all transform hover:-translate-y-1">
+                            <i class="fab fa-whatsapp mr-3 text-2xl"></i>
+                            Pesan via WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-8 text-center text-gray-600">
+        <div class="container mx-auto px-6">
+            <p>&copy; <span id="current-year"></span> Ilham Wahyuni</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // --- MOBILE MENU LOGIC ---
+        const menuBtn = document.getElementById('menuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuContent = document.getElementById('mobileMenuContent');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        if(menuBtn) {
+            const openMenu = () => {
+                mobileMenu.classList.remove('hidden');
+                mobileMenuContent.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                requestAnimationFrame(() => {
+                    mobileMenuContent.classList.remove('translate-x-full');
+                });
+            };
+
+            const closeMenu = () => {
+                mobileMenuContent.classList.add('translate-x-full');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuContent.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }, 300);
+            };
+
+            menuBtn.addEventListener('click', openMenu);
+            closeMenuBtn.addEventListener('click', closeMenu);
+            mobileMenu.addEventListener('click', closeMenu);
+            mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+        }
+    </script>
+</body>
+
+</html>
