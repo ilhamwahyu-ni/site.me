@@ -142,61 +142,8 @@
 
 <body class="bg-gray-50 text-gray-800 antialiased transition-colors duration-300">
 
-    <!-- Header -->
-    <header id="header" class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm transition-colors duration-300">
-        <div class="container mx-auto px-6 py-4">
-            <nav class="flex items-center justify-between">
-                <a href="#hero" class="text-xl md:text-2xl font-bold text-gray-900">Ilham Wahyuni</a>
-                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
-                    <a href="index.html" class="text-gray-700 hover:text-[#e07a5f] transition-colors">
-                        <i class="fas fa-home mr-2"></i>Home
-                    </a>
-                    <a href="about-founder.html" class="text-gray-700 hover:text-[#e07a5f] transition-colors">
-                        <i class="fas fa-user-circle mr-2"></i>About
-                    </a>
-                    <a href="jual-beras.html" class="text-gray-700 hover:text-[#e07a5f] transition-colors">
-                        <i class="fas fa-shopping-cart mr-2"></i>Jual Beras
-                    </a>
-                    <!-- <a href="informasi-penting.html" class="text-gray-700 hover:text-[#e07a5f] transition-colors">
-                        <i class="fas fa-info-circle mr-2"></i>Important Info
-                    </a> -->
-                </div>
-                <div class="flex items-center space-x-4">
-                    <button id="menuBtn" class="md:hidden text-gray-700 text-2xl">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-black bg-opacity-50 z-40" aria-hidden="true">
-    </div>
-    <div id="mobileMenuContent"
-        class="hidden md:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 p-6 transform translate-x-full transition-transform duration-300 ease-in-out">
-        <button id="closeMenuBtn" class="absolute top-6 right-6 text-gray-700">
-            <i class="fas fa-times text-2xl"></i>
-        </button>
-        <nav class="mt-16 space-y-4">
-            <a href="index.html"
-                class="mobile-link block text-gray-700 hover:text-[#e07a5f] transition-colors text-lg">
-                <i class="fas fa-home mr-3"></i>Home
-            </a>
-            <a href="about-founder.html"
-                class="mobile-link block text-gray-700 hover:text-[#e07a5f] transition-colors text-lg">
-                <i class="fas fa-user-circle mr-3"></i>About Founder
-            </a>
-            <a href="informasi-penting.html"
-                class="mobile-link block text-gray-700 hover:text-[#e07a5f] transition-colors text-lg">
-                <i class="fas fa-info-circle mr-3"></i>Important Info
-            </a>
-            <a href="jual-beras.html"
-                class="mobile-link block text-gray-700 hover:text-[#e07a5f] transition-colors text-lg">
-                <i class="fas fa-shopping-cart mr-3"></i>Jual Beras
-            </a>
-        </nav>
-    </div>
+    <!-- Navbar Placeholder -->
+    <div id="navbar-placeholder"></div>
 
     <main id="main-content">
         <!-- Hero Section -->
@@ -335,29 +282,7 @@
 
                     { title: 'TeacherAttendance', icon: 'fa-solid fa-user-clock', color: 'text-[#81b29a]', description: 'Realtime web application for recording teacher attendance in teaching classes.', link: 'https://absensiguru.ilwa.my.id/', image: 'absensiguru.png', orderLink: 'https://wa.me/6282323066956?text=Hi%20Ilham,%20I%27m%20interested%20in%20the%20TeacherAttendance%20project' },
                     { title: 'E-learning with Moodle', icon: 'fa-solid fa-graduation-cap', color: 'text-[#489fb5]', description: 'Comprehensive e-learning platform using Moodle for online exams, course materials, modules, and more.', link: 'https://studywith.ilwa.my.id', image: 'moodle.png', orderLink: 'https://wa.me/6282323066956?text=Hi%20Ilham,%20I%27m%20interested%20in%20the%20Moodle%20E-learning%20project' },
-                    {
-                        title: 'Open Source Point of Sale',
-                        icon: 'fa-solid fa-cash-register',
-                        color: 'text-[#f3722c]',
-                        description: `
-                            <div>
-                                <span>Web-based Point of Sale (POS) application built with PHP CodeIgniter. Perfect for your business needs.</span>
-                                <hr class="my-3 border-t-2 border-dashed border-gray-200">
-                                <span class="font-semibold text-green-900 block">
-                                    Try it out with login
-                                </span>
-                                <span class="font-semibold text-green-900 block">
-                                    username: <b>admin</b> </b>.
-                                </span>
-                                <span class="font-semibold text-green-900 block">
-                                    password: <b>pointofsale</b>.
-                                </span>
-                            </div>
-                        `,
-                        link: 'https://pos.ilwa.my.id',
-                        image: 'appkasir.png',
-                        orderLink: 'https://wa.me/6282323066956?text=Hai%20Ilham,%20saya%20butuh%20aplikasi%20kasir.'
-                    },
+                    ,
 
                 ],
 
@@ -464,35 +389,7 @@
 
             initUI();
 
-            // --- MOBILE MENU LOGIC ---
-            const menuBtn = document.getElementById('menuBtn');
-            const closeMenuBtn = document.getElementById('closeMenuBtn');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileMenuContent = document.getElementById('mobileMenuContent');
-            const mobileLinks = document.querySelectorAll('.mobile-link');
-
-            const openMenu = () => {
-                mobileMenu.classList.remove('hidden');
-                mobileMenuContent.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-                requestAnimationFrame(() => {
-                    mobileMenuContent.classList.remove('translate-x-full');
-                });
-            };
-
-            const closeMenu = () => {
-                mobileMenuContent.classList.add('translate-x-full');
-                setTimeout(() => {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenuContent.classList.add('hidden');
-                    document.body.style.overflow = 'auto';
-                }, 300);
-            };
-
-            menuBtn.addEventListener('click', openMenu);
-            closeMenuBtn.addEventListener('click', closeMenu);
-            mobileMenu.addEventListener('click', closeMenu);
-            mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+            // --- MOBILE MENU LOGIC MOVED TO NAV.JS ---
 
 
             // --- TABS LOGIC ---
@@ -538,6 +435,7 @@
         });
     </script>
 
+    <script src="nav.js"></script>
 </body>
 
 </html>

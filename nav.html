@@ -1,0 +1,54 @@
+<header id="header" class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm transition-colors duration-300">
+    <div class="container mx-auto px-6 py-4">
+        <nav class="flex items-center justify-between">
+            <a href="index.html" class="text-xl md:text-2xl font-bold text-gray-900">Ilham Wahyuni</a>
+            <div class="hidden md:flex items-center space-x-6 lg:space-x-8" id="desktop-menu">
+                <a href="index.html" class="text-gray-700 hover:text-[#e07a5f] transition-colors" data-page="index.html">
+                    <i class="fas fa-home mr-2"></i>Home
+                </a>
+                <a href="about-founder.html" class="text-gray-700 hover:text-[#e07a5f] transition-colors" data-page="about-founder.html">
+                    <i class="fas fa-user-circle mr-2"></i>About
+                </a>
+                <a href="jual-beras.html" class="text-gray-700 hover:text-[#e07a5f] transition-colors" data-page="jual-beras.html">
+                    <i class="fas fa-shopping-cart mr-2"></i>Jual Beras
+                </a>
+                <a href="https://clicky.id/ilhamwahyuni/shop" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-[#e07a5f] transition-colors">
+                    <i class="fas fa-store mr-2"></i>Materi Ajar
+                </a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="menuBtn" class="md:hidden text-gray-700 text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-black bg-opacity-50 z-40" aria-hidden="true">
+</div>
+<div id="mobileMenuContent"
+    class="hidden md:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 p-6 transform translate-x-full transition-transform duration-300 ease-in-out">
+    <button id="closeMenuBtn" class="absolute top-6 right-6 text-gray-700">
+        <i class="fas fa-times text-2xl"></i>
+    </button>
+    <nav class="mt-16 space-y-4" id="mobile-nav-menu">
+        <a href="index.html" data-page="index.html"
+            class="mobile-link block text-gray-700 hover:text-[#e07a5f] transition-colors text-lg">
+            <i class="fas fa-home mr-3"></i>Home
+        </a>
+        <a href="about-founder.html" data-page="about-founder.html"
+            class="mobile-link block text-gray-700 hover:text-[#e07a5f] transition-colors text-lg">
+            <i class="fas fa-user-circle mr-3"></i>About
+        </a>
+        <a href="jual-beras.html" data-page="jual-beras.html"
+            class="mobile-link block text-gray-700 hover:text-[#e07a5f] transition-colors text-lg">
+            <i class="fas fa-shopping-cart mr-3"></i>Jual Beras
+        </a>
+        <a href="https://clicky.id/ilhamwahyuni/shop" target="_blank" rel="noopener noreferrer"
+            class="mobile-link block text-gray-700 hover:text-[#e07a5f] transition-colors text-lg">
+            <i class="fas fa-store mr-3"></i>Materi Ajar
+        </a>
+    </nav>
+</div>
