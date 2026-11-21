@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Bahan Pendaftaran Kelas 9 2026 Boarding - Akses cepat dokumen Akreditasi Sekolah dan file Excel / Spreadsheet pendaftaran." />
+        content="Bahan Pendaftaran Kelas 9 2026 Boarding - Akses cepat dokumen Akreditasi Sekolah, file Excel pendaftaran, dan Foto Siswa." />
     <meta name="keywords"
-        content="bahan pendaftaran kelas 9 2026 boarding, akreditasi sekolah, file excel pendaftaran, boarding school, ilham wahyuni" />
+        content="bahan pendaftaran kelas 9 2026 boarding, akreditasi sekolah, file excel pendaftaran, foto siswa, boarding school, ilham wahyuni" />
     <meta name="author" content="Ilham Wahyuni" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://ilwa.my.id/bahan-pendaftaran-kelas-9-2026.html" />
@@ -16,7 +16,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Bahan Pendaftaran Kelas 9 2026 Boarding" />
     <meta property="og:description"
-        content="Portal akses cepat berkas pendaftaran: Akreditasi Sekolah & File Spreadsheet / Excel Pendaftaran Kelas 9 Boarding 2026." />
+        content="Portal akses berkas pendaftaran: Akreditasi Sekolah, File Excel Pendaftaran, & Foto Siswa Kelas 9 Boarding 2026." />
     <meta property="og:url" content="https://ilwa.my.id/bahan-pendaftaran-kelas-9-2026.html" />
     <meta property="og:site_name" content="Ilham Wahyuni" />
     <meta property="og:image" content="https://ilwa.my.id/assets/images/profile.png" />
@@ -26,7 +26,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Bahan Pendaftaran Kelas 9 2026 Boarding" />
     <meta name="twitter:description"
-        content="Portal akses cepat berkas pendaftaran: Akreditasi Sekolah & File Spreadsheet / Excel Pendaftaran Kelas 9 Boarding 2026." />
+        content="Portal akses berkas pendaftaran: Akreditasi Sekolah & File Spreadsheet / Excel Pendaftaran Kelas 9 Boarding 2026." />
     <meta name="twitter:image" content="https://ilwa.my.id/assets/images/profile.png" />
 
     <title>Bahan Pendaftaran Kelas 9 2026 Boarding - Ilham Wahyuni</title>
@@ -47,421 +47,187 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-
-        .gradient-card-blue {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-        }
-
-        .gradient-card-green {
-            background: linear-gradient(135deg, #065f46 0%, #10b981 100%);
-        }
-
-        /* Toast animation */
-        #toast {
-            visibility: hidden;
-            opacity: 0;
-            transition: visibility 0s 0.3s, opacity 0.3s linear;
-        }
-
-        #toast.show {
-            visibility: visible;
-            opacity: 1;
-            transition: opacity 0.3s linear;
-        }
     </style>
 </head>
 
 <body class="bg-gray-50 text-gray-800 antialiased min-h-screen flex flex-col justify-between">
 
     <!-- Navbar Placeholder -->
-    <!-- Navbar Placeholder (Loaded from partials/nav.html) -->
-    <div id="navbar-placeholder"></div>
+    <div id="navbar-placeholder">
+        <header id="header" class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm transition-colors duration-300">
+            <div class="container mx-auto px-6 py-4">
+                <nav class="flex items-center justify-between">
+                    <a href="index.html" class="text-xl md:text-2xl font-bold text-gray-900">Ilham Wahyuni</a>
+                    <div class="hidden md:flex items-center space-x-6 lg:space-x-8" id="desktop-menu">
+                        <a href="index.html" class="text-gray-700 hover:text-[#e07a5f] transition-colors" data-page="index.html">
+                            <i class="fas fa-home mr-2"></i>Home
+                        </a>
+                        <a href="about-founder.html" class="text-gray-700 hover:text-[#e07a5f] transition-colors" data-page="about-founder.html">
+                            <i class="fas fa-user-circle mr-2"></i>About
+                        </a>
+                        <a href="bahan-pendaftaran-kelas-9-2026.html" class="text-[#e07a5f] font-semibold transition-colors" data-page="bahan-pendaftaran-kelas-9-2026.html">
+                            <i class="fas fa-graduation-cap mr-2"></i>Pendaftaran 2026
+                        </a>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button id="menuBtn" class="md:hidden text-gray-700 text-2xl">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-black bg-opacity-50 z-40" aria-hidden="true"></div>
+        <div id="mobileMenuContent" class="hidden md:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 p-6 transform translate-x-full transition-transform duration-300 ease-in-out">
+            <button id="closeMenuBtn" class="absolute top-6 right-6 text-gray-700">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <nav class="mt-16 space-y-4" id="mobile-nav-menu">
+                <a href="index.html" data-page="index.html" class="mobile-link block text-gray-700 hover:text-[#e07a5f] transition-colors text-lg">
+                    <i class="fas fa-home mr-3"></i>Home
+                </a>
+                <a href="about-founder.html" data-page="about-founder.html" class="mobile-link block text-gray-700 hover:text-[#e07a5f] transition-colors text-lg">
+                    <i class="fas fa-user-circle mr-3"></i>About
+                </a>
+                <a href="bahan-pendaftaran-kelas-9-2026.html" data-page="bahan-pendaftaran-kelas-9-2026.html" class="mobile-link block text-[#e07a5f] font-semibold transition-colors text-lg">
+                    <i class="fas fa-graduation-cap mr-3"></i>Pendaftaran 2026
+                </a>
+            </nav>
+        </div>
+    </div>
 
     <!-- Main Content -->
-    <main class="py-12 md:py-20 flex-grow">
-        <div class="container mx-auto px-4 sm:px-6 max-w-4xl">
+    <main class="py-12 sm:py-16 md:py-20 flex-grow">
+        <div class="container mx-auto px-4 sm:px-6 max-w-2xl">
 
-            <!-- Breadcrumb / Badge Header -->
-            <div class="flex flex-wrap items-center justify-center gap-2 mb-6">
-                <span
-                    class="inline-flex items-center px-3 py-1 rounded-full text-xs sm:text-sm font-semibold bg-blue-100 text-blue-800">
-                    <i class="fas fa-graduation-cap mr-1.5"></i> Kelas 9 Boarding
-                </span>
-                <span
-                    class="inline-flex items-center px-3 py-1 rounded-full text-xs sm:text-sm font-semibold bg-amber-100 text-amber-800">
-                    <i class="fas fa-calendar-alt mr-1.5"></i> Tahun 2026
-                </span>
-                <span
-                    class="inline-flex items-center px-3 py-1 rounded-full text-xs sm:text-sm font-semibold bg-emerald-100 text-emerald-800">
-                    <i class="fas fa-check-circle mr-1.5"></i> Berkas Resmi
-                </span>
-            </div>
-            <main class="py-16 md:py-24 flex-grow">
-                <div class="container mx-auto px-6 max-w-5xl">
-
-                    <!-- Page Title -->
-                    <div class="text-center mb-10 md:mb-14">
-                        <h1
-                            class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight mb-4">
-                            Bahan Pendaftaran Kelas 9 2026 Boarding
-                            <!-- Section Heading (Style matching index.html) -->
-                            <div class="text-center mb-12">
-                                <h1
-                                    class="text-3xl md:text-5xl font-extrabold text-gray-900 relative inline-block pb-3">
-                                    <span class="relative z-10">Bahan Pendaftaran Kelas 9 2026 Boarding</span>
-                                    <span
-                                        class="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-1 bg-[#e07a5f] rounded-full"></span>
-                                </h1>
-                                <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                                    Halaman tautan resmi bagi siswa dan wali santri untuk mengunduh serta mengakses
-                                    berkas persyaratan pendaftaran.
-                                <p class="mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
-                                    Silakan klik tautan di bawah ini untuk mengakses dokumen Akreditasi Sekolah dan File
-                                    Excel / Spreadsheet pendaftaran.
-                                </p>
-                            </div>
-
-                            <!-- Link Cards Container -->
-                            <div class="space-y-6 md:space-y-8 mb-12">
-                                <!-- Cards Container (Matching index.html project item card layout) -->
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
-
-                                    <!-- CARD 1: AKREDITASI SEKOLAH -->
-                                    <div
-                                        class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden transform hover:-translate-y-1">
-                                        <div
-                                            class="p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                                            <!-- Icon & Info -->
-                                            <div
-                                                class="flex items-start sm:items-center gap-4 sm:gap-6 w-full md:w-auto">
-                                                <div
-                                                    class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-3xl sm:text-4xl shadow-inner flex-shrink-0 border border-amber-100">
-                                                    <i class="fas fa-certificate"></i>
-                                                </div>
-                                                <div class="flex-grow">
-                                                    <div class="flex items-center gap-2 mb-1">
-                                                        <span
-                                                            class="px-2.5 py-0.5 rounded text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-800">
-                                                            Google Drive Folder
-                                                        </span>
-                                                    </div>
-                                                    <h2
-                                                        class="text-xl sm:text-2xl font-bold text-gray-900 leading-snug">
-                                                        AKREDITASI SEKOLAH
-                                                    </h2>
-                                                    <p class="text-sm sm:text-base text-gray-600 mt-1 leading-relaxed">
-                                                        Folder Google Drive berisi sertifikat & dokumen kelengkapan
-                                                        akreditasi sekolah untuk syarat pendaftaran.
-                                                    </p>
-                                                </div>
-                                                <div
-                                                    class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 flex flex-col justify-between p-6 sm:p-8">
-                                                    <div>
-                                                        <div
-                                                            class="w-14 h-14 rounded-xl bg-orange-50 text-[#e07a5f] flex items-center justify-center text-2xl mb-5 shadow-sm border border-orange-100">
-                                                            <i class="fas fa-certificate"></i>
-                                                        </div>
-
-                                                        <!-- Action Buttons -->
-                                                        <div
-                                                            class="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-3 w-full md:w-auto flex-shrink-0">
-                                                            <a href="https://drive.google.com/drive/folders/1CFjQ3rrGN06yL5KA8wm9TNNs7aTBS_mx?usp=sharing"
-                                                                target="_blank" rel="noopener noreferrer"
-                                                                class="inline-flex items-center justify-center px-6 py-3.5 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg transition-all text-sm sm:text-base group">
-                                                                <span>Buka Folder</span>
-                                                                <i
-                                                                    class="fas fa-arrow-up-right-from-square ml-2 text-sm group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
-                                                            </a>
-                                                            <button type="button"
-                                                                onclick="copyToClipboard('https://drive.google.com/drive/folders/1CFjQ3rrGN06yL5KA8wm9TNNs7aTBS_mx?usp=sharing', 'Link Akreditasi Sekolah berhasil disalin!')"
-                                                                class="inline-flex items-center justify-center px-4 py-3.5 rounded-xl font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-all text-sm border border-gray-200">
-                                                                <i class="far fa-copy mr-2"></i>
-                                                                Salin Link
-                                                            </button>
-                                                        </div>
-                                                        <h2
-                                                            class="font-extrabold text-2xl text-gray-900 mb-3 flex items-center">
-                                                            AKREDITASI SEKOLAH
-                                                        </h2>
-                                                        <p class="text-gray-600 leading-relaxed mb-6">
-                                                            Folder Google Drive resmi yang memuat berkas dan sertifikat
-                                                            akreditasi sekolah untuk persyaratan pendaftaran siswa.
-                                                        </p>
-                                                    </div>
-
-                                                    <!-- Direct URL bar preview -->
-                                                    <div
-                                                        class="bg-gray-50 px-6 py-3 border-t border-gray-100 text-xs text-gray-500 flex items-center justify-between overflow-hidden">
-                                                        <div class="truncate mr-2">
-                                                            <i class="fab fa-google-drive mr-1.5 text-amber-600"></i>
-                                                            <span
-                                                                class="font-mono">https://drive.google.com/drive/folders/1CFjQ3rrGN06yL5KA8wm9TNNs7aTBS_mx</span>
-                                                        </div>
-                                                        <span class="hidden sm:inline-block text-gray-400">Google
-                                                            Drive</span>
-                                                        <div>
-                                                            <a href="https://drive.google.com/drive/folders/1CFjQ3rrGN06yL5KA8wm9TNNs7aTBS_mx?usp=sharing"
-                                                                target="_blank" rel="noopener noreferrer"
-                                                                class="inline-flex items-center justify-center bg-[#e07a5f] text-white px-6 py-3.5 rounded-lg hover:bg-opacity-90 transition-all text-base w-full font-semibold shadow">
-                                                                <i class="fas fa-folder-open mr-2"></i>
-                                                                Buka Akreditasi Sekolah
-                                                            </a>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- CARD 2: FILE EXCEL / SPREADSHEET -->
-                                                    <div
-                                                        class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden transform hover:-translate-y-1">
-                                                        <div
-                                                            class="p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                                                            <!-- Icon & Info -->
-                                                            <div
-                                                                class="flex items-start sm:items-center gap-4 sm:gap-6 w-full md:w-auto">
-                                                                <div
-                                                                    class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-3xl sm:text-4xl shadow-inner flex-shrink-0 border border-emerald-100">
-                                                                    <i class="fas fa-file-excel"></i>
-                                                                </div>
-                                                                <div class="flex-grow">
-                                                                    <div class="flex items-center gap-2 mb-1">
-                                                                        <span
-                                                                            class="px-2.5 py-0.5 rounded text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800">
-                                                                            Google Sheets / Excel
-                                                                        </span>
-                                                                    </div>
-                                                                    <h2
-                                                                        class="text-xl sm:text-2xl font-bold text-gray-900 leading-snug">
-                                                                        File Excel / Spreadsheet Pendaftaran
-                                                                    </h2>
-                                                                    <p
-                                                                        class="text-sm sm:text-base text-gray-600 mt-1 leading-relaxed">
-                                                                        Format data & formulir spreadsheet pendaftaran
-                                                                        siswa kelas 9 boarding 2026.
-                                                                    </p>
-                                                                </div>
-                                                                <div
-                                                                    class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 flex flex-col justify-between p-6 sm:p-8">
-                                                                    <div>
-                                                                        <div
-                                                                            class="w-14 h-14 rounded-xl bg-green-50 text-green-600 flex items-center justify-center text-2xl mb-5 shadow-sm border border-green-100">
-                                                                            <i class="fas fa-file-excel"></i>
-                                                                        </div>
-
-                                                                        <!-- Action Buttons -->
-                                                                        <div
-                                                                            class="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-3 w-full md:w-auto flex-shrink-0">
-                                                                            <a href="https://docs.google.com/spreadsheets/d/1JmoktjobqPIj4An8EEk3z8t7QiRJPzyAdBnc8ntVjvk/edit?usp=sharing"
-                                                                                target="_blank"
-                                                                                rel="noopener noreferrer"
-                                                                                class="inline-flex items-center justify-center px-6 py-3.5 rounded-xl font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-md hover:shadow-lg transition-all text-sm sm:text-base group">
-                                                                                <span>Buka Spreadsheet</span>
-                                                                                <i
-                                                                                    class="fas fa-arrow-up-right-from-square ml-2 text-sm group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
-                                                                            </a>
-                                                                            <a href="https://docs.google.com/spreadsheets/d/1JmoktjobqPIj4An8EEk3z8t7QiRJPzyAdBnc8ntVjvk/export?format=xlsx"
-                                                                                target="_blank"
-                                                                                rel="noopener noreferrer"
-                                                                                title="Download langsung file dalam format Excel .xlsx"
-                                                                                class="inline-flex items-center justify-center px-4 py-3.5 rounded-xl font-semibold text-emerald-800 bg-emerald-100 hover:bg-emerald-200 transition-all text-sm border border-emerald-200">
-                                                                                <i class="fas fa-download mr-1.5"></i>
-                                                                                Download .xlsx
-                                                                            </a>
-                                                                            <button type="button"
-                                                                                onclick="copyToClipboard('https://docs.google.com/spreadsheets/d/1JmoktjobqPIj4An8EEk3z8t7QiRJPzyAdBnc8ntVjvk/edit?usp=sharing', 'Link File Spreadsheet berhasil disalin!')"
-                                                                                class="inline-flex items-center justify-center px-4 py-3.5 rounded-xl font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-all text-sm border border-gray-200">
-                                                                                <i class="far fa-copy mr-1.5"></i>
-                                                                                Salin
-                                                                            </button>
-                                                                        </div>
-                                                                        <h2
-                                                                            class="font-extrabold text-2xl text-gray-900 mb-3 flex items-center">
-                                                                            File Excel Pendaftaran
-                                                                        </h2>
-                                                                        <p class="text-gray-600 leading-relaxed mb-6">
-                                                                            Dokumen format isian dan rekapan data
-                                                                            pendaftaran siswa kelas 9 boarding 2026
-                                                                            melalui Google Spreadsheet.
-                                                                        </p>
-                                                                    </div>
-
-                                                                    <!-- Direct URL bar preview -->
-                                                                    <div
-                                                                        class="bg-gray-50 px-6 py-3 border-t border-gray-100 text-xs text-gray-500 flex items-center justify-between overflow-hidden">
-                                                                        <div class="truncate mr-2">
-                                                                            <i
-                                                                                class="fas fa-table mr-1.5 text-emerald-600"></i>
-                                                                            <span
-                                                                                class="font-mono">https://docs.google.com/spreadsheets/d/1JmoktjobqPIj4An8EEk3z8t7QiRJPzyAdBnc8ntVjvk</span>
-                                                                        </div>
-                                                                        <span
-                                                                            class="hidden sm:inline-block text-gray-400">Google
-                                                                            Sheets</span>
-                                                                        <div>
-                                                                            <a href="https://docs.google.com/spreadsheets/d/1JmoktjobqPIj4An8EEk3z8t7QiRJPzyAdBnc8ntVjvk/edit?usp=sharing"
-                                                                                target="_blank"
-                                                                                rel="noopener noreferrer"
-                                                                                class="inline-flex items-center justify-center bg-[#e07a5f] text-white px-6 py-3.5 rounded-lg hover:bg-opacity-90 transition-all text-base w-full font-semibold shadow">
-                                                                                <i class="fas fa-table mr-2"></i>
-                                                                                Buka File Excel
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-
-                                                                <!-- Petunjuk & Panduan Singkat -->
-                                                                <div
-                                                                    class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-200 mb-8">
-                                                                    <h3
-                                                                        class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                                                                        <i
-                                                                            class="fas fa-circle-info text-blue-600 mr-2.5"></i>
-                                                                        Petunjuk Akses untuk Siswa & Wali Murid
-                                                                    </h3>
-                                                                    <ul
-                                                                        class="space-y-3 text-sm sm:text-base text-gray-600">
-                                                                        <li class="flex items-start">
-                                                                            <i
-                                                                                class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                                                                            <span><b>Buka Dokumen Akreditasi:</b> Klik
-                                                                                tombol "Buka Folder" untuk melihat dan
-                                                                                mengunduh berkas akreditasi sekolah yang
-                                                                                tersimpan di Google Drive.</span>
-                                                                        </li>
-                                                                        <li class="flex items-start">
-                                                                            <i
-                                                                                class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                                                                            <span><b>Mengisi / Melihat File Excel:</b>
-                                                                                Klik tombol "Buka Spreadsheet" untuk
-                                                                                membukanya secara online di Google
-                                                                                Sheets, atau tombol "Download .xlsx"
-                                                                                jika ingin membukanya dengan Microsoft
-                                                                                Excel di laptop/HP Anda.</span>
-                                                                        </li>
-                                                                        <li class="flex items-start">
-                                                                            <i
-                                                                                class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                                                                            <span><b>Buat Salinan Pribadi:</b> Di Google
-                                                                                Sheets, Anda dapat memilih menu <i>File
-                                                                                    &rarr; Buat Salinan (Make a
-                                                                                    copy)</i> untuk mengisi data pribadi
-                                                                                Anda secara mandiri.</span>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-
-                                                                <!-- Share Page & WhatsApp Help -->
-                                                                <div
-                                                                    class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-6 sm:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
-                                                                    <div>
-                                                                        <h3
-                                                                            class="text-xl font-bold mb-1 flex items-center">
-                                                                            <i
-                                                                                class="fas fa-share-nodes text-[#e07a5f] mr-2.5"></i>
-                                                                            Bagikan Tautan Halaman Ini
-                                                                        </h3>
-                                                                        <p class="text-gray-300 text-sm max-w-xl">
-                                                                            Kirimkan halaman ini kepada teman sekelas
-                                                                            atau kelompok pendaftaran boarding agar
-                                                                            mereka dapat mengakses dokumen dengan mudah.
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="flex flex-wrap gap-3 w-full md:w-auto">
-                                                                        <button type="button"
-                                                                            onclick="shareToWhatsApp()"
-                                                                            class="flex-1 sm:flex-none inline-flex items-center justify-center px-5 py-3 rounded-xl font-semibold bg-emerald-500 hover:bg-emerald-600 text-white transition-all shadow">
-                                                                            <i class="fab fa-whatsapp mr-2 text-lg"></i>
-                                                                            Bagikan ke WA
-                                                                        </button>
-                                                                        <button type="button"
-                                                                            onclick="copyCurrentPageUrl()"
-                                                                            class="flex-1 sm:flex-none inline-flex items-center justify-center px-5 py-3 rounded-xl font-semibold bg-gray-700 hover:bg-gray-600 text-white transition-all border border-gray-600">
-                                                                            <i class="far fa-copy mr-2"></i>
-                                                                            Salin URL Halaman
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-            </main>
-
-            <!-- Toast Notification -->
-            <div id="toast"
-                class="fixed bottom-6 right-6 z-50 bg-gray-900 text-white px-5 py-3.5 rounded-xl shadow-2xl flex items-center gap-3 border border-gray-700 text-sm font-medium">
-                <i class="fas fa-circle-check text-emerald-400 text-lg"></i>
-                <span id="toast-message">Tautan berhasil disalin!</span>
-            </div>
-
-            <!-- Footer -->
-            <footer class="bg-gray-100 py-8 text-center text-gray-600 border-t border-gray-200">
-                <div class="container mx-auto px-6">
-                    <p>&copy; <span id="current-year"></span> Ilham Wahyuni. Semua Hak Dilindungi.</p>
-                    <p>&copy; <span id="current-year"></span> Ilham Wahyuni</p>
+            <!-- Header Badge & Title -->
+            <div class="text-center mb-8 sm:mb-10">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-100 text-[#e07a5f] text-xs sm:text-sm font-semibold mb-4 border border-orange-200">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Pendaftaran 2026 &bull; Boarding</span>
                 </div>
-            </footer>
+                <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight leading-snug">
+                    Bahan Pendaftaran Kelas 9 2026 Boarding
+                </h1>
+                <p class="mt-3 text-sm sm:text-base text-gray-600 max-w-lg mx-auto leading-relaxed">
+                    Silakan klik tautan di bawah ini untuk membuka dokumen Akreditasi Sekolah, File Excel, dan Foto Siswa pendaftaran.
+                </p>
+            </div>
 
-            <!-- Scripts -->
-            <script>
-                document.getElementById('current-year').textContent = new Date().getFullYear();
+            <!-- Link Cards Stack -->
+            <div class="space-y-4 sm:space-y-5">
+                
+                <!-- CARD 1: AKREDITASI SEKOLAH -->
+                <a href="https://drive.google.com/drive/folders/1CFjQ3rrGN06yL5KA8wm9TNNs7aTBS_mx?usp=sharing"
+                    target="_blank" rel="noopener noreferrer"
+                    class="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 sm:p-6 bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-[#e07a5f] transition-all duration-300 transform hover:-translate-y-0.5">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl flex-shrink-0 border border-amber-100 group-hover:scale-105 transition-transform">
+                            <i class="fab fa-google-drive"></i>
+                        </div>
+                        <div>
+                            <span class="inline-block text-[11px] font-bold uppercase tracking-wider text-amber-700 bg-amber-100 px-2 py-0.5 rounded mb-1">
+                                Google Drive
+                            </span>
+                            <h2 class="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-[#e07a5f] transition-colors leading-snug">
+                                AKREDITASI SEKOLAH
+                            </h2>
+                            <p class="text-xs sm:text-sm text-gray-500 mt-0.5">
+                                Berkas & sertifikat akreditasi resmi sekolah
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 sm:pl-2">
+                        <span class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#e07a5f] group-hover:bg-[#cf6b50] text-white font-semibold text-sm shadow-sm transition-colors">
+                            <span>Buka Folder</span>
+                            <i class="fas fa-arrow-up-right-from-square text-xs"></i>
+                        </span>
+                    </div>
+                </a>
 
-                // Toast handler
-                let toastTimeout;
-                function showToast(message) {
-                    const toast = document.getElementById('toast');
-                    const toastMsg = document.getElementById('toast-message');
-                    toastMsg.textContent = message;
-                    toast.classList.add('show');
+                <!-- CARD 2: FILE EXCEL PENDAFTARAN -->
+                <a href="https://docs.google.com/spreadsheets/d/1JmoktjobqPIj4An8EEk3z8t7QiRJPzyAdBnc8ntVjvk/edit?usp=sharing"
+                    target="_blank" rel="noopener noreferrer"
+                    class="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 sm:p-6 bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-[#e07a5f] transition-all duration-300 transform hover:-translate-y-0.5">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl flex-shrink-0 border border-emerald-100 group-hover:scale-105 transition-transform">
+                            <i class="fas fa-file-excel"></i>
+                        </div>
+                        <div>
+                            <span class="inline-block text-[11px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded mb-1">
+                                Google Sheets
+                            </span>
+                            <h2 class="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-[#e07a5f] transition-colors leading-snug">
+                                File Excel Pendaftaran
+                            </h2>
+                            <p class="text-xs sm:text-sm text-gray-500 mt-0.5">
+                                Format data pendaftaran kelas 9 boarding 2026
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 sm:pl-2">
+                        <span class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#e07a5f] group-hover:bg-[#cf6b50] text-white font-semibold text-sm shadow-sm transition-colors">
+                            <span>Buka Spreadsheet</span>
+                            <i class="fas fa-arrow-up-right-from-square text-xs"></i>
+                        </span>
+                    </div>
+                </a>
 
-                    clearTimeout(toastTimeout);
-                    toastTimeout = setTimeout(() => {
-                        toast.classList.remove('show');
-                    }, 3000);
-                }
+                <!-- CARD 3: FOTO SISWA -->
+                <a href="https://drive.google.com/drive/folders/1VDTeomwh1x5wRVfQfFd13VVEhENe8BAv?usp=sharing"
+                    target="_blank" rel="noopener noreferrer"
+                    class="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 sm:p-6 bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-[#e07a5f] transition-all duration-300 transform hover:-translate-y-0.5">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl flex-shrink-0 border border-blue-100 group-hover:scale-105 transition-transform">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <div>
+                            <span class="inline-block text-[11px] font-bold uppercase tracking-wider text-blue-700 bg-blue-100 px-2 py-0.5 rounded mb-1">
+                                Google Drive
+                            </span>
+                            <h2 class="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-[#e07a5f] transition-colors leading-snug">
+                                Foto Siswa
+                            </h2>
+                            <p class="text-xs sm:text-sm text-gray-500 mt-0.5">
+                                Folder berkas pas foto siswa pendaftaran boarding 2026
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 sm:pl-2">
+                        <span class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#e07a5f] group-hover:bg-[#cf6b50] text-white font-semibold text-sm shadow-sm transition-colors">
+                            <span>Buka Folder Foto</span>
+                            <i class="fas fa-arrow-up-right-from-square text-xs"></i>
+                        </span>
+                    </div>
+                </a>
 
-                // Copy to clipboard
-                function copyToClipboard(text, successMessage) {
-                    if (navigator.clipboard && window.isSecureContext) {
-                        navigator.clipboard.writeText(text).then(() => {
-                            showToast(successMessage || 'Tautan berhasil disalin!');
-                        }).catch(() => {
-                            fallbackCopy(text, successMessage);
-                        });
-                    } else {
-                        fallbackCopy(text, successMessage);
-                    }
-                }
+            </div>
 
-                function fallbackCopy(text, successMessage) {
-                    const textArea = document.createElement("textarea");
-                    textArea.value = text;
-                    textArea.style.position = "fixed";
-                    textArea.style.left = "-999999px";
-                    textArea.style.top = "-999999px";
-                    document.body.appendChild(textArea);
-                    textArea.focus();
-                    textArea.select();
-                    try {
-                        document.execCommand('copy');
-                        showToast(successMessage || 'Tautan berhasil disalin!');
-                    } catch (err) {
-                        alert('Gagal menyalin tautan: ' + text);
-                    }
-                    document.body.removeChild(textArea);
-                }
+            <!-- Petunjuk Singkat -->
+            <div class="mt-8 p-4 rounded-xl bg-white border border-gray-200 text-xs sm:text-sm text-gray-600 flex items-start gap-3 shadow-sm">
+                <i class="fas fa-info-circle text-[#e07a5f] text-base mt-0.5 flex-shrink-0"></i>
+                <p class="leading-relaxed">
+                    <b>Petunjuk:</b> Klik tombol kartu di atas untuk membuka dokumen secara langsung di Google Drive atau Google Sheets pada tab baru.
+                </p>
+            </div>
 
-                // Copy current page URL
-                function copyCurrentPageUrl() {
-                    copyToClipboard(window.location.href, 'Tautan halaman ini berhasil disalin!');
-                }
+        </div>
+    </main>
 
-                // Share via WhatsApp
-                function shareToWhatsApp() {
-                    const text = encodeURIComponent(
-                        "Halo! Berikut bahan pendaftaran kelas 9 2026 boarding (Akreditasi Sekolah & File Excel):\n" + window.location.href
-                    );
-                    window.open('https://api.whatsapp.com/send?text=' + text, '_blank');
-                }
-            </script>
-            <script src="assets/js/nav.js"></script>
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-8 text-center text-gray-600 border-t border-gray-200">
+        <div class="container mx-auto px-6">
+            <p>&copy; <span id="current-year"></span> Ilham Wahyuni</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+    <script src="assets/js/nav.js"></script>
 </body>
 
 </html>
